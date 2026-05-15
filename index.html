@@ -1773,6 +1773,72 @@ body.cat-bar-shown {
 section[id] {
   scroll-margin-top: var(--scroll-margin, 95px);
 }
+
+/* =============================================
+   PRODUCT CAROUSEL
+   ============================================= */
+.prod-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.prod-carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.15s ease;
+}
+.prod-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(6px);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-brown);
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.2s, transform 0.2s;
+  line-height: 1;
+  padding: 0;
+}
+.prod-carousel-btn:hover {
+  background: rgba(255,255,255,0.96);
+  transform: translateY(-50%) scale(1.08);
+}
+.prod-carousel-prev { left: 8px; }
+.prod-carousel-next { right: 8px; }
+.prod-carousel-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 2;
+}
+.prod-carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  transition: background 0.2s, transform 0.2s;
+}
+.prod-carousel-dot.active {
+  background: #fff;
+  transform: scale(1.3);
+}
 </style>
 </head>
 
