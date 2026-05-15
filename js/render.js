@@ -118,10 +118,12 @@
       if (nextBtn) nextBtn.addEventListener('click', function(e) { e.stopPropagation(); goTo(currentIndex + 1); });
 
       var touchStartX = 0;
-      carousel.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+      var touchStartY = 0;
+      carousel.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, { passive: true });
       carousel.addEventListener('touchend', function(e) {
         var dx = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(dx) > 40) { goTo(dx < 0 ? currentIndex + 1 : currentIndex - 1); }
+        var dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { goTo(dx < 0 ? currentIndex + 1 : currentIndex - 1); }
       }, { passive: true });
     });
   }
@@ -168,7 +170,7 @@
       for (var di = 0; di < product.images.length; di++) {
         dotsHtml += '<span class="prod-carousel-dot' + (di === 0 ? ' active' : '') + '"></span>';
       }
-      var dataImages = JSON.stringify(product.images).replace(/"/g, '&quot;');
+      var dataImages = escapeHtml(JSON.stringify(product.images));
       imgHtml = '<div class="prod-carousel" data-index="0" data-images="' + dataImages + '">' +
         '<img class="prod-carousel-img" src="' + escapeHtml(product.images[0]) + '" alt="' + escapeHtml(product.imageAlt) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">' +
         '<button class="prod-carousel-btn prod-carousel-prev" aria-label="Imagen anterior">&#8249;</button>' +
