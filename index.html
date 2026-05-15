@@ -1389,6 +1389,22 @@ body.cat-bar-shown {
     font-size: 0.84rem;
   }
 }
+/* =============================================
+   CUADRITOS SECTION
+   ============================================= */
+#cuadritos { padding: var(--space-xl) 0; background: linear-gradient(180deg, #FFF5ED 0%, #FFFAF5 100%); }
+.cuadritos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin: var(--space-lg) 0; }
+@media (max-width: 600px) { .cuadritos-grid { grid-template-columns: 1fr; } }
+.cuadrito-item { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 4px 24px rgba(90,60,30,0.10); }
+.cuadrito-item img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.cuadrito-item:hover img { transform: scale(1.04); }
+.cuadrito-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem 1rem; background: linear-gradient(0deg, rgba(60,30,10,0.55) 0%, transparent 100%); }
+.cuadrito-label { color: #fff; font-weight: 700; font-size: 0.95rem; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+.cuadritos-prices { display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap; margin: var(--space-md) 0 0; }
+.cuadrito-price-tag { background: rgba(255,255,255,0.82); backdrop-filter: blur(12px); border: 1px solid rgba(201,150,58,0.3); border-radius: 999px; padding: 0.45rem 1.1rem; font-size: 0.92rem; font-weight: 700; color: var(--color-taupe, #7B5B3A); box-shadow: 0 2px 8px rgba(90,60,30,0.08); }
+.cuadrito-price-tag strong { color: #C9963A; }
+.cuadritos-cta { margin-top: var(--space-lg); text-align: center; background: rgba(255,255,255,0.72); backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(255,200,160,0.3); border-radius: 1.5rem; padding: var(--space-md) var(--space-lg); box-shadow: 0 4px 20px rgba(90,60,30,0.08); }
+.cuadritos-cta p { font-size: 1.1rem; color: var(--color-taupe, #7B5B3A); margin-bottom: var(--space-sm); font-weight: 500; }
 </style>
 </head>
 
@@ -1453,6 +1469,10 @@ body.cat-bar-shown {
     <button class="cat-pill" data-target="prod-composicion" aria-label="Composición para Pared">
       <span class="cat-pill-icon">🖼️</span>
       <span class="cat-pill-label">Composición</span>
+    </button>
+    <button class="cat-pill" data-target="cuadritos" aria-label="Cuadritos para pared">
+      <span class="cat-pill-icon">🖼️</span>
+      <span class="cat-pill-label">Cuadritos</span>
     </button>
   </div>
 </div>
@@ -1896,6 +1916,52 @@ body.cat-bar-shown {
     <div class="gallery-cta fade-in">
       <a href="https://www.instagram.com/segedahome1?igsh=MXg2NWR2a2ZveXphNg==" target="_blank" rel="noopener noreferrer" class="btn-primary">
         📸 Ver más en Instagram @Segedahomel
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- =============================================
+     CUADRITOS
+     ============================================= -->
+<section id="cuadritos" aria-label="Cuadritos decorativos para pared">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-eyebrow">Decoración para pared</span>
+      <h2 class="section-title">Cuadritos que cuentan historias</h2>
+      <p class="section-subtitle">Sets de cuadros infantiles personalizados para transformar el cuarto de tu bebé en un rincón mágico.</p>
+    </div>
+
+    <div class="cuadritos-grid">
+      <div class="cuadrito-item fade-in">
+        <img src="assets/img/cuadros-infantiles.png" alt="Composición infantil de cuadros para pared SEGEDA HOME" loading="lazy">
+        <div class="cuadrito-overlay">
+          <span class="cuadrito-label">Composición Infantil para Pared</span>
+        </div>
+      </div>
+      <div class="cuadrito-item fade-in fade-in-delay-1">
+        <img src="assets/img/pack-cuadritos.png" alt="Pack de cuadritos decorativos para pared SEGEDA HOME" loading="lazy">
+        <div class="cuadrito-overlay">
+          <span class="cuadrito-label">Pack de Cuadritos Decorativos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cuadritos-prices fade-in">
+      <div class="cuadrito-price-tag">
+        Pack 3 cuadritos <strong>29 × 20 cm</strong> — <strong>S/ 50</strong>
+      </div>
+      <div class="cuadrito-price-tag">
+        Pack 3 cuadritos <strong>35 × 25 cm</strong> — <strong>S/ 75</strong>
+      </div>
+    </div>
+
+    <div class="cuadritos-cta fade-in">
+      <p>¿Querés un set personalizado para el cuarto de tu bebé?</p>
+      <a href="https://wa.me/51978642447?text=Hola!%20Me%20interesan%20los%20cuadritos%20para%20pared%20%F0%9F%96%BC%EF%B8%8F%20%C2%BFpodemos%20conversar%3F" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+        💬 Consultar por cuadritos
       </a>
     </div>
   </div>
