@@ -97,6 +97,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
   font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100%;
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -1492,8 +1494,10 @@ footer {
 .cat-bar-inner {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   gap: 0.6rem;
   padding: 0.5rem 1rem 0.65rem;
 }
