@@ -1268,6 +1268,25 @@ footer {
   .hero-subtitle { margin: 0 auto var(--space-sm); }
   .hero-badges { justify-content: center; }
 }
+/* =============================================
+   PRODUCT IMAGE REAL PHOTOS
+   ============================================= */
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition);
+}
+.product-card:hover .product-img img {
+  transform: scale(1.04);
+}
+.gallery-item img {
+  transition: transform var(--transition);
+}
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
 </style>
 </head>
 
@@ -1338,9 +1357,13 @@ footer {
         </div>
       </div>
       <div class="hero-img-wrap fade-in fade-in-delay-2">
-        <div class="hero-img-placeholder">
-          <span style="filter: drop-shadow(0 4px 12px rgba(247,197,208,0.6));">☁️</span>
-          <span class="hero-img-label">📸 Reemplazar con foto real</span>
+        <div class="hero-img-placeholder" style="background: none; padding: 0; border: none; font-size: inherit;">
+          <img
+            src="assets/img/nube-con-nombre-luz.jpg"
+            alt="Nube con nombre personalizado y luz LED cálida, decoración infantil SEGEDA HOME"
+            loading="eager"
+            style="width:100%; max-width:480px; aspect-ratio:4/5; object-fit:cover; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); display:block;"
+          >
           <div class="hero-img-badge">
             <span style="font-size:1.5rem;">⭐</span>
             <div>
@@ -1402,9 +1425,13 @@ footer {
     <div class="products-grid">
       <!-- PRODUCT 1: Nube con Nombre y Luz -->
       <article class="product-card fade-in" aria-label="Nube con Nombre y Luz">
-        <div class="product-img" style="background: linear-gradient(135deg, #FDDDE6 0%, #FDE8EF 50%, #EDE8F8 100%);">
-          <span>☁️✨</span>
-          <span class="product-img-label">📸 Reemplazar con foto real</span>
+        <div class="product-img" style="background: #f9eef3; padding:0;">
+          <img
+            src="assets/img/nube-con-nombre-luz.jpg"
+            alt="Nube con nombre personalizado y luz LED para habitación infantil"
+            loading="lazy"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+          >
         </div>
         <div class="product-body">
           <div class="product-badges">
@@ -1438,9 +1465,13 @@ footer {
       </article>
       <!-- PRODUCT 2: Nube con Luz -->
       <article class="product-card fade-in fade-in-delay-1" aria-label="Nube con Luz">
-        <div class="product-img" style="background: linear-gradient(135deg, #E8F4FD 0%, #DDEEFF 50%, #EDE8F8 100%);">
-          <span>☁️💡</span>
-          <span class="product-img-label">📸 Reemplazar con foto real</span>
+        <div class="product-img" style="background: #eef4fb; padding:0;">
+          <img
+            src="assets/img/nube-con-luz.jpg"
+            alt="Nube decorativa con luz LED cálida para cuarto de bebé"
+            loading="lazy"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+          >
         </div>
         <div class="product-body">
           <div class="product-badges">
@@ -1472,9 +1503,13 @@ footer {
       </article>
       <!-- PRODUCT 3: Placa Circular con Luz -->
       <article class="product-card fade-in fade-in-delay-2" aria-label="Placa Circular con Luz">
-        <div class="product-img" style="background: linear-gradient(135deg, #FFF8E7 0%, #FDDDE6 50%, #FFF3CD 100%);">
-          <span>🌟</span>
-          <span class="product-img-label">📸 Reemplazar con foto real</span>
+        <div class="product-img" style="background: #fdf5e8; padding:0;">
+          <img
+            src="assets/img/placa-circular-luz.jpg"
+            alt="Placa circular con nombre personalizado y luz LED, regalo ideal para baby shower"
+            loading="lazy"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+          >
         </div>
         <div class="product-body">
           <div class="product-badges">
@@ -1507,9 +1542,13 @@ footer {
       </article>
       <!-- PRODUCT 4: Nube Temática con Luz -->
       <article class="product-card fade-in" aria-label="Nube Temática con Luz">
-        <div class="product-img" style="background: linear-gradient(135deg, #E8F5E9 0%, #FFF3CD 50%, #E8F4FD 100%);">
-          <span>🎨☁️</span>
-          <span class="product-img-label">📸 Reemplazar con foto real</span>
+        <div class="product-img" style="background: #edf5ed; padding:0;">
+          <img
+            src="assets/img/nube-tematica-con-luz.jpg"
+            alt="Nube temática personalizada con luz LED, decoración infantil princesas y más"
+            loading="lazy"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+          >
         </div>
         <div class="product-body">
           <div class="product-badges">
@@ -1660,29 +1699,29 @@ footer {
       <p class="section-subtitle">Cada foto es una familia que confió en nosotros. Cada pieza, un sueño cumplido.</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item fade-in" style="background: linear-gradient(135deg,#FDDDE6,#EDE8F8);">
-        <div class="gallery-placeholder">☁️✨</div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Nube con Nombre y Luz</span></div>
+      <div class="gallery-item fade-in">
+        <img src="assets/img/nube-tematica-princesa.jpg" alt="Nube temática princesa con decoración personalizada SEGEDA HOME" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Nube Temática Princesa</span></div>
       </div>
-      <div class="gallery-item fade-in fade-in-delay-1" style="background: linear-gradient(135deg,#FFF8E7,#FDDDE6);">
-        <div class="gallery-placeholder">🌟</div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Placa Circular</span></div>
+      <div class="gallery-item fade-in fade-in-delay-1">
+        <img src="assets/img/placas-circulares.jpg" alt="Placas circulares decorativas infantiles personalizadas" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Placas Circulares</span></div>
       </div>
-      <div class="gallery-item fade-in fade-in-delay-2" style="background: linear-gradient(135deg,#E8F5E9,#FFF8E7);">
-        <div class="gallery-placeholder">🦕🌿</div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Nube Temática Dinos</span></div>
+      <div class="gallery-item fade-in fade-in-delay-2">
+        <img src="assets/img/nube-tematica-conejita.jpg" alt="Nube temática conejita personalizada con luz LED" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Nube Temática Conejita</span></div>
       </div>
-      <div class="gallery-item fade-in fade-in-delay-1" style="background: linear-gradient(135deg,#EDE8F8,#FDDDE6);">
-        <div class="gallery-placeholder">👸✨</div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Nube Princesas</span></div>
+      <div class="gallery-item fade-in fade-in-delay-1">
+        <img src="assets/img/nube-tematica-con-luz.jpg" alt="Nube temática con luz LED decoración habitación infantil" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Nube Temática con Luz</span></div>
       </div>
-      <div class="gallery-item fade-in fade-in-delay-2" style="background: linear-gradient(135deg,#FFF3CD,#FFF8E7);">
-        <div class="gallery-placeholder">⭐🌙</div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Composición Estrellas</span></div>
+      <div class="gallery-item fade-in fade-in-delay-2">
+        <img src="assets/img/combo-lampara-personalizada.jpg" alt="Combo lámpara y decoración personalizada SEGEDA HOME" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Combo Lámpara Personalizada</span></div>
       </div>
-      <div class="gallery-item fade-in fade-in-delay-3" style="background: linear-gradient(135deg,#FDDDE6,#EDE8F8,#E8F5E9);">
-        <div class="gallery-placeholder">🖼️🌸</div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Composición Pared Completa</span></div>
+      <div class="gallery-item fade-in fade-in-delay-3">
+        <img src="assets/img/stickers-variados.jpg" alt="Stickers variados decorativos infantiles personalizados" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Stickers Variados</span></div>
       </div>
     </div>
     <div class="gallery-cta fade-in">
@@ -2040,9 +2079,15 @@ footer {
           </div>
         </div>
         <div class="social-gallery">
-          <div class="social-gallery-item" style="background:linear-gradient(135deg,#FDDDE6,#EDE8F8);">☁️</div>
-          <div class="social-gallery-item" style="background:linear-gradient(135deg,#FFF8E7,#FDDDE6);">🌟</div>
-          <div class="social-gallery-item" style="background:linear-gradient(135deg,#E8F5E9,#FFF3CD);">🦕</div>
+          <div class="social-gallery-item" style="overflow:hidden; border-radius:4px;">
+            <img src="assets/img/nube-tematica-1.jpg" alt="Nube temática personalizada SEGEDA HOME" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="social-gallery-item" style="overflow:hidden; border-radius:4px;">
+            <img src="assets/img/nube-tematica-2.jpg" alt="Nube temática decoración infantil" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="social-gallery-item" style="overflow:hidden; border-radius:4px;">
+            <img src="assets/img/nube-tematica-3.jpg" alt="Nube temática SEGEDA HOME estilo boutique" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
         </div>
         <a href="https://www.instagram.com/Segedahomel" target="_blank" rel="noopener noreferrer"
            class="btn-primary" style="margin-top:var(--space-sm); width:100%; justify-content:center;">
@@ -2059,9 +2104,15 @@ footer {
           </div>
         </div>
         <div class="social-gallery">
-          <div class="social-gallery-item" style="background:linear-gradient(135deg,#EDE8F8,#FDDDE6);">👸</div>
-          <div class="social-gallery-item" style="background:linear-gradient(135deg,#FFF3CD,#FFF8E7);">⭐</div>
-          <div class="social-gallery-item" style="background:linear-gradient(135deg,#FDDDE6,#EDE8F8,#E8F5E9);">🖼️</div>
+          <div class="social-gallery-item" style="overflow:hidden; border-radius:4px;">
+            <img src="assets/img/nube-tematica-4.jpg" alt="Nube temática personalizada Facebook SEGEDA HOME" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="social-gallery-item" style="overflow:hidden; border-radius:4px;">
+            <img src="assets/img/pack-cuadritos.png" alt="Pack cuadritos decorativos infantiles" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="social-gallery-item" style="overflow:hidden; border-radius:4px;">
+            <img src="assets/img/placa-circular-luz.jpg" alt="Placa circular con luz decorativa SEGEDA HOME" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
         </div>
         <a href="https://www.facebook.com/SegedaHome" target="_blank" rel="noopener noreferrer"
            class="btn-primary" style="margin-top:var(--space-sm); width:100%; justify-content:center;">
