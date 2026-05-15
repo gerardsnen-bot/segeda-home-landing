@@ -281,6 +281,7 @@ section { padding: var(--space-xl) 0; }
 @media (max-width: 480px) {
   .nav-logo img { height: 96px; max-width: 240px; }
   #navbar { padding: 0.75rem 0; }
+  #hero { padding-top: 7rem; }
 }
 .nav-logo-name { display: none; }
 .nav-logo-slogan { display: none; }
@@ -293,7 +294,7 @@ section { padding: var(--space-xl) 0; }
   min-height: 100vh;
   min-height: 100dvh; /* Dynamic Viewport Height para Android */
   display: flex; align-items: center;
-  padding-top: 5rem;
+  padding-top: 8rem;
   background: linear-gradient(145deg, var(--color-cream) 0%, #FDE8EF 40%, #EDE8F8 70%, var(--color-cream) 100%);
   position: relative;
   overflow: hidden;
@@ -477,7 +478,7 @@ section { padding: var(--space-xl) 0; }
   gap: var(--space-md);
 }
 @media (min-width: 640px) {
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
 }
 @media (min-width: 1024px) {
   .products-grid { grid-template-columns: repeat(3, 1fr); }
@@ -486,7 +487,7 @@ section { padding: var(--space-xl) 0; }
   background: var(--color-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 3px 16px rgba(74,44,26,0.08);
   border: 1px solid rgba(201,150,58,0.1);
   transition: var(--transition);
   display: flex; flex-direction: column;
@@ -629,7 +630,7 @@ section { padding: var(--space-xl) 0; }
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  gap: 0.85rem;
   margin-bottom: var(--space-lg);
 }
 @media (min-width: 768px) {
@@ -637,7 +638,7 @@ section { padding: var(--space-xl) 0; }
 }
 .gallery-item {
   aspect-ratio: 1;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
   cursor: pointer;
@@ -1428,6 +1429,10 @@ footer {
   transform: scale(1.04);
 }
 .gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   transition: transform var(--transition);
 }
 .gallery-item:hover img {
@@ -1516,7 +1521,7 @@ footer {
   font-family: var(--font-sans);
   font-size: 0.78rem;
   font-weight: 600;
-  padding: 0.52rem 1.1rem;
+  padding: 0.55rem 1.2rem;
   border-radius: var(--radius-full);
   cursor: pointer;
   white-space: nowrap;
