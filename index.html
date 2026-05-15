@@ -99,6 +99,13 @@ html { scroll-behavior: smooth; font-size: 16px; }
 body {
   font-family: var(--font-sans);
   background-color: var(--color-cream);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 10% 15%, rgba(255,214,224,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 90% 10%, rgba(237,232,248,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 55% at 50% 85%, rgba(245,224,160,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 60%, rgba(212,168,83,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 45% at 20% 70%, rgba(247,184,200,0.3) 0%, transparent 55%);
+  background-attachment: fixed;
   color: var(--color-brown);
   line-height: 1.6;
   overflow-x: hidden;
@@ -401,7 +408,8 @@ section { padding: var(--space-xl) 0; }
    BENEFITS
    ============================================= */
 #beneficios {
-  background: var(--color-white);
+  background: rgba(255,253,249,0.65);
+  backdrop-filter: blur(2px);
 }
 .benefits-grid {
   display: grid;
@@ -447,7 +455,7 @@ section { padding: var(--space-xl) 0; }
    PRODUCTS
    ============================================= */
 #productos {
-  background: linear-gradient(180deg, var(--color-cream) 0%, #FDE8EF22 50%, var(--color-cream) 100%);
+  background: rgba(255,253,249,0.5);
 }
 .products-grid {
   display: grid;
@@ -602,7 +610,7 @@ section { padding: var(--space-xl) 0; }
    GALLERY
    ============================================= */
 #galeria {
-  background: var(--color-white);
+  background: rgba(255,253,249,0.6);
 }
 .gallery-grid {
   display: grid;
@@ -705,7 +713,7 @@ section { padding: var(--space-xl) 0; }
    PERSONALIZATION
    ============================================= */
 #personalizacion {
-  background: var(--color-cream);
+  background: transparent;
 }
 .personalization-grid {
   display: grid;
@@ -740,7 +748,7 @@ section { padding: var(--space-xl) 0; }
    HOW TO BUY
    ============================================= */
 #como-comprar {
-  background: var(--color-white);
+  background: rgba(255,253,249,0.6);
 }
 .steps-timeline {
   display: grid;
@@ -790,7 +798,7 @@ section { padding: var(--space-xl) 0; }
    MATERIALS
    ============================================= */
 #materiales {
-  background: linear-gradient(135deg, var(--color-cream) 0%, #EDE8F815 100%);
+  background: transparent;
 }
 .materials-list {
   max-width: 700px; margin: 0 auto;
@@ -815,7 +823,7 @@ section { padding: var(--space-xl) 0; }
    PAYMENTS
    ============================================= */
 #pagos {
-  background: var(--color-white);
+  background: rgba(255,253,249,0.6);
 }
 .payments-grid {
   display: grid;
@@ -861,7 +869,7 @@ section { padding: var(--space-xl) 0; }
    SHIPPING
    ============================================= */
 #envios {
-  background: var(--color-cream);
+  background: transparent;
 }
 .shipping-grid {
   display: grid;
@@ -891,7 +899,7 @@ section { padding: var(--space-xl) 0; }
    CARE
    ============================================= */
 #cuidados {
-  background: var(--color-white);
+  background: rgba(255,253,249,0.6);
 }
 .care-grid {
   display: grid;
@@ -920,7 +928,7 @@ section { padding: var(--space-xl) 0; }
    SOCIAL / REDES
    ============================================= */
 #redes {
-  background: linear-gradient(135deg, var(--color-cream) 0%, #FDE8EF22 50%, var(--color-cream) 100%);
+  background: transparent;
 }
 .social-grid {
   display: grid;
@@ -966,7 +974,7 @@ section { padding: var(--space-xl) 0; }
    FAQ
    ============================================= */
 #faq {
-  background: var(--color-cream);
+  background: rgba(255,253,249,0.55);
 }
 .faq-list {
   max-width: 780px; margin: 0 auto;
@@ -1237,6 +1245,126 @@ footer {
 .fade-in-delay-4 { transition-delay: 0.4s; }
 
 /* =============================================
+   SILUETAS DECORATIVAS FLOTANTES
+   ============================================= */
+.deco-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.deco-layer svg {
+  position: absolute;
+  opacity: 0;
+  animation: deco-float 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+/* Nube 1 — arriba izquierda */
+.deco-cloud-1 {
+  top: 8%; left: 3%;
+  width: 110px;
+  opacity: 0.18 !important;
+  animation-delay: 0s !important;
+  animation-duration: 20s !important;
+}
+/* Nube 2 — arriba derecha */
+.deco-cloud-2 {
+  top: 12%; right: 5%;
+  width: 90px;
+  opacity: 0.14 !important;
+  animation-delay: -6s !important;
+  animation-duration: 22s !important;
+}
+/* Nube 3 — centro izquierda */
+.deco-cloud-3 {
+  top: 45%; left: 1%;
+  width: 70px;
+  opacity: 0.12 !important;
+  animation-delay: -10s !important;
+  animation-duration: 25s !important;
+}
+/* Estrella 1 */
+.deco-star-1 {
+  top: 20%; left: 18%;
+  width: 28px;
+  opacity: 0.22 !important;
+  animation-delay: -3s !important;
+  animation-duration: 14s !important;
+}
+/* Estrella 2 */
+.deco-star-2 {
+  top: 60%; right: 12%;
+  width: 22px;
+  opacity: 0.18 !important;
+  animation-delay: -8s !important;
+  animation-duration: 16s !important;
+}
+/* Estrella 3 */
+.deco-star-3 {
+  top: 35%; right: 22%;
+  width: 18px;
+  opacity: 0.2 !important;
+  animation-delay: -12s !important;
+  animation-duration: 12s !important;
+}
+/* Corazón 1 */
+.deco-heart-1 {
+  top: 75%; left: 8%;
+  width: 32px;
+  opacity: 0.16 !important;
+  animation-delay: -5s !important;
+  animation-duration: 19s !important;
+}
+/* Corazón 2 */
+.deco-heart-2 {
+  top: 30%; right: 6%;
+  width: 24px;
+  opacity: 0.14 !important;
+  animation-delay: -14s !important;
+  animation-duration: 17s !important;
+}
+/* Mariposa */
+.deco-butterfly-1 {
+  top: 55%; left: 88%;
+  width: 38px;
+  opacity: 0.13 !important;
+  animation-delay: -7s !important;
+  animation-duration: 23s !important;
+}
+/* Flor */
+.deco-flower-1 {
+  top: 80%; right: 3%;
+  width: 34px;
+  opacity: 0.15 !important;
+  animation-delay: -9s !important;
+  animation-duration: 21s !important;
+}
+/* Estrella grande */
+.deco-star-big {
+  top: 88%; left: 40%;
+  width: 44px;
+  opacity: 0.1 !important;
+  animation-delay: -16s !important;
+  animation-duration: 28s !important;
+}
+/* Nube pequeña centro */
+.deco-cloud-sm {
+  top: 68%; left: 50%;
+  width: 55px;
+  opacity: 0.1 !important;
+  animation-delay: -11s !important;
+  animation-duration: 24s !important;
+}
+@keyframes deco-float {
+  0%   { transform: translateY(0px) rotate(0deg) scale(1); }
+  25%  { transform: translateY(-18px) rotate(3deg) scale(1.04); }
+  50%  { transform: translateY(-8px) rotate(-2deg) scale(0.97); }
+  75%  { transform: translateY(-22px) rotate(4deg) scale(1.02); }
+  100% { transform: translateY(0px) rotate(0deg) scale(1); }
+}
+
+/* =============================================
    UTILITY
    ============================================= */
 .text-center { text-align: center; }
@@ -1292,7 +1420,7 @@ footer {
 }
 
 /* =============================================
-   CATEGORY BAR — sticky glassmorphism iPhone
+   CATEGORY BAR — cristal dorado translúcido
    ============================================= */
 #category-bar {
   position: sticky;
@@ -1300,11 +1428,22 @@ footer {
   left: 0;
   right: 0;
   z-index: 999;
-  background: rgba(255, 248, 240, 0.85);
-  backdrop-filter: blur(24px) saturate(220%);
-  -webkit-backdrop-filter: blur(24px) saturate(220%);
-  border-bottom: 1.5px solid rgba(212, 168, 83, 0.22);
-  box-shadow: 0 6px 32px rgba(74, 44, 26, 0.1);
+  /* Cristal dorado: gradiente translúcido con destellos */
+  background:
+    linear-gradient(135deg,
+      rgba(255,248,230,0.82) 0%,
+      rgba(255,235,180,0.72) 30%,
+      rgba(255,248,230,0.78) 60%,
+      rgba(255,220,160,0.68) 100%);
+  backdrop-filter: blur(28px) saturate(260%) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(260%) brightness(1.08);
+  border-top: 1px solid rgba(255,220,140,0.55);
+  border-bottom: 1.5px solid rgba(212,168,83,0.35);
+  box-shadow:
+    0 2px 0 0 rgba(255,240,180,0.6) inset,
+    0 -1px 0 0 rgba(255,200,100,0.2) inset,
+    0 8px 40px rgba(212,168,83,0.22),
+    0 2px 12px rgba(255,200,100,0.15);
   padding: 0.7rem 0;
   transform: translateY(-100%);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
@@ -1312,6 +1451,23 @@ footer {
               background 0.3s ease,
               border-color 0.3s ease;
   will-change: transform;
+  /* Brillo superior tipo cristal */
+  position: relative;
+}
+#category-bar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,240,160,0.9) 20%,
+    rgba(255,255,220,1) 50%,
+    rgba(255,240,160,0.9) 80%,
+    transparent 100%);
+  border-radius: 0 0 2px 2px;
+  pointer-events: none;
+  z-index: 1;
 }
 #category-bar.cat-visible {
   transform: translateY(0);
@@ -1332,10 +1488,15 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(255, 253, 249, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(212, 168, 83, 0.28);
+  /* Cristal perla con toque dorado */
+  background: linear-gradient(145deg,
+    rgba(255,255,245,0.92) 0%,
+    rgba(255,245,215,0.82) 50%,
+    rgba(255,255,245,0.88) 100%);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1.5px solid rgba(212,168,83,0.38);
+  border-top-color: rgba(255,240,180,0.75);
   color: var(--color-brown);
   font-family: var(--font-sans);
   font-size: 0.78rem;
@@ -1348,26 +1509,51 @@ footer {
   transition: background 0.25s ease, border-color 0.25s ease,
               color 0.25s ease, box-shadow 0.25s ease,
               transform 0.2s ease;
-  box-shadow: 0 2px 10px rgba(74, 44, 26, 0.08);
+  box-shadow:
+    0 1px 0 rgba(255,255,220,0.8) inset,
+    0 3px 12px rgba(212,168,83,0.15),
+    0 1px 4px rgba(255,200,100,0.1);
 }
 .cat-pill:hover {
-  background: rgba(212, 168, 83, 0.18);
-  border-color: rgba(212, 168, 83, 0.5);
+  background: linear-gradient(145deg,
+    rgba(255,245,200,0.95) 0%,
+    rgba(255,230,150,0.85) 50%,
+    rgba(255,245,200,0.92) 100%);
+  border-color: rgba(212,168,83,0.6);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(212, 168, 83, 0.25);
+  box-shadow:
+    0 1px 0 rgba(255,255,220,0.9) inset,
+    0 8px 20px rgba(212,168,83,0.3),
+    0 2px 8px rgba(255,200,100,0.2);
 }
 .cat-pill-active {
-  background: linear-gradient(135deg, #D4A853, #E8B860);
-  border-color: #D4A853;
+  background: linear-gradient(135deg,
+    #E8C068 0%,
+    #D4A853 35%,
+    #F0CC78 65%,
+    #C9963A 100%);
+  border-color: rgba(212,168,83,0.6);
+  border-top-color: rgba(255,240,180,0.9);
   color: #fff;
-  box-shadow: 0 6px 20px rgba(212, 168, 83, 0.45);
+  text-shadow: 0 1px 2px rgba(100,60,0,0.3);
+  box-shadow:
+    0 1px 0 rgba(255,255,200,0.5) inset,
+    0 8px 24px rgba(212,168,83,0.5),
+    0 2px 8px rgba(255,180,50,0.25);
 }
 .cat-pill-active:hover {
-  background: linear-gradient(135deg, #C5A047, #D4A853);
+  background: linear-gradient(135deg,
+    #F0CC78 0%,
+    #D4A853 40%,
+    #E8C068 70%,
+    #C5A047 100%);
   border-color: #C5A047;
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(212, 168, 83, 0.5);
+  box-shadow:
+    0 1px 0 rgba(255,255,200,0.6) inset,
+    0 10px 28px rgba(212,168,83,0.55),
+    0 3px 10px rgba(255,180,50,0.3);
 }
 .cat-pill-icon {
   font-size: 0.95rem;
@@ -1432,6 +1618,82 @@ body.cat-bar-shown {
 
 
 <body>
+
+<!-- =============================================
+     DECORATIVE BACKGROUND LAYER — siluetas flotantes
+     ============================================= -->
+<div class="deco-layer" aria-hidden="true">
+  <!-- Nube grande izquierda -->
+  <svg class="deco-cloud-1" viewBox="0 0 120 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="60" cy="50" rx="55" ry="22" fill="#FFB8C8" opacity="0.7"/>
+    <ellipse cx="35" cy="38" rx="28" ry="22" fill="#FFB8C8" opacity="0.7"/>
+    <ellipse cx="70" cy="32" rx="32" ry="24" fill="#FFB8C8" opacity="0.7"/>
+    <ellipse cx="95" cy="42" rx="22" ry="18" fill="#FFB8C8" opacity="0.7"/>
+  </svg>
+  <!-- Nube mediana derecha -->
+  <svg class="deco-cloud-2" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="44" rx="45" ry="18" fill="#DDD0F0" opacity="0.7"/>
+    <ellipse cx="28" cy="34" rx="24" ry="18" fill="#DDD0F0" opacity="0.7"/>
+    <ellipse cx="60" cy="28" rx="28" ry="20" fill="#DDD0F0" opacity="0.7"/>
+    <ellipse cx="80" cy="36" rx="18" ry="15" fill="#DDD0F0" opacity="0.7"/>
+  </svg>
+  <!-- Nube pequeña centro -->
+  <svg class="deco-cloud-3" viewBox="0 0 80 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="40" cy="36" rx="36" ry="14" fill="#F5E0A0" opacity="0.7"/>
+    <ellipse cx="22" cy="28" rx="20" ry="15" fill="#F5E0A0" opacity="0.7"/>
+    <ellipse cx="52" cy="22" rx="22" ry="16" fill="#F5E0A0" opacity="0.7"/>
+  </svg>
+  <!-- Nube pequeña flotante centro-bajo -->
+  <svg class="deco-cloud-sm" viewBox="0 0 70 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="35" cy="32" rx="32" ry="12" fill="#F7C5D0" opacity="0.7"/>
+    <ellipse cx="18" cy="24" rx="18" ry="14" fill="#F7C5D0" opacity="0.7"/>
+    <ellipse cx="46" cy="20" rx="20" ry="15" fill="#F7C5D0" opacity="0.7"/>
+  </svg>
+  <!-- Estrella 4 puntas 1 -->
+  <svg class="deco-star-1" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15 2 L17 12 L27 15 L17 18 L15 28 L13 18 L3 15 L13 12 Z" fill="#D4A853" opacity="0.8"/>
+  </svg>
+  <!-- Estrella 4 puntas 2 -->
+  <svg class="deco-star-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#F7C5D0" opacity="0.8"/>
+  </svg>
+  <!-- Estrella 4 puntas 3 -->
+  <svg class="deco-star-3" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 1 L11.8 7.8 L18 10 L11.8 12.2 L10 19 L8.2 12.2 L2 10 L8.2 7.8 Z" fill="#DDD0F0" opacity="0.8"/>
+  </svg>
+  <!-- Estrella grande -->
+  <svg class="deco-star-big" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M23 2 L26.5 17 L41 23 L26.5 29 L23 44 L19.5 29 L5 23 L19.5 17 Z" fill="#F5E0A0" opacity="0.7"/>
+  </svg>
+  <!-- Corazón 1 -->
+  <svg class="deco-heart-1" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17 27 C17 27 2 18 2 9.5 C2 5.4 5.4 2 9.5 2 C12.2 2 14.6 3.4 17 6 C19.4 3.4 21.8 2 24.5 2 C28.6 2 32 5.4 32 9.5 C32 18 17 27 17 27 Z" fill="#F7C5D0" opacity="0.8"/>
+  </svg>
+  <!-- Corazón 2 -->
+  <svg class="deco-heart-2" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M13 20 C13 20 1 13.5 1 7 C1 4 3.5 1.5 6.5 1.5 C8.8 1.5 10.8 2.8 13 5 C15.2 2.8 17.2 1.5 19.5 1.5 C22.5 1.5 25 4 25 7 C25 13.5 13 20 13 20 Z" fill="#DDD0F0" opacity="0.8"/>
+  </svg>
+  <!-- Mariposa -->
+  <svg class="deco-butterfly-1" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="10" cy="12" rx="10" ry="12" fill="#F7C5D0" opacity="0.7" transform="rotate(-20 10 12)"/>
+    <ellipse cx="30" cy="12" rx="10" ry="12" fill="#DDD0F0" opacity="0.7" transform="rotate(20 30 12)"/>
+    <ellipse cx="12" cy="22" rx="8" ry="8" fill="#F5E0A0" opacity="0.6" transform="rotate(-15 12 22)"/>
+    <ellipse cx="28" cy="22" rx="8" ry="8" fill="#F5E0A0" opacity="0.6" transform="rotate(15 28 22)"/>
+    <ellipse cx="20" cy="16" rx="2" ry="8" fill="#D4A853" opacity="0.6"/>
+  </svg>
+  <!-- Flor -->
+  <svg class="deco-flower-1" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="18" cy="8" rx="6" ry="9" fill="#F7C5D0" opacity="0.7"/>
+    <ellipse cx="18" cy="28" rx="6" ry="9" fill="#F7C5D0" opacity="0.7"/>
+    <ellipse cx="8" cy="18" rx="9" ry="6" fill="#DDD0F0" opacity="0.7"/>
+    <ellipse cx="28" cy="18" rx="9" ry="6" fill="#DDD0F0" opacity="0.7"/>
+    <ellipse cx="10" cy="10" rx="6" ry="8" fill="#F5E0A0" opacity="0.6" transform="rotate(45 10 10)"/>
+    <ellipse cx="26" cy="10" rx="6" ry="8" fill="#F5E0A0" opacity="0.6" transform="rotate(-45 26 10)"/>
+    <ellipse cx="10" cy="26" rx="6" ry="8" fill="#F5E0A0" opacity="0.6" transform="rotate(-45 10 26)"/>
+    <ellipse cx="26" cy="26" rx="6" ry="8" fill="#F5E0A0" opacity="0.6" transform="rotate(45 26 26)"/>
+    <circle cx="18" cy="18" r="6" fill="#D4A853" opacity="0.8"/>
+  </svg>
+</div>
 
 <!-- =============================================
      NAVBAR
