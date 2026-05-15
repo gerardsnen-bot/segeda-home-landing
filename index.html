@@ -105,7 +105,9 @@ body {
     radial-gradient(ellipse 60% 55% at 50% 85%, rgba(245,224,160,0.35) 0%, transparent 55%),
     radial-gradient(ellipse 50% 40% at 80% 60%, rgba(212,168,83,0.12) 0%, transparent 50%),
     radial-gradient(ellipse 55% 45% at 20% 70%, rgba(247,184,200,0.3) 0%, transparent 55%);
-  background-attachment: fixed;
+  /* background-attachment: fixed causaba rebote de scroll en iOS Safari y móviles.
+     Se reemplaza por scroll (comportamiento estándar, sin rebote). */
+  background-attachment: scroll;
   color: var(--color-brown);
   line-height: 1.6;
   overflow-x: hidden;
@@ -284,7 +286,8 @@ section { padding: var(--space-xl) 0; }
   padding-top: 5rem;
   background: linear-gradient(145deg, var(--color-cream) 0%, #FDE8EF 40%, #EDE8F8 70%, var(--color-cream) 100%);
   position: relative;
-  overflow: hidden;
+  /* overflow:hidden eliminado — bloqueaba el scroll en algunos navegadores */
+  overflow: visible;
 }
 .hero-shape {
   position: absolute;
@@ -2863,8 +2866,13 @@ body.cat-bar-shown {
     });
 
     // Highlight active pill based on scroll position
+    // NOTA: se eliminó el scrollIntoView dentro del listener de scroll
+    // porque causaba un bucle de rebote (el scroll del pill disparaba el
+    // evento scroll de la ventana, que volvía a llamar a scrollIntoView).
+    var isScrollingToPill = false;
     function updateActivePill() {
       if (!catBar.classList.contains('cat-visible')) return;
+      if (isScrollingToPill) return; // evitar bucle de rebote
       var navH = navbarEl.offsetHeight;
       var catH = catBar.offsetHeight;
       var scrollTop = window.pageYOffset + navH + catH + 20;
@@ -2880,8 +2888,13 @@ body.cat-bar-shown {
       if (active) {
         pills.forEach(function (pill) {
           if (pill.getAttribute('data-target') === active) {
-            pill.classList.add('cat-pill-active');
-            pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            if (!pill.classList.contains('cat-pill-active')) {
+              pill.classList.add('cat-pill-active');
+              // Scroll del pill dentro de la barra sin afectar la página
+              isScrollingToPill = true;
+              pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+              setTimeout(function () { isScrollingToPill = false; }, 600);
+            }
           } else {
             pill.classList.remove('cat-pill-active');
           }
