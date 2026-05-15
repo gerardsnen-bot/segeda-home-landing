@@ -1467,7 +1467,6 @@ footer {
               border-color 0.3s ease;
   will-change: transform;
   /* Brillo superior tipo cristal */
-  position: relative;
 }
 #category-bar::before {
   content: '';
@@ -1604,7 +1603,7 @@ body.cat-bar-shown {
   .cat-bar-inner {
     gap: 0.45rem;
     padding: 0.45rem 0.6rem 0.6rem;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .cat-pill {
     font-size: 0.7rem;
@@ -1774,7 +1773,7 @@ body.cat-bar-shown {
 
 /* Anchor scroll clearance for sticky bars */
 section[id] {
-  scroll-margin-top: 130px;
+  scroll-margin-top: var(--scroll-margin, 95px);
 }
 </style>
 </head>
@@ -2846,6 +2845,8 @@ section[id] {
     function positionCatBar() {
       var navH = navbarEl.offsetHeight;
       catBar.style.top = navH + 'px';
+      var catVisible = catBar.classList.contains('cat-visible');
+      document.documentElement.style.setProperty('--scroll-margin', (navH + (catVisible ? catBar.offsetHeight : 0) + 8) + 'px');
     }
     positionCatBar();
     window.addEventListener('resize', positionCatBar, { passive: true });
@@ -2860,6 +2861,9 @@ section[id] {
       } else {
         catBar.classList.remove('cat-visible');
       }
+      var navH = navbarEl.offsetHeight;
+      var catVisible = catBar.classList.contains('cat-visible');
+      document.documentElement.style.setProperty('--scroll-margin', (navH + (catVisible ? catBar.offsetHeight : 0) + 8) + 'px');
     }
     window.addEventListener('scroll', handleCatBarVisibility, { passive: true });
     handleCatBarVisibility();
@@ -2892,6 +2896,7 @@ section[id] {
     // porque causaba un bucle de rebote (el scroll del pill disparaba el
     // evento scroll de la ventana, que volvía a llamar a scrollIntoView).
     var isScrollingToPill = false;
+    var lastActivePill = null;
     function updateActivePill() {
       if (!catBar.classList.contains('cat-visible')) return;
       if (isScrollingToPill) return; // evitar bucle de rebote
@@ -3021,4 +3026,4 @@ section[id] {
 })();
 </script>
 </body>
-</html>>
+</html>
