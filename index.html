@@ -296,7 +296,7 @@ section { padding: var(--space-xl) 0; }
   padding-top: 5rem;
   background: linear-gradient(145deg, var(--color-cream) 0%, #FDE8EF 40%, #EDE8F8 70%, var(--color-cream) 100%);
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   -webkit-user-select: none; /* evitar selección accidental en móvil */
   touch-action: pan-y; /* permitir scroll vertical nativo */
 }
@@ -1267,7 +1267,7 @@ footer {
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  touch-action: none; /* evitar interferencia con gestos tactiles */
+  touch-action: pan-y; /* permitir scroll vertical, no bloquear gestos */
 }
 .deco-layer svg {
   position: absolute;
@@ -1438,10 +1438,11 @@ footer {
    CATEGORY BAR — cristal dorado translúcido
    ============================================= */
 #category-bar {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  width: 100%;
   z-index: 999;
   /* Cristal dorado: gradiente translúcido con destellos */
   background:
@@ -1486,10 +1487,7 @@ footer {
 #category-bar.cat-visible {
   transform: translateY(0);
 }
-/* Push category bar below the fixed navbar */
-#navbar ~ #category-bar {
-  top: 0;
-}
+/* top is set dynamically by JS based on navbar height */
 .cat-bar-inner {
   display: flex;
   align-items: center;
@@ -2803,8 +2801,8 @@ section[id] {
      ============================================= */
   if ('IntersectionObserver' in window) {
     var observerOptions = {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.1,
+      rootMargin: '0px 0px -20px 0px'
     };
 
     var observer = new IntersectionObserver(function (entries) {
@@ -2886,8 +2884,8 @@ section[id] {
         var targetTop = target.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({ top: targetTop, behavior: 'smooth' });
 
-        // Scroll active pill into view within the bar
-        this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        // Scroll active pill into view within the bar (instant para no competir con window.scrollTo)
+        this.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
       });
     });
 
