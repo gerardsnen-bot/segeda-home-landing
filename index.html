@@ -1497,6 +1497,7 @@ footer {
   gap: 0.6rem;
   padding: 0.5rem 1rem 0.65rem;
 }
+.cat-bar-inner::-webkit-scrollbar { display: none; }
 .cat-pill {
   display: inline-flex;
   align-items: center;
@@ -1766,6 +1767,11 @@ body.cat-bar-shown {
 .cuadrito-price-tag strong { color: #C9963A; }
 .cuadritos-cta { margin-top: var(--space-lg); text-align: center; background: rgba(255,255,255,0.72); backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(255,200,160,0.3); border-radius: 1.5rem; padding: var(--space-md) var(--space-lg); box-shadow: 0 4px 20px rgba(90,60,30,0.08); }
 .cuadritos-cta p { font-size: 1.1rem; color: var(--color-taupe, #7B5B3A); margin-bottom: var(--space-sm); font-weight: 500; }
+
+/* Anchor scroll clearance for sticky bars */
+section[id] {
+  scroll-margin-top: 130px;
+}
 </style>
 </head>
 
@@ -2751,7 +2757,9 @@ body.cat-bar-shown {
       if (target) {
         e.preventDefault();
         var navbarHeight = navbar ? navbar.offsetHeight : 0;
-        var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 16;
+        var catBarEl = document.getElementById('category-bar');
+        var catBarH = (catBarEl && catBarEl.classList.contains('cat-visible')) ? catBarEl.offsetHeight : 0;
+        var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight - catBarH - 16;
         window.scrollTo({ top: targetPosition, behavior: 'smooth' });
       }
     });
@@ -2895,7 +2903,8 @@ body.cat-bar-shown {
         }
       });
 
-      if (active) {
+      if (active && active !== lastActivePill) {
+        lastActivePill = active;
         pills.forEach(function (pill) {
           if (pill.getAttribute('data-target') === active) {
             if (!pill.classList.contains('cat-pill-active')) {

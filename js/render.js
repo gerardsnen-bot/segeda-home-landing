@@ -150,7 +150,6 @@
     }
     target.innerHTML = products.map(buildProductCard).join('\n      ');
     initSizePills(target);
-    observeFadeIns();
   }
 
   /* --------- renderGallery --------- */
@@ -168,7 +167,6 @@
         '        <div class="gallery-item-overlay"><span class="gallery-item-label">' + escapeHtml(item.label) + '</span></div>\n' +
         '      </div>';
     }).join('\n      ');
-    observeFadeIns();
   }
 
   /* --------- applySiteSettings --------- */
@@ -215,6 +213,7 @@
       renderProducts(products);
       renderGallery(gallery);
       applySiteSettings(settings);
+      observeFadeIns();
     })
     .catch(function (err) {
       console.error('[SEGEDA HOME] Error cargando JSON:', err);
