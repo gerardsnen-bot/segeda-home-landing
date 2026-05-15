@@ -1,0 +1,27 @@
+{
+  "brand": "SEGEDA HOME",
+  "slogan": "Ilusión hecha decoración",
+  "heroHeadline": "La habitación que tu bebé merece, hecha solo para él",
+  "heroSubheadline": "Nubes con luz, placas circulares, nombres decorativos y mucho más. Cada pieza diseñada con amor y hecha a medida para el mundo mágico de tu pequeño.",
+  "whatsapp": "51978642447",
+  "instagram": "https://www.instagram.com/segedahome1?igsh=MXg2NWR2a2ZveXphNg==",
+  "facebook": "https://www.facebook.com/share/1Ngx9d67Sn/",
+  "instagramHandle": "@Segedahomel",
+  "location": "Surco, Lima, Perú",
+  "locationShort": "Surco, Lima",
+  "productionDays": 4,
+  "productionText": "Producción: 4 días hábiles",
+  "shippingText": "Envíos a todo el Perú",
+  "priceRange": "S/25 - S/180",
+  "openingHours": "Mo-Sa 09:00-18:00",
+  "paymentMethods": [
+    { "emoji": "💜", "label": "Yape" },
+    { "emoji": "🔵", "label": "Plin" },
+    { "emoji": "🏦", "label": "Transferencia" },
+    { "emoji": "💵", "label": "Efectivo" }
+  ],
+  "ctaHeadline": "La habitación de tus sueños empieza con un mensaje",
+  "ctaSubtitle": "Escríbenos ahora por WhatsApp y en menos de 24 horas tendrás un diseño personalizado esperándote. Producción en 4 días. Envíos a todo el Perú.",
+  "ctaButtonText": "¡Quiero empezar mi decoración ahora!",
+  "seoDescription": "SEGEDA HOME — Decoración infantil personalizada. Nubes con luz, placas circulares, nombres decorativos y más. Envíos a todo el Perú. ¡Ilusión hecha decoración!"
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "src": "assets/img/nube-tematica-princesa.jpg",
+    "alt": "Nube temática princesa con decoración personalizada SEGEDA HOME",
+    "label": "Nube Temática Princesa",
+    "fadeClass": ""
+  },
+  {
+    "src": "assets/img/placas-circulares.jpg",
+    "alt": "Placas circulares decorativas infantiles personalizadas",
+    "label": "Placas Circulares",
+    "fadeClass": "fade-in-delay-1"
+  },
+  {
+    "src": "assets/img/nube-tematica-conejita.jpg",
+    "alt": "Nube temática conejita personalizada con luz LED",
+    "label": "Nube Temática Conejita",
+    "fadeClass": "fade-in-delay-2"
+  },
+  {
+    "src": "assets/img/nube-tematica-con-luz.jpg",
+    "alt": "Nube temática con luz LED decoración habitación infantil",
+    "label": "Nube Temática con Luz",
+    "fadeClass": "fade-in-delay-1"
+  },
+  {
+    "src": "assets/img/combo-lampara-personalizada.jpg",
+    "alt": "Combo lámpara y decoración personalizada SEGEDA HOME",
+    "label": "Combo Lámpara Personalizada",
+    "fadeClass": "fade-in-delay-2"
+  },
+  {
+    "src": "assets/img/stickers-variados.jpg",
+    "alt": "Stickers variados decorativos infantiles personalizados",
+    "label": "Stickers Variados",
+    "fadeClass": "fade-in-delay-3"
+  },
+  {
+    "src": "assets/img/nube-carita-con-luz.jpg",
+    "alt": "Nube con carita y luz LED decoración infantil personalizada SEGEDA HOME",
+    "label": "Nube Carita con Luz",
+    "fadeClass": ""
+  },
+  {
+    "src": "assets/img/nube-tematica-9.jpg",
+    "alt": "Nube temática personalizada diseño especial SEGEDA HOME",
+    "label": "Nube Temática Especial",
+    "fadeClass": "fade-in-delay-1"
+  },
+  {
+    "src": "assets/img/imagen-adicional.jpg",
+    "alt": "Decoración infantil adicional personalizada SEGEDA HOME",
+    "label": "Decoración Personalizada",
+    "fadeClass": "fade-in-delay-2"
+  }
+]
