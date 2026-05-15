@@ -95,7 +95,12 @@
    RESET & BASE
    ============================================= */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; }
+html {
+  font-size: 16px;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
 body {
   font-family: var(--font-sans);
   background-color: var(--color-cream);
@@ -111,6 +116,8 @@ body {
   color: var(--color-brown);
   line-height: 1.6;
   overflow-x: hidden;
+  touch-action: pan-y;
+  -webkit-touch-callout: none;
 }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
 img { max-width: 100%; height: auto; display: block; }
@@ -282,12 +289,14 @@ section { padding: var(--space-xl) 0; }
    ============================================= */
 #hero {
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic Viewport Height para Android */
   display: flex; align-items: center;
   padding-top: 5rem;
   background: linear-gradient(145deg, var(--color-cream) 0%, #FDE8EF 40%, #EDE8F8 70%, var(--color-cream) 100%);
   position: relative;
-  /* overflow:hidden eliminado — bloqueaba el scroll en algunos navegadores */
   overflow: visible;
+  -webkit-user-select: none; /* evitar selección accidental en móvil */
+  touch-action: pan-y; /* permitir scroll vertical nativo */
 }
 .hero-shape {
   position: absolute;
@@ -1256,6 +1265,7 @@ footer {
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+  touch-action: none; /* evitar interferencia con gestos tactiles */
 }
 .deco-layer svg {
   position: absolute;
