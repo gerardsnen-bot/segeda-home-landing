@@ -2303,51 +2303,6 @@ body.cat-bar-shown {
   });
 
   /* =============================================
-     3. SIZE PILL SELECTOR WITH PRICE UPDATE
-     ============================================= */
-  document.querySelectorAll('.size-pills').forEach(function (pillGroup) {
-    var productKey = pillGroup.getAttribute('data-product');
-    var priceDisplay = document.querySelector('[data-price-display="' + productKey + '"]');
-    var pills = pillGroup.querySelectorAll('.size-pill');
-
-    pills.forEach(function (pill) {
-      pill.addEventListener('click', function () {
-        // Remove active from all pills in this group
-        pills.forEach(function (p) {
-          p.classList.remove('active');
-          p.setAttribute('aria-pressed', 'false');
-        });
-        // Set active on clicked pill
-        this.classList.add('active');
-        this.setAttribute('aria-pressed', 'true');
-        // Update price display
-        if (priceDisplay) {
-          priceDisplay.textContent = this.getAttribute('data-price');
-          priceDisplay.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
-          priceDisplay.style.opacity = '0';
-          priceDisplay.style.transform = 'scale(0.9)';
-          setTimeout(function () {
-            priceDisplay.style.opacity = '1';
-            priceDisplay.style.transform = 'scale(1)';
-          }, 100);
-        }
-      });
-    });
-
-    // Set first pill as active by default
-    if (pills.length > 0) {
-      // Try to find and activate popular size first
-      var popularPill = pillGroup.querySelector('.popular-size');
-      var defaultPill = popularPill || pills[0];
-      defaultPill.classList.add('active');
-      defaultPill.setAttribute('aria-pressed', 'true');
-      if (priceDisplay) {
-        priceDisplay.textContent = defaultPill.getAttribute('data-price');
-      }
-    }
-  });
-
-  /* =============================================
      4. FAQ ACCORDION
      ============================================= */
   document.querySelectorAll('.faq-item').forEach(function (item) {
