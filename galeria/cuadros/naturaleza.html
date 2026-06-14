@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuadros - Naturaleza | SEGEDA HOME</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--color-cream:#FDF6EC;--color-brown:#4A2C1A;--color-taupe:#8C7B72;--color-gold:#C9963A;--color-white:#FFFDF9;--color-primary:#E8D5B7;--color-bg:#FDF6EC;--color-text:#6B4E2A;--color-accent:#C9963A;--color-border:rgba(201,150,58,0.3);--font-display:"Playfair Display",Georgia,serif;--font-sans:"Nunito",system-ui,sans-serif;--radius-md:16px;--radius-full:9999px;--shadow-sm:0 2px 8px rgba(74,44,26,.07);--shadow-hover:0 12px 36px rgba(74,44,26,.16);--transition:.3s cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-sans);background:linear-gradient(180deg,var(--color-bg) 0%,var(--color-cream) 100%);color:var(--color-brown);min-height:100vh}
+.page-header{background:linear-gradient(135deg,#FDF6EC,#F5EDE0);padding:2rem 1.5rem 1.5rem;text-align:center;border-bottom:2px solid var(--color-border);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.back-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:700;color:var(--color-text);background:var(--color-white);padding:.5rem 1.2rem;border-radius:var(--radius-full);border:2px solid var(--color-border);text-decoration:none;margin-bottom:1rem;transition:var(--transition)}
+.back-btn:hover{background:var(--color-primary);color:#fff;transform:translateY(-2px)}
+.page-title{font-family:var(--font-display);font-size:clamp(1.4rem,4vw,2rem);font-weight:700;color:var(--color-text);margin-bottom:.3rem}
+.page-subtitle{font-size:.9rem;color:var(--color-taupe)}
+.gallery-container{max-width:1200px;margin:0 auto;padding:2rem 1rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media(min-width:768px){.gallery-grid{grid-template-columns:repeat(3,1fr);gap:1.5rem}}
+@media(min-width:1024px){.gallery-grid{grid-template-columns:repeat(4,1fr);gap:1.5rem}}
+.gallery-item{position:relative;border-radius:var(--radius-md);overflow:hidden;background:var(--color-white);border:2px solid var(--color-border);box-shadow:var(--shadow-sm);transition:var(--transition);aspect-ratio:1/1}
+.gallery-item:hover{transform:translateY(-4px) scale(1.02);box-shadow:var(--shadow-hover);border-color:var(--color-primary)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:var(--transition)}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-item-number{position:absolute;top:.5rem;left:.5rem;background:var(--color-accent);color:#fff;font-size:.7rem;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.gallery-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#FDF6EC,#F5EDE0);opacity:.6}
+.gallery-placeholder-text{font-size:.7rem;font-weight:600;color:var(--color-taupe);margin-top:.5rem}
+.cta-section{text-align:center;padding:2rem 1rem 3rem}
+.cta-text{font-size:1rem;color:var(--color-taupe);margin-bottom:1rem}
+.btn-whatsapp{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,#25D366,#1ebe59);color:#fff;font-weight:700;font-size:.95rem;padding:.9rem 2rem;border-radius:var(--radius-full);box-shadow:0 4px 16px rgba(37,211,102,.3);transition:var(--transition);text-decoration:none}
+.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.45)}
+</style>
+</head>
+<body>
+<header class="page-header">
+  <a href="../../index.html" class="back-btn">&#8592; Volver al catalogo</a>
+  <h1 class="page-title">Cuadros - Naturaleza</h1>
+  <p class="page-subtitle">Coleccion de cuadros con tematica de naturaleza</p>
+</header>
+<main class="gallery-container">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <span class="gallery-item-number">1</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-1.jpg" alt="Cuadros - Naturaleza diseno 1" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 1</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">2</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-2.jpg" alt="Cuadros - Naturaleza diseno 2" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 2</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">3</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-3.jpg" alt="Cuadros - Naturaleza diseno 3" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 3</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">4</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-4.jpg" alt="Cuadros - Naturaleza diseno 4" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 4</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">5</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-5.jpg" alt="Cuadros - Naturaleza diseno 5" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 5</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">6</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-6.jpg" alt="Cuadros - Naturaleza diseno 6" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 6</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">7</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-7.jpg" alt="Cuadros - Naturaleza diseno 7" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 7</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">8</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-8.jpg" alt="Cuadros - Naturaleza diseno 8" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 8</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">9</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-9.jpg" alt="Cuadros - Naturaleza diseno 9" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 9</span>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-item-number">10</span>
+      <img src="../../assets/img/galeria/cuadros/naturaleza-10.jpg" alt="Cuadros - Naturaleza diseno 10" loading="lazy" onerror="this.style.display=&quot;none&quot;; this.nextElementSibling.style.display=&quot;flex&quot;;">
+      <div class="gallery-placeholder" style="display:none;">
+        <span style="font-size:2.5rem;">&#128247;</span>
+        <span class="gallery-placeholder-text">Imagen 10</span>
+      </div>
+    </div>
+  </div>
+</main>
+<section class="cta-section">
+  <a href="https://wa.me/51978642447?text=Hola!%20Me%20interesan%20los%20Cuadros%20de%20Naturaleza" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+    <svg style="width:22px;height:22px" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Pedir este diseno por WhatsApp
+  </a>
+</section>
+</body>
+</html>
