@@ -253,6 +253,19 @@ section { padding: var(--space-xl) 0; }
 }
 .nav-logo-name { display: none; }
 .nav-logo-slogan { display: none; }
+.nav-brand-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--color-brown);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
 .nav-cta { }
 
 /* =============================================
@@ -1520,10 +1533,11 @@ body.cat-bar-shown {
      ============================================= -->
 <nav id="navbar" role="navigation" aria-label="Navegación principal">
   <div class="container">
-    <div class="nav-inner">
+    <div class="nav-inner" style="position:relative;">
       <a href="#hero" class="nav-logo" aria-label="SEGEDA HOME - Inicio">
         <img src="assets/img/logo-segeda-home.jpg" alt="SEGEDA HOME logo" loading="eager" style="height:64px; width:auto; display:block; object-fit:contain;">
       </a>
+      <span class="nav-brand-title">SEGEDA HOME</span>
       <a href="https://wa.me/51978642447?text=Hola%20SEGEDA%20HOME!%20Me%20interesa%20una%20decoraci%C3%B3n%20personalizada%20%F0%9F%8C%9F"
          class="btn-whatsapp nav-cta"
          target="_blank" rel="noopener noreferrer"
