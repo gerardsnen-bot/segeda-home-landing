@@ -596,6 +596,104 @@ section { padding: var(--space-xl) 0; }
 }
 
 /* =============================================
+   PRODUCT GENDER TABS (Niñas / Niños)
+   ============================================= */
+.product-gender-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+.gender-tab {
+  flex: 1;
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+}
+.gender-tab-girls {
+  background: #FFF0F5;
+  color: #a0456e;
+  border-color: #F7C5D0;
+}
+.gender-tab-girls:hover, .gender-tab-girls.active {
+  background: var(--color-rose);
+  color: #fff;
+  border-color: var(--color-rose);
+  box-shadow: 0 4px 12px rgba(247,197,208,0.4);
+}
+.gender-tab-boys {
+  background: #EBF5FF;
+  color: #2c6faa;
+  border-color: #A8D4F5;
+}
+.gender-tab-boys:hover, .gender-tab-boys.active {
+  background: #6BB3E8;
+  color: #fff;
+  border-color: #6BB3E8;
+  box-shadow: 0 4px 12px rgba(107,179,232,0.4);
+}
+.gender-content {
+  display: none;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+  animation: fadeInGender 0.3s ease;
+}
+.gender-content.active {
+  display: block;
+}
+.gender-content-girls {
+  background: linear-gradient(135deg, #FFF0F5, #FDE8EF);
+  border: 1px solid rgba(247,197,208,0.4);
+}
+.gender-content-boys {
+  background: linear-gradient(135deg, #EBF5FF, #E3F2FD);
+  border: 1px solid rgba(168,212,245,0.4);
+}
+.gender-content h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.gender-content-girls h4 { color: #a0456e; }
+.gender-content-boys h4 { color: #2c6faa; }
+.gender-content p {
+  font-size: 0.8rem;
+  color: var(--color-taupe);
+  line-height: 1.5;
+  margin-bottom: 0.4rem;
+}
+.gender-content .gender-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.gender-themes span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+.gender-content-girls .gender-themes span {
+  background: rgba(247,197,208,0.3);
+  color: #a0456e;
+}
+.gender-content-boys .gender-themes span {
+  background: rgba(168,212,245,0.3);
+  color: #2c6faa;
+}
+@keyframes fadeInGender {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =============================================
    GALLERY
    ============================================= */
 #galeria {
@@ -1584,6 +1682,24 @@ body.cat-bar-shown {
           </div>
           <h3 class="product-name">Nube con Nombre y Luz</h3>
           <p class="product-desc">La pieza más especial que puede tener la habitación de tu bebé. Su nombre, brillando con luz cálida, dentro de una nube que parece sacada de un cuento.</p>
+          <div class="product-gender-toggle">
+            <button class="gender-tab gender-tab-girls" data-target="girls" data-product-id="nube-nombre">👧 Niñas</button>
+            <button class="gender-tab gender-tab-boys" data-target="boys" data-product-id="nube-nombre">👦 Niños</button>
+          </div>
+          <div class="gender-content gender-content-girls" data-gender="girls" data-product-id="nube-nombre">
+            <h4>Para Niñas</h4>
+            <p>Diseños delicados con mariposas, flores, conejitas y colores pastel.</p>
+            <div class="gender-themes">
+              <span>🦋 Mariposas</span><span>🌸 Flores</span><span>🐰 Conejitas</span><span>👑 Princesas</span><span>🦄 Unicornios</span>
+            </div>
+          </div>
+          <div class="gender-content gender-content-boys" data-gender="boys" data-product-id="nube-nombre">
+            <h4>Para Niños</h4>
+            <p>Diseños aventureros con dinosaurios, cohetes, animalitos y colores vibrantes.</p>
+            <div class="gender-themes">
+              <span>🦕 Dinosaurios</span><span>🚀 Espacio</span><span>🦁 Animales</span><span>⚽ Deportes</span><span>🚗 Autos</span>
+            </div>
+          </div>
           <div class="size-pills" data-product="nube-nombre" role="group" aria-label="Tamaños disponibles">
             <button class="size-pill" data-size="30cm" data-price="S/45" aria-pressed="false">30 cm</button>
             <button class="size-pill" data-size="40cm" data-price="S/60" aria-pressed="false">40 cm</button>
@@ -1623,6 +1739,24 @@ body.cat-bar-shown {
           </div>
           <h3 class="product-name">Nube con Luz</h3>
           <p class="product-desc">Una nube suave y luminosa que transforma cualquier rincón en un espacio de cuento. Luz cálida a pilas, perfecta para el cuarto de tu bebé.</p>
+          <div class="product-gender-toggle">
+            <button class="gender-tab gender-tab-girls" data-target="girls" data-product-id="nube-luz">👧 Niñas</button>
+            <button class="gender-tab gender-tab-boys" data-target="boys" data-product-id="nube-luz">👦 Niños</button>
+          </div>
+          <div class="gender-content gender-content-girls" data-gender="girls" data-product-id="nube-luz">
+            <h4>Para Niñas</h4>
+            <p>Nubes en tonos rosa, lila y blanco con detalles tiernos y delicados.</p>
+            <div class="gender-themes">
+              <span>🌸 Rosa pastel</span><span>💜 Lila suave</span><span>✨ Blanco perla</span><span>🌟 Dorado</span>
+            </div>
+          </div>
+          <div class="gender-content gender-content-boys" data-gender="boys" data-product-id="nube-luz">
+            <h4>Para Niños</h4>
+            <p>Nubes en tonos celeste, verde menta y gris con estilo moderno.</p>
+            <div class="gender-themes">
+              <span>💧 Celeste</span><span>🌿 Verde menta</span><span>☁️ Gris suave</span><span>🔵 Azul marino</span>
+            </div>
+          </div>
           <div class="size-pills" data-product="nube-luz" role="group" aria-label="Tamaños disponibles">
             <button class="size-pill" data-size="30cm" data-price="S/35" aria-pressed="false">30 cm</button>
             <button class="size-pill" data-size="40cm" data-price="S/45" aria-pressed="false">40 cm</button>
@@ -1662,6 +1796,24 @@ body.cat-bar-shown {
           </div>
           <h3 class="product-name">Placa Circular con Luz</h3>
           <p class="product-desc">Elegante, luminosa y completamente tuya. Una placa circular con el nombre de tu bebé, iluminada con luz cálida. El regalo perfecto para baby shower.</p>
+          <div class="product-gender-toggle">
+            <button class="gender-tab gender-tab-girls" data-target="girls" data-product-id="placa-circular">👧 Niñas</button>
+            <button class="gender-tab gender-tab-boys" data-target="boys" data-product-id="placa-circular">👦 Niños</button>
+          </div>
+          <div class="gender-content gender-content-girls" data-gender="girls" data-product-id="placa-circular">
+            <h4>Para Niñas</h4>
+            <p>Placas con diseños florales, hadas, bailarinas y tonos rosa/dorado.</p>
+            <div class="gender-themes">
+              <span>🌺 Florales</span><span>🧹 Hadas</span><span>🩰 Bailarinas</span><span>🌟 Dorado rosa</span>
+            </div>
+          </div>
+          <div class="gender-content gender-content-boys" data-gender="boys" data-product-id="placa-circular">
+            <h4>Para Niños</h4>
+            <p>Placas con temáticas de safari, espacio, mar y tonos azul/verde.</p>
+            <div class="gender-themes">
+              <span>🦁 Safari</span><span>🌌 Galaxia</span><span>🌊 Mar</span><span>⚓ Náutico</span>
+            </div>
+          </div>
           <div class="size-pills" data-product="placa-circular" role="group" aria-label="Tamaños disponibles">
             <button class="size-pill" data-size="30cm" data-price="S/80" aria-pressed="false">30 cm</button>
             <button class="size-pill" data-size="35cm" data-price="S/95" aria-pressed="false">35 cm</button>
@@ -1700,6 +1852,24 @@ body.cat-bar-shown {
           </div>
           <h3 class="product-name">Nube Temática con Luz</h3>
           <p class="product-desc">¿Tu bebé tiene un mundo favorito? Dinosaurios, princesas, espacio, animales… Lo diseñamos especialmente para ti con todos los detalles que imaginaste.</p>
+          <div class="product-gender-toggle">
+            <button class="gender-tab gender-tab-girls" data-target="girls" data-product-id="nube-tematica">👧 Niñas</button>
+            <button class="gender-tab gender-tab-boys" data-target="boys" data-product-id="nube-tematica">👦 Niños</button>
+          </div>
+          <div class="gender-content gender-content-girls" data-gender="girls" data-product-id="nube-tematica">
+            <h4>Para Niñas</h4>
+            <p>Nubes temáticas con princesas, hadas, unicornios, conejitas y más.</p>
+            <div class="gender-themes">
+              <span>👑 Princesas</span><span>🦄 Unicornios</span><span>🧹 Hadas</span><span>🐰 Conejitas</span><span>🌸 Flores</span>
+            </div>
+          </div>
+          <div class="gender-content gender-content-boys" data-gender="boys" data-product-id="nube-tematica">
+            <h4>Para Niños</h4>
+            <p>Nubes temáticas con dinosaurios, astronautas, autos, aviones y más.</p>
+            <div class="gender-themes">
+              <span>🦕 Dinosaurios</span><span>👨‍🚀 Astronautas</span><span>🚗 Autos</span><span>✈️ Aviones</span><span>⚽ Fútbol</span>
+            </div>
+          </div>
           <div class="size-pills" data-product="nube-tematica" role="group" aria-label="Tamaños disponibles">
             <button class="size-pill" data-size="40cm" data-price="S/80" aria-pressed="false">40 cm</button>
             <button class="size-pill popular-size" data-size="50cm" data-price="S/100" aria-pressed="false">50 cm ⭐</button>
@@ -1738,6 +1908,24 @@ body.cat-bar-shown {
           </div>
           <h3 class="product-name">Pack de Estrellas Brillantes</h3>
           <p class="product-desc">80 estrellitas brillantes para rodear tu nube o placa y completar el rincón mágico de tu bebé. El complemento perfecto para cualquier decoración.</p>
+          <div class="product-gender-toggle">
+            <button class="gender-tab gender-tab-girls" data-target="girls" data-product-id="pack-estrellas">👧 Niñas</button>
+            <button class="gender-tab gender-tab-boys" data-target="boys" data-product-id="pack-estrellas">👦 Niños</button>
+          </div>
+          <div class="gender-content gender-content-girls" data-gender="girls" data-product-id="pack-estrellas">
+            <h4>Para Niñas</h4>
+            <p>Estrellas en tonos dorado, rosa y plateado para un cielo de princesa.</p>
+            <div class="gender-themes">
+              <span>✨ Doradas</span><span>🌟 Rosas</span><span>💖 Plateadas</span><span>🧸 Brillantes</span>
+            </div>
+          </div>
+          <div class="gender-content gender-content-boys" data-gender="boys" data-product-id="pack-estrellas">
+            <h4>Para Niños</h4>
+            <p>Estrellas en tonos plateado, azul y verde para un cielo de aventurero.</p>
+            <div class="gender-themes">
+              <span>⭐ Plateadas</span><span>💠 Azules</span><span>🔵 Verdes</span><span>✨ Brillantes</span>
+            </div>
+          </div>
           <div class="price-display" style="margin-top: auto;">
             <div class="price-from">Precio por pack</div>
             <div class="price-single">S/25</div>
@@ -1768,6 +1956,24 @@ body.cat-bar-shown {
           </div>
           <h3 class="product-name">Nombres Decorativos</h3>
           <p class="product-desc">Su nombre como una obra de arte. Letras personalizadas en MDF de alta calidad, pintadas y decoradas a mano para hacer su habitación única e irrepetible.</p>
+          <div class="product-gender-toggle">
+            <button class="gender-tab gender-tab-girls" data-target="girls" data-product-id="nombres">👧 Niñas</button>
+            <button class="gender-tab gender-tab-boys" data-target="boys" data-product-id="nombres">👦 Niños</button>
+          </div>
+          <div class="gender-content gender-content-girls" data-gender="girls" data-product-id="nombres">
+            <h4>Para Niñas</h4>
+            <p>Nombres con tipografía elegante, decorados con flores, coronas y colores pastel.</p>
+            <div class="gender-themes">
+              <span>🌺 Floral</span><span>👑 Coronas</span><span>🦋 Mariposas</span><span>🌟 Glitter rosa</span>
+            </div>
+          </div>
+          <div class="gender-content gender-content-boys" data-gender="boys" data-product-id="nombres">
+            <h4>Para Niños</h4>
+            <p>Nombres con estilo moderno, decorados con estrellas, rayos y colores fuertes.</p>
+            <div class="gender-themes">
+              <span>⭐ Estrellas</span><span>⚡ Rayos</span><span>🎮 Geométrico</span><span>🚀 Aventura</span>
+            </div>
+          </div>
           <div class="price-display" style="margin-top:auto;">
             <div class="price-consult">Precio según letras y tamaño</div>
             <div class="price-single" style="font-size:1.1rem; color:var(--color-taupe);">Consultar precio</div>
@@ -1799,6 +2005,24 @@ body.cat-bar-shown {
           </div>
           <h3 class="product-name">Decoración Temática Infantil</h3>
           <p class="product-desc">Dinos qué le gusta a tu bebé y nosotros lo convertimos en decoración. Dinosaurios, princesas, espacio, animales, flores… ¡Todo es posible!</p>
+          <div class="product-gender-toggle">
+            <button class="gender-tab gender-tab-girls" data-target="girls" data-product-id="tematica">👧 Niñas</button>
+            <button class="gender-tab gender-tab-boys" data-target="boys" data-product-id="tematica">👦 Niños</button>
+          </div>
+          <div class="gender-content gender-content-girls" data-gender="girls" data-product-id="tematica">
+            <h4>Para Niñas</h4>
+            <p>Decoración con temáticas de cuentos de hadas, jardín encantado y fantasía.</p>
+            <div class="gender-themes">
+              <span>🧹 Hadas</span><span>🌹 Jardín</span><span>🦄 Fantasía</span><span>🌈 Arcoíris</span><span>🩰 Ballet</span>
+            </div>
+          </div>
+          <div class="gender-content gender-content-boys" data-gender="boys" data-product-id="tematica">
+            <h4>Para Niños</h4>
+            <p>Decoración con temáticas de selva, piratas, superhéroes y construcción.</p>
+            <div class="gender-themes">
+              <span>🌴 Selva</span><span>🏴‍☠️ Piratas</span><span>🦸 Superhéroes</span><span>🚜 Construcción</span><span>🌍 Mundo</span>
+            </div>
+          </div>
           <div class="price-display" style="margin-top:auto;">
             <div class="price-consult">Precio según diseño y piezas</div>
             <div class="price-single" style="font-size:1.1rem; color:var(--color-taupe);">Consultar precio</div>
@@ -1830,6 +2054,24 @@ body.cat-bar-shown {
           </div>
           <h3 class="product-name">Composición Decorativa para Pared</h3>
           <p class="product-desc">Transforma una pared entera en una obra de arte. Nubes, nombres, placas y elementos que juntos cuentan la historia única de tu bebé.</p>
+          <div class="product-gender-toggle">
+            <button class="gender-tab gender-tab-girls" data-target="girls" data-product-id="composicion">👧 Niñas</button>
+            <button class="gender-tab gender-tab-boys" data-target="boys" data-product-id="composicion">👦 Niños</button>
+          </div>
+          <div class="gender-content gender-content-girls" data-gender="girls" data-product-id="composicion">
+            <h4>Para Niñas</h4>
+            <p>Composiciones con nubes, flores, mariposas y elementos en tonos rosa y dorado.</p>
+            <div class="gender-themes">
+              <span>☁️ Nubes rosas</span><span>🌼 Flores</span><span>🦋 Mariposas</span><span>🌟 Estrellas</span><span>💕 Corazones</span>
+            </div>
+          </div>
+          <div class="gender-content gender-content-boys" data-gender="boys" data-product-id="composicion">
+            <h4>Para Niños</h4>
+            <p>Composiciones con nubes, aviones, cohetes y elementos en tonos azul y verde.</p>
+            <div class="gender-themes">
+              <span>☁️ Nubes celestes</span><span>✈️ Aviones</span><span>🚀 Cohetes</span><span>⭐ Estrellas</span><span>🌙 Lunas</span>
+            </div>
+          </div>
           <div class="price-display" style="margin-top:auto;">
             <div class="price-consult">Precio según composición</div>
             <div class="price-single" style="font-size:1.1rem; color:var(--color-taupe);">Consultar precio</div>
@@ -2544,7 +2786,34 @@ body.cat-bar-shown {
   });
 
   /* =============================================
-     3. SIZE PILL SELECTOR WITH PRICE UPDATE
+     3. GENDER TABS (Niñas / Niños)
+     ============================================= */
+  document.querySelectorAll('.gender-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var target = this.getAttribute('data-target');
+      var productId = this.getAttribute('data-product-id');
+      // Remove active from sibling tabs
+      var toggleGroup = this.parentElement;
+      toggleGroup.querySelectorAll('.gender-tab').forEach(function (t) {
+        t.classList.remove('active');
+      });
+      // Add active to clicked tab
+      this.classList.add('active');
+      // Hide all gender content for this product
+      var card = this.closest('.product-card');
+      card.querySelectorAll('.gender-content').forEach(function (content) {
+        content.classList.remove('active');
+      });
+      // Show the target content
+      var targetContent = card.querySelector('.gender-content[data-gender="' + target + '"][data-product-id="' + productId + '"]');
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    });
+  });
+
+  /* =============================================
+     4. SIZE PILL SELECTOR WITH PRICE UPDATE
      ============================================= */
   document.querySelectorAll('.size-pills').forEach(function (pillGroup) {
     var productKey = pillGroup.getAttribute('data-product');
