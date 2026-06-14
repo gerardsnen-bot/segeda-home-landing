@@ -247,22 +247,12 @@ section { padding: var(--space-xl) 0; }
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
 }
 .nav-logo {
-  display: flex; flex-direction: column; line-height: 1;
+  display: flex;
+  align-items: center;
+  line-height: 1;
 }
-.nav-logo-name {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--color-brown);
-  letter-spacing: 0.05em;
-}
-.nav-logo-slogan {
-  font-family: var(--font-script);
-  font-size: 0.75rem;
-  color: var(--color-gold);
-  display: none;
-}
-@media (min-width: 768px) { .nav-logo-slogan { display: block; } }
+.nav-logo-name { display: none; }
+.nav-logo-slogan { display: none; }
 .nav-cta { }
 
 /* =============================================
@@ -1532,9 +1522,7 @@ body.cat-bar-shown {
   <div class="container">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo" aria-label="SEGEDA HOME - Inicio">
-        <img src="assets/img/logo-segeda-home.jpg" alt="SEGEDA HOME logo" loading="eager" style="height:40px; width:auto; border-radius:4px; display:inline-block; vertical-align:middle; margin-right:0.5rem;">
-        <span class="nav-logo-name">SEGEDA HOME</span>
-        <span class="nav-logo-slogan">Ilusión hecha decoración</span>
+        <img src="assets/img/logo-segeda-home.jpg" alt="SEGEDA HOME logo" loading="eager" style="height:64px; width:auto; display:block; object-fit:contain;">
       </a>
       <a href="https://wa.me/51978642447?text=Hola%20SEGEDA%20HOME!%20Me%20interesa%20una%20decoraci%C3%B3n%20personalizada%20%F0%9F%8C%9F"
          class="btn-whatsapp nav-cta"
