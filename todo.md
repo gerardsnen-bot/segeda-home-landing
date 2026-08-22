@@ -33,3 +33,6 @@
 - [x] Validar la experiencia con varios modelos desde escritorio y móvil.
 - [x] Conectar el botón móvil “Ver todas las categorías” al catálogo completo.
 - [x] Comprobar que la navegación funciona desde un teléfono.
+- [x] Crear el panel de cuadrícula con todas las categorías y sus imágenes de referencia.
+- [x] Conectar cada tarjeta del panel con su categoría real.
+- [x] Validar la apertura del panel y sus enlaces en escritorio y móvil.
