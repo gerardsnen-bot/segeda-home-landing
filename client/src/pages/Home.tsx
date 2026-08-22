@@ -15,32 +15,33 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
+import { useLocation } from "wouter";
 
 const WHATSAPP = "https://wa.me/51978642447?text=Hola%20Segeda%20Home%2C%20quiero%20crear%20un%20producto%20personalizado";
 
 const categoryLinks = [
-  ["✼", "Preventa Navideña"], ["☁", "Nubes temáticas"], ["○", "Placas circulares"],
-  ["▣", "Cuadros infantiles"], ["✦", "Combo completo"], ["☁", "Nube + cuadros"],
-  ["☼", "Nube + cuadros + lámpara"], ["Aa", "Nombre + cuadros"], ["✧", "Packs lamparitas"],
-  ["☼", "Lámparas"], ["%", "Liquidación"], ["✦", "Fe y espiritualidad"],
-  ["♡", "Alcancías y regalos"], ["ABC", "Didácticos"],
+  ["✼", "Preventa Navideña", "navidad"], ["☁", "Nubes temáticas", "nubes"], ["○", "Placas circulares", "placas"],
+  ["▣", "Cuadros infantiles", "cuadros"], ["✦", "Combo completo", "combo"], ["☁", "Nube + cuadros", "nube-cuadros"],
+  ["☼", "Nube + cuadros + lámpara", "nube-cuadros-lampara"], ["Aa", "Nombre + cuadros", "nombre-cuadros"], ["✧", "Packs lamparitas", "packs"],
+  ["☼", "Lámparas", "lamparas"], ["%", "Liquidación", "liquidacion"], ["✦", "Fe y espiritualidad", "fe-espiritualidad"],
+  ["♡", "Alcancías y regalos", "alcancias"], ["ABC", "Didácticos", "didacticos"],
 ];
 
 const products = [
-  { title: "Preventa Navideña", note: "9 modelos · Ver preventa", image: "/manus-storage/navidad_c98eafac.jpg", badge: "PREVENTA · DESDE S/79", featured: true },
-  { title: "Nubes temáticas", note: "Ver diseños", image: "/manus-storage/nubes-portada-premium_f843e2ec.jpeg" },
-  { title: "Placas circulares", note: "Ver diseños", image: "/manus-storage/placas_f2df896b.jpg" },
-  { title: "Cuadros infantiles", note: "Ver diseños", image: "/manus-storage/cuadros_0fdc2e1c.jpg" },
-  { title: "Combo completo", note: "Ver diseños", image: "/manus-storage/combo_d729a5a2.jpg" },
-  { title: "Nube + cuadros", note: "Ver diseños", image: "/manus-storage/nube-cuadros_4f013700.jpg" },
+  { title: "Preventa Navideña", note: "9 modelos · Ver preventa", image: "/manus-storage/navidad_c98eafac.jpg", badge: "PREVENTA · DESDE S/79", featured: true, slug: "navidad" },
+  { title: "Nubes temáticas", note: "Ver diseños", image: "/manus-storage/nubes-portada-premium_f843e2ec.jpeg", slug: "nubes" },
+  { title: "Placas circulares", note: "Ver diseños", image: "/manus-storage/placas_f2df896b.jpg", slug: "placas" },
+  { title: "Cuadros infantiles", note: "Ver diseños", image: "/manus-storage/cuadros_0fdc2e1c.jpg", slug: "cuadros" },
+  { title: "Combo completo", note: "Ver diseños", image: "/manus-storage/combo_d729a5a2.jpg", slug: "combo" },
+  { title: "Nube + cuadros", note: "Ver diseños", image: "/manus-storage/nube-cuadros_4f013700.jpg", slug: "nube-cuadros" },
 ];
 
 const serviceLines = [
-  { icon: "⌂", title: "Decoración para el hogar", note: "Próximamente" },
-  { icon: "✦", title: "Fe y espiritualidad", note: "5 diseños disponibles" },
-  { icon: "S/♡", title: "Alcancías y regalos", note: "1 diseño disponible" },
-  { icon: "ABC", title: "Didácticos", note: "3 diseños disponibles" },
-  { icon: "✼", title: "Preventa Navideña", note: "9 diseños disponibles" },
+  { icon: "⌂", title: "Decoración para el hogar", note: "Próximamente", slug: "nubes" },
+  { icon: "✦", title: "Fe y espiritualidad", note: "5 diseños disponibles", slug: "fe-espiritualidad" },
+  { icon: "S/♡", title: "Alcancías y regalos", note: "1 diseño disponible", slug: "alcancias" },
+  { icon: "ABC", title: "Didácticos", note: "3 diseños disponibles", slug: "didacticos" },
+  { icon: "✼", title: "Preventa Navideña", note: "9 diseños disponibles", slug: "navidad" },
 ];
 
 const materialDetails = [
@@ -53,6 +54,7 @@ export default function Home() {
   const [cartOpen, setCartOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   const scrollToCatalog = () => document.getElementById("colecciones")?.scrollIntoView({ behavior: "smooth" });
 
@@ -85,7 +87,7 @@ export default function Home() {
       <section className="category-rail" aria-label="Explora otras categorías">
         <div className="rail-label"><span>✦</span><strong>Explora</strong><small>OTRAS<br />CATEGORÍAS</small></div>
         <div className="category-scroll">
-          {categoryLinks.map(([icon, label]) => <a key={label} href="#colecciones" className="category-pill"><i>{icon}</i>{label}</a>)}
+          {categoryLinks.map(([icon, label, slug]) => <button key={label} onClick={() => setLocation(`/catalogo/${slug}`)} className="category-pill"><i>{icon}</i>{label}</button>)}
         </div>
       </section>
 
@@ -113,7 +115,7 @@ export default function Home() {
         <section id="colecciones" className="catalogue-section shell">
           <header className="section-heading"><span className="spark">✦</span><h2 className="section-title">Explora el universo Segeda Home</h2><span className="spark">✦</span><p>Decoración y regalos en MDF creados para niños, hogares y momentos especiales.</p></header>
           <div className="product-grid">
-            {products.map((product) => <button className={`product-card ${product.featured ? "is-featured" : ""}`} key={product.title} onClick={() => setCartOpen(true)}>
+            {products.map((product) => <button className={`product-card ${product.featured ? "is-featured" : ""}`} key={product.title} onClick={() => setLocation(`/catalogo/${product.slug}`)}>
               <div className="product-image"><img src={product.image} alt={product.title} />{product.badge && <span>{product.badge}</span>}</div>
               <div className="product-info"><h3 className="serif">{product.title}</h3><p>{product.note} <i>→</i></p></div>
             </button>)}
@@ -123,12 +125,12 @@ export default function Home() {
 
         <section className="faith-banner shell">
           <div className="faith-picture"><img src="/manus-storage/fe-espiritualidad_546155f2.png" alt="Decoración religiosa en MDF con la frase El tiempo de Dios es perfecto" /></div>
-          <div className="faith-copy"><p className="eyebrow">Nueva línea para el hogar</p><h2 className="section-title">Fe y espiritualidad</h2><p>Piezas que inspiran y dan significado a cada espacio.</p><button className="round-button round-button--outline" onClick={() => setCartOpen(true)}>Ver colección <ArrowRight size={15} /></button></div>
+          <div className="faith-copy"><p className="eyebrow">Nueva línea para el hogar</p><h2 className="section-title">Fe y espiritualidad</h2><p>Piezas que inspiran y dan significado a cada espacio.</p><button className="round-button round-button--outline" onClick={() => setLocation("/catalogo/fe-espiritualidad")}>Ver colección <ArrowRight size={15} /></button></div>
         </section>
 
         <section className="lines-section shell">
           <div className="lines-intro"><p className="eyebrow">Mucho más que decoración infantil</p><h2 className="section-title">Una marca de MDF para cada etapa y ocasión.</h2><p>Las nubes continúan siendo nuestra colección insignia. Ahora también encontrarás nuevas líneas para decorar, aprender, regalar y celebrar.</p></div>
-          <div className="lines-list">{serviceLines.map((line) => <button key={line.title} className="line-item" onClick={() => setCartOpen(true)}><i>{line.icon}</i><span><b>{line.title}</b><small>{line.note}</small></span><ChevronRight size={17} /></button>)}</div>
+          <div className="lines-list">{serviceLines.map((line) => <button key={line.title} className="line-item" onClick={() => setLocation(`/catalogo/${line.slug}`)}><i>{line.icon}</i><span><b>{line.title}</b><small>{line.note}</small></span><ChevronRight size={17} /></button>)}</div>
         </section>
 
         <section id="como-comprar" className="steps-section"><div className="shell">

@@ -1,0 +1,4 @@
+- [x] Mapear cada categoría del catálogo a una ruta navegable.
+- [x] Crear una vista reutilizable de categoría con sus productos disponibles.
+- [x] Comprobar que los enlaces de la barra, las tarjetas y los CTA abren la categoría correspondiente.
+- [x] Verificar la navegación en escritorio y móvil.
