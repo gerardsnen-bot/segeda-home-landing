@@ -23,3 +23,7 @@
 - [x] Comprobar la escala y distribución de los nuevos íconos en escritorio y móvil.
 - [x] Rediseñar el resumen navideño para reducir su peso visual y evitar que cubra las fotos.
 - [x] Validar el resumen navideño en escritorio y móvil con artículos seleccionados.
+- [x] Añadir un apellido opcional y conservarlo de forma local durante la selección.
+- [x] Mostrar modelos elegidos con edición y opción de vaciar la selección.
+- [x] Incorporar ampliación de fotos, señales de confianza y CTA de pedido enriquecido.
+- [x] Verificar que WhatsApp funciona correctamente sin apellido.
