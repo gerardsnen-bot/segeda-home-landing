@@ -9,12 +9,14 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Category from "./pages/Category";
 import Home from "./pages/Home";
+import Navidad from "./pages/Navidad";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/catalogo" component={Home} />
+      <Route path="/catalogo/navidad" component={Navidad} />
       <Route path="/catalogo/:category" component={Category} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />

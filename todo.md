@@ -5,3 +5,6 @@
 - [x] Recuperar los productos, precios, textos e imágenes reales de cada categoría original.
 - [x] Reemplazar los modelos genéricos de las vistas de categoría por el catálogo real.
 - [x] Validar que cada producto visible coincida con la categoría de origen.
+- [x] Documentar la estructura, tipografía, precios y controles de la página original de Preventa Navideña.
+- [x] Reemplazar la vista genérica de Navidad por la composición específica de preventa.
+- [x] Comprobar el diseño navideño en escritorio y móvil.
