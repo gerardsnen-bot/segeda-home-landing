@@ -8,3 +8,6 @@
 - [x] Documentar la estructura, tipografía, precios y controles de la página original de Preventa Navideña.
 - [x] Reemplazar la vista genérica de Navidad por la composición específica de preventa.
 - [x] Comprobar el diseño navideño en escritorio y móvil.
+- [x] Conservar los modelos navideños y cantidades en el carrito local.
+- [x] Mostrar la cantidad real del carrito en la cabecera y el panel del catálogo principal.
+- [x] Verificar que los artículos persisten al volver desde Preventa Navideña.

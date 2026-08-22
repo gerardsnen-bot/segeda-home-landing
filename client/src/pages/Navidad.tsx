@@ -2,9 +2,10 @@
  * Réplica fiel de Preventa Navideña: composición estacional con modelos reales,
  * oferta escalonada y selector por cantidades según la página original de Segeda Home.
  */
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { ArrowRight, ChevronDown, Minus, Plus, ShoppingCart, Sparkles } from "lucide-react";
 import { Link } from "wouter";
+import { SegedaCartItem, useSegedaCart } from "@/lib/segedaCart";
 
 const SOURCE = "https://segeda-home-tienda.mad-elynnlevon7.chatgpt.site";
 const WHATSAPP = "https://wa.me/51978642447?text=";
@@ -24,15 +25,22 @@ const models = Array.from({ length: 9 }, (_, index) => ({
 }));
 
 export default function Navidad() {
-  const [amounts, setAmounts] = useState<Record<number, number>>({});
-  const quantity = useMemo(() => Object.values(amounts).reduce((sum, value) => sum + value, 0), [amounts]);
+  const { items, quantity: cartQuantity, total, updateCart } = useSegedaCart();
+  const amounts = useMemo(() => Object.fromEntries(items.filter((item) => item.category === "navidad").map((item) => [Number(item.id.replace("navidad-", "")), item.quantity])), [items]);
+  const quantity = useMemo(() => Object.values(amounts).reduce<number>((sum, value) => sum + value, 0), [amounts]);
   const unitPrice = quantity >= 2 ? 69 : 79;
-  const total = quantity * unitPrice;
   const selected = models.filter((model) => amounts[model.id]).map((model) => `${model.title} × ${amounts[model.id]}`).join(", ");
 
-  const changeAmount = (id: number, delta: number) => setAmounts((current) => {
-    const next = Math.max(0, (current[id] ?? 0) + delta);
-    return { ...current, [id]: next };
+  const changeAmount = (id: number, delta: number) => updateCart((current) => {
+    const model = models.find((item) => item.id === id);
+    if (!model) return current;
+    const itemId = `navidad-${id}`;
+    const existing = current.find((item) => item.id === itemId);
+    const nextQuantity = Math.max(0, (existing?.quantity ?? 0) + delta);
+    const withoutCurrent = current.filter((item) => item.id !== itemId);
+    const next: SegedaCartItem[] = nextQuantity ? [...withoutCurrent, { id: itemId, category: "navidad", title: model.title, image: model.image, quantity: nextQuantity, unitPrice: 79 }] : withoutCurrent;
+    const navidadQuantity = next.filter((item) => item.category === "navidad").reduce((sum, item) => sum + item.quantity, 0);
+    return next.map((item) => item.category === "navidad" ? { ...item, unitPrice: navidadQuantity >= 2 ? 69 : 79 } : item);
   });
 
   const scrollToModels = () => document.getElementById("navidad-modelos")?.scrollIntoView({ behavior: "smooth" });
@@ -46,7 +54,7 @@ export default function Navidad() {
     <div className="navidad-page">
       <header className="navidad-header">
         <Link href="/catalogo" className="navidad-brand"><img src="/manus-storage/segeda-logo_2fda80cf.jpg" alt="Segeda Home" /><span><strong>Segeda Home</strong><small>PREVENTA NAVIDEÑA</small></span></Link>
-        <div className="navidad-actions"><button onClick={scrollToModels}>Ver modelos</button><button onClick={sendOrder} aria-label="Abrir el carrito principal" className="navidad-cart"><ShoppingCart size={16} /><i>{quantity}</i></button></div>
+        <div className="navidad-actions"><button onClick={scrollToModels}>Ver modelos</button><Link href="/catalogo" aria-label="Abrir el carrito principal" className="navidad-cart"><ShoppingCart size={16} /><i>{cartQuantity}</i></Link></div>
       </header>
 
       <nav className="navidad-rail" aria-label="Explora otras categorías"><div className="navidad-rail-title"><span>✦</span><b>Explora</b><small>OTRAS<br />CATEGORÍAS</small></div><div className="navidad-rail-items">{categoryLinks.map(([icon, title, slug]) => <Link key={title} href={`/catalogo/${slug}`} className={`navidad-pill ${slug === "navidad" ? "selected" : ""}`}><i>{icon}</i>{title}</Link>)}</div></nav>
