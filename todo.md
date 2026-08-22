@@ -2,3 +2,6 @@
 - [x] Crear una vista reutilizable de categoría con sus productos disponibles.
 - [x] Comprobar que los enlaces de la barra, las tarjetas y los CTA abren la categoría correspondiente.
 - [x] Verificar la navegación en escritorio y móvil.
+- [x] Recuperar los productos, precios, textos e imágenes reales de cada categoría original.
+- [x] Reemplazar los modelos genéricos de las vistas de categoría por el catálogo real.
+- [x] Validar que cada producto visible coincida con la categoría de origen.
