@@ -27,3 +27,7 @@
 - [x] Mostrar modelos elegidos con edición y opción de vaciar la selección.
 - [x] Incorporar ampliación de fotos, señales de confianza y CTA de pedido enriquecido.
 - [x] Verificar que WhatsApp funciona correctamente sin apellido.
+- [x] Eliminar el campo y la lógica global de apellido de Preventa Navideña.
+- [x] Renovar los botones navideños con una paleta más clara y consistente.
+- [x] Añadir ayudas visuales para elegir varios modelos y gestionar cantidades.
+- [x] Validar la experiencia con varios modelos desde escritorio y móvil.
