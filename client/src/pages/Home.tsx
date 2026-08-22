@@ -1,25 +1,179 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
-
 /**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
+ * Réplica Segeda Home — catálogo editorial de tonos marfil, coral y cacao.
+ * La composición, textos y activos se basan en la página de referencia proporcionada por el usuario.
  */
+import { useState } from "react";
+import {
+  ArrowRight,
+  Check,
+  ChevronRight,
+  Heart,
+  Menu,
+  MessageCircle,
+  Search,
+  ShoppingCart,
+  Sparkles,
+  X,
+} from "lucide-react";
+
+const WHATSAPP = "https://wa.me/51978642447?text=Hola%20Segeda%20Home%2C%20quiero%20crear%20un%20producto%20personalizado";
+
+const categoryLinks = [
+  ["✼", "Preventa Navideña"], ["☁", "Nubes temáticas"], ["○", "Placas circulares"],
+  ["▣", "Cuadros infantiles"], ["✦", "Combo completo"], ["☁", "Nube + cuadros"],
+  ["☼", "Nube + cuadros + lámpara"], ["Aa", "Nombre + cuadros"], ["✧", "Packs lamparitas"],
+  ["☼", "Lámparas"], ["%", "Liquidación"], ["✦", "Fe y espiritualidad"],
+  ["♡", "Alcancías y regalos"], ["ABC", "Didácticos"],
+];
+
+const products = [
+  { title: "Preventa Navideña", note: "9 modelos · Ver preventa", image: "/manus-storage/navidad_c98eafac.jpg", badge: "PREVENTA · DESDE S/79", featured: true },
+  { title: "Nubes temáticas", note: "Ver diseños", image: "/manus-storage/nubes-portada-premium_f843e2ec.jpeg" },
+  { title: "Placas circulares", note: "Ver diseños", image: "/manus-storage/placas_f2df896b.jpg" },
+  { title: "Cuadros infantiles", note: "Ver diseños", image: "/manus-storage/cuadros_0fdc2e1c.jpg" },
+  { title: "Combo completo", note: "Ver diseños", image: "/manus-storage/combo_d729a5a2.jpg" },
+  { title: "Nube + cuadros", note: "Ver diseños", image: "/manus-storage/nube-cuadros_4f013700.jpg" },
+];
+
+const serviceLines = [
+  { icon: "⌂", title: "Decoración para el hogar", note: "Próximamente" },
+  { icon: "✦", title: "Fe y espiritualidad", note: "5 diseños disponibles" },
+  { icon: "S/♡", title: "Alcancías y regalos", note: "1 diseño disponible" },
+  { icon: "ABC", title: "Didácticos", note: "3 diseños disponibles" },
+  { icon: "✼", title: "Preventa Navideña", note: "9 diseños disponibles" },
+];
+
+const materialDetails = [
+  ["Relieve y profundidad", "Las capas de MDF permiten que nombres, personajes y detalles destaquen con un acabado más especial."],
+  ["Iluminación cálida opcional", "En los modelos con luz, el resplandor queda oculto detrás de la pieza para crear un ambiente suave y acogedor."],
+  ["Diseñado para su espacio", "Las proporciones, colores y acabados se coordinan para que el producto combine con el lugar donde será instalado."],
+];
+
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
+  const [cartOpen, setCartOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const scrollToCatalog = () => document.getElementById("colecciones")?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen overflow-x-hidden bg-[#fffaf4] text-[#513a30]">
+      <div className="trust-strip">
+        <span><Heart size={10} fill="currentColor" /> Hecho con amor</span>
+        <span><Sparkles size={11} /> Envíos a todo el Perú</span>
+      </div>
+
+      <header className="site-header">
+        <div className="shell header-inner">
+          <a href="#inicio" className="brand" aria-label="Ir al inicio">
+            <img src="/manus-storage/segeda-logo_2fda80cf.jpg" alt="Logo de Segeda Home" className="brand-logo" />
+            <span className="brand-copy"><b className="serif">Segeda Home</b><small>DETALLES PERSONALIZADOS EN MDF</small></span>
+          </a>
+          <nav className="main-nav" aria-label="Navegación principal">
+            <a href="#inicio" className="active">Inicio</a><a href="#colecciones">Categorías</a><a href="#como-comprar">Cómo comprar</a><a href="#contacto">Contacto</a>
+          </nav>
+          <div className="header-actions">
+            <button onClick={() => setSearchOpen((state) => !state)} aria-label="Buscar"><Search size={19} /></button>
+            <button onClick={() => setCartOpen(true)} aria-label="Abrir carrito" className="cart-trigger"><ShoppingCart size={19} /><i>0</i></button>
+            <button className="menu-trigger" onClick={() => setMobileOpen((state) => !state)} aria-label="Abrir menú"><Menu size={22} /></button>
+          </div>
+        </div>
+        {searchOpen && <div className="search-bar shell"><Search size={16} /><input autoFocus placeholder="Busca una colección" /><button onClick={() => setSearchOpen(false)} aria-label="Cerrar búsqueda"><X size={17} /></button></div>}
+        {mobileOpen && <nav className="mobile-menu"><a href="#inicio" onClick={() => setMobileOpen(false)}>Inicio</a><a href="#colecciones" onClick={() => setMobileOpen(false)}>Categorías</a><a href="#como-comprar" onClick={() => setMobileOpen(false)}>Cómo comprar</a><a href="#contacto" onClick={() => setMobileOpen(false)}>Contacto</a></nav>}
+      </header>
+
+      <section className="category-rail" aria-label="Explora otras categorías">
+        <div className="rail-label"><span>✦</span><strong>Explora</strong><small>OTRAS<br />CATEGORÍAS</small></div>
+        <div className="category-scroll">
+          {categoryLinks.map(([icon, label]) => <a key={label} href="#colecciones" className="category-pill"><i>{icon}</i>{label}</a>)}
+        </div>
+      </section>
+
+      <section className="payment-strip"><div className="shell payment-inner">
+        <div><p className="eyebrow">✦ Paga fácil y seguro</p></div><h2 className="serif">Medios de pago</h2>
+        <div className="payment-list"><div className="payment-card visa">VISA <span>Visa</span></div><div className="payment-card master"><b>●</b><b>●</b><span>Mastercard</span></div><div className="payment-card yape">YAPE <span>Yape</span></div><div className="payment-card plin">plin <span>Plin</span></div></div>
+      </div></section>
+
       <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
+        <section id="inicio" className="hero shell">
+          <div className="hero-copy reveal">
+            <p className="eyebrow">✦ Diseño y personalización en MDF</p>
+            <h1 className="serif">Un detalle<br />único <em>para cada<br />espacio.</em></h1>
+            <p className="hero-description">Descubre decoración infantil, hogar, didácticos, alcancías, regalos y colecciones de temporada.</p>
+            <div className="hero-actions"><button className="round-button round-button--coral" onClick={scrollToCatalog}>Explorar colecciones <ArrowRight size={15} /></button><a className="round-button round-button--wa" href={WHATSAPP} target="_blank" rel="noreferrer">Crear por WhatsApp <MessageCircle size={15} /></a></div>
+            <div className="hero-stats"><span><b>100%</b>personalizado</span><span><b>5–7 días</b>de elaboración</span><span><b>Todo Perú</b>con envío seguro</span></div>
+          </div>
+          <button onClick={scrollToCatalog} className="hero-image reveal reveal-delay" aria-label="Ver colección de nubes temáticas">
+            <img src="/manus-storage/nubes-portada-premium_f843e2ec.jpeg" alt="Nube temática personalizada con iluminación" />
+            <span className="craft-tag">Hecho a mano · MDF premium</span>
+            <span className="hero-image-caption"><small>COLECCIÓN DESTACADA</small><b className="serif">Nubes temáticas</b><em>Ver diseños →</em></span>
+          </button>
+        </section>
+
+        <section id="colecciones" className="catalogue-section shell">
+          <header className="section-heading"><span className="spark">✦</span><h2 className="section-title">Explora el universo Segeda Home</h2><span className="spark">✦</span><p>Decoración y regalos en MDF creados para niños, hogares y momentos especiales.</p></header>
+          <div className="product-grid">
+            {products.map((product) => <button className={`product-card ${product.featured ? "is-featured" : ""}`} key={product.title} onClick={() => setCartOpen(true)}>
+              <div className="product-image"><img src={product.image} alt={product.title} />{product.badge && <span>{product.badge}</span>}</div>
+              <div className="product-info"><h3 className="serif">{product.title}</h3><p>{product.note} <i>→</i></p></div>
+            </button>)}
+          </div>
+          <button className="round-button round-button--outline all-categories" onClick={() => setCartOpen(true)}>Ver todas las categorías <ChevronRight size={15} /></button>
+        </section>
+
+        <section className="faith-banner shell">
+          <div className="faith-picture"><img src="/manus-storage/fe-espiritualidad_546155f2.png" alt="Decoración religiosa en MDF con la frase El tiempo de Dios es perfecto" /></div>
+          <div className="faith-copy"><p className="eyebrow">Nueva línea para el hogar</p><h2 className="section-title">Fe y espiritualidad</h2><p>Piezas que inspiran y dan significado a cada espacio.</p><button className="round-button round-button--outline" onClick={() => setCartOpen(true)}>Ver colección <ArrowRight size={15} /></button></div>
+        </section>
+
+        <section className="lines-section shell">
+          <div className="lines-intro"><p className="eyebrow">Mucho más que decoración infantil</p><h2 className="section-title">Una marca de MDF para cada etapa y ocasión.</h2><p>Las nubes continúan siendo nuestra colección insignia. Ahora también encontrarás nuevas líneas para decorar, aprender, regalar y celebrar.</p></div>
+          <div className="lines-list">{serviceLines.map((line) => <button key={line.title} className="line-item" onClick={() => setCartOpen(true)}><i>{line.icon}</i><span><b>{line.title}</b><small>{line.note}</small></span><ChevronRight size={17} /></button>)}</div>
+        </section>
+
+        <section id="como-comprar" className="steps-section"><div className="shell">
+          <header className="section-heading"><p className="eyebrow">✦ Fácil, rápido y personalizado ✦</p><h2 className="section-title">Tu idea se convierte<br /><em>en un detalle único</em></h2><p>Solo necesitas elegir, personalizar y enviarnos tu pedido.</p></header>
+          <div className="steps-grid">
+            {[['01', 'Primer paso', 'Elige tu producto', 'Explora las colecciones y abre tu modelo favorito.', 'Explora a tu ritmo', '▣'], ['02', 'Segundo paso', 'Personalízalo', 'Selecciona las opciones y cuéntanos cómo lo imaginas.', 'Hecho especialmente para ti', '✦'], ['03', 'Último paso', 'Confirma por WhatsApp', 'Recibimos tu carrito y coordinamos cada detalle.', 'Atención personalizada', '◔']].map(([num, label, title, text, note, icon]) => <article className="step-card" key={num}><span className="step-number">{num}</span><span className="step-icon">{icon}</span><p className="eyebrow">{label}</p><h3 className="serif">{title}</h3><p>{text}</p><small>{note} <i>{num === '02' ? '♡' : num === '03' ? '✓' : '→'}</i></small></article>)}
+          </div>
+        </div></section>
+
+        <section className="material-section shell">
+          <header className="section-heading"><span className="spark">✦</span><h2 className="section-title">Detalles que se sienten especiales</h2><span className="spark">✦</span><p>Materiales, relieve e iluminación pensados para dar presencia a cada pieza.</p></header>
+          <div className="materials-list">{materialDetails.map(([title, text], index) => <article key={title} className="material-item"><span>✦</span><div><h3 className="serif">{title}</h3><p>{text}</p></div></article>)}</div>
+        </section>
+
+        <section className="installation-section shell">
+          <div className="installation-image"><img src="/manus-storage/instalacion-real-nubes_eee88aa5.jpg" alt="Decoración de luna y nubes con iluminación cálida instalada en una habitación infantil" /><span>Foto real de instalación</span></div>
+          <div className="installation-copy"><p className="eyebrow">Luz que transforma el espacio</p><h2 className="section-title">Así se siente una habitación con un detalle hecho especialmente para ella.</h2><p>La iluminación cálida y suave acompaña la decoración sin perder la ternura del ambiente. Cada composición puede adaptarse a los colores, formas y temática de su habitación.</p><div className="feature-tags"><span>✦ Luz cálida</span><span>♡ Diseño personalizado</span><span>⌂ Listo para instalar</span></div><button className="round-button round-button--coral" onClick={() => setCartOpen(true)}>Ver diseños personalizados <ArrowRight size={15} /></button></div>
+        </section>
+
+        <section className="coordination-section"><div className="shell coordination-inner"><div><p className="eyebrow">✦ Acompañamiento real</p><h2 className="section-title">Tu pedido,<br /><em>claro y coordinado</em></h2><p>Antes de elaborar confirmamos contigo lo esencial por WhatsApp.</p><a className="round-button round-button--wa" href={WHATSAPP} target="_blank" rel="noreferrer">Coordinar mi pedido <MessageCircle size={15} /></a></div><div className="coordination-list">{[['01','Confirmamos tu pedido','Producto, medida y personalización.'],['02','Coordinamos diseño y pago','Todo queda definido antes de elaborar.'],['03','Preparamos y enviamos','Empaque protegido y datos de seguimiento.']].map(([number, title, note]) => <div key={number}><b>{number}</b><span><strong>{title}</strong><small>{note}</small></span></div>)}</div></div></section>
       </main>
+
+      <footer id="contacto"><div className="shell footer-inner"><div className="footer-brand"><h2 className="serif">Segeda Home<sup>♡</sup></h2><p>Diseño y personalización en MDF para niños, hogares y momentos especiales.</p></div><div className="footer-contact"><a href="https://wa.me/51978642447" target="_blank" rel="noreferrer">WhatsApp: 978 642 447</a><a href="https://www.instagram.com/segedahome1" target="_blank" rel="noreferrer">Instagram: @segedahome1</a><small>Envíos a todo el Perú por Olva Courier o Shalom</small></div></div></footer>
+
+      <a className="floating-whatsapp" href={WHATSAPP} target="_blank" rel="noreferrer"><MessageCircle size={20} /> ¿Necesitas ayuda?</a>
+
+      {cartOpen && <div className="cart-overlay" role="dialog" aria-modal="true" aria-label="Tu pedido"><button className="overlay-close" onClick={() => setCartOpen(false)} aria-label="Cerrar carrito" /><aside className="cart-panel"><button className="cart-close" onClick={() => setCartOpen(false)} aria-label="Cerrar carrito"><X size={20} /></button><p className="eyebrow">Tu pedido</p><h2 className="serif">Carrito <small>0</small></h2><div className="empty-cart"><Heart size={34} strokeWidth={1.4} /><h3 className="serif">Tu carrito está vacío</h3><p>Elige una categoría y personaliza un producto.</p><button className="round-button round-button--coral" onClick={() => { setCartOpen(false); scrollToCatalog(); }}>Ver productos</button></div></aside></div>}
+
+      <style>{`
+        .trust-strip { height:27px; background:#5b4034; color:#fffaf4; display:flex; justify-content:center; align-items:center; gap:42px; font-size:9px; font-weight:600; letter-spacing:.11em; text-transform:uppercase; }.trust-strip span{display:flex;align-items:center;gap:5px}
+        .site-header{background:rgba(255,253,249,.96);position:relative;z-index:10;border-bottom:1px solid #f2e7dc}.header-inner{height:88px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;min-width:max-content}.brand-logo{width:78px;height:58px;object-fit:contain}.brand-copy{display:flex;flex-direction:column;gap:3px}.brand-copy b{font-size:24px;font-weight:600;line-height:1}.brand-copy small{font-size:7px;letter-spacing:.17em;font-weight:600;color:#786357}.main-nav{display:flex;gap:33px;margin-left:auto;margin-right:42px;font-family:'Playfair Display',serif;font-size:13px}.main-nav a{position:relative;padding:6px 0}.main-nav a.active::after{content:'';position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);height:2px;width:18px;border-radius:2px;background:#f1afa2}.header-actions{display:flex;gap:9px}.header-actions button{border:0;background:transparent;padding:8px;color:#664d40;position:relative}.cart-trigger i{position:absolute;right:0;top:1px;width:13px;height:13px;display:grid;place-items:center;border-radius:99px;background:#e98f84;color:white;font-style:normal;font-size:8px}.menu-trigger{display:none}.search-bar{display:flex;align-items:center;gap:10px;padding:10px 20px 14px;color:#8a7568}.search-bar input{width:100%;border:1px solid #ebded3;border-radius:999px;padding:10px 15px;background:white;outline:none}.search-bar button{border:0;background:transparent}.mobile-menu{display:none}
+        .category-rail{height:64px;display:flex;align-items:stretch;background:#fffdfa;border-bottom:1px solid #efe4d9}.rail-label{flex:0 0 105px;display:grid;grid-template-columns:13px 1fr;grid-template-rows:20px 1fr;align-content:center;gap:0 3px;padding-left:35px;color:#6a5141}.rail-label span{grid-row:span 2;font-size:12px;color:#b18861}.rail-label strong{font-family:'Playfair Display',serif;font-size:13px;line-height:1}.rail-label small{font-size:5px;font-weight:700;letter-spacing:.12em;line-height:1.3}.category-scroll{display:flex;align-items:center;gap:8px;overflow:hidden;padding:0 12px;white-space:nowrap}.category-pill{display:inline-flex;align-items:center;gap:6px;padding:10px 12px;border:1px solid #f0e7de;border-radius:6px;background:#fff;box-shadow:0 2px 5px rgba(99,72,49,.035);font-size:10px;transition:transform .16s ease}.category-pill:hover{transform:translateY(-2px);border-color:#e5b5ab}.category-pill i{font-style:normal;font-size:12px;color:#c59283}
+        .payment-strip{background:rgba(244,235,225,.7);padding:13px 0}.payment-inner{display:flex;align-items:center;gap:24px}.payment-inner .eyebrow{white-space:nowrap}.payment-inner h2{font-size:18px;font-weight:500;white-space:nowrap}.payment-list{display:flex;align-items:center;gap:9px;margin-left:auto}.payment-card{height:34px;width:104px;border:1px solid #efe7df;border-radius:9px;background:#fff;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:800}.payment-card span{font:600 9px 'DM Sans',sans-serif;color:#775f51}.visa{color:#1e4e9d;font-style:italic}.master b{font-size:22px;line-height:.5;color:#ea3e32}.master b+ b{color:#f4aa20;margin-left:-13px}.yape{color:white;background:#6f337e;font-size:10px}.yape span,.plin span{color:#755e58}.plin{color:#00a6dd;font-size:18px}
+        .hero{min-height:495px;margin-top:25px;padding:66px 52px 44px;display:grid;grid-template-columns:minmax(300px,.84fr) 1.25fr;align-items:center;gap:55px;border-radius:30px;background:#fff8f1 url('/manus-storage/cream-luminous-orb_7f1b4b3d.jpg') center / cover;box-shadow:0 18px 35px rgba(91,64,52,.06);position:relative;overflow:hidden}.hero-stars{position:absolute;width:180px;right:43%;top:22px;opacity:.58;pointer-events:none}.hero-copy{position:relative;z-index:1}.hero h1{font-size:clamp(48px,5vw,69px);line-height:.98;letter-spacing:-.05em;margin:13px 0 22px;font-weight:500}.hero h1 em,.steps-section h2 em,.coordination-section h2 em{display:block;color:#c77f72;font-weight:500}.hero-description{max-width:360px;font-size:13px;line-height:1.65;color:#725c51;margin-bottom:21px}.hero-actions{display:flex;gap:10px;align-items:center}.hero-stats{display:flex;gap:21px;margin-top:35px}.hero-stats span{display:flex;flex-direction:column;gap:3px;width:84px;color:#8d786b;font-size:8px;line-height:1.35}.hero-stats span+span{border-left:1px solid #e7d9ce;padding-left:17px}.hero-stats b{font-size:10px;color:#5f4639}.hero-image{height:306px;padding:0;border:0;border-radius:42px;position:relative;overflow:hidden;box-shadow:0 15px 25px rgba(91,64,52,.11);text-align:left;background:#eae0d7;cursor:pointer}.hero-image>img{height:100%;width:100%;object-fit:cover;display:block}.hero-image::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,22,17,0) 50%,rgba(38,22,17,.21) 100%);pointer-events:none}.craft-tag{position:absolute;right:14px;top:14px;border-radius:99px;background:rgba(70,48,37,.85);color:#fff6ee;padding:7px 10px;font-size:7px;font-weight:700;z-index:1}.hero-image-caption{position:absolute;z-index:2;left:16px;bottom:15px;width:160px;border-radius:13px;background:#fff9f1;padding:13px 15px;display:flex;flex-direction:column;gap:3px;color:#695043}.hero-image-caption small{font-size:7px;letter-spacing:.12em;color:#a08268}.hero-image-caption b{font-size:19px;font-weight:600}.hero-image-caption em{font-size:9px;color:#8f7466;font-style:italic}
+        .catalogue-section{margin-top:25px;border-radius:28px;padding:29px 27px 26px;background:rgba(255,250,244,.87);box-shadow:0 10px 23px rgba(91,64,52,.035)}.section-heading{text-align:center;max-width:700px;margin:0 auto 25px}.section-heading>span{vertical-align:middle;margin:0 7px}.section-heading h2{display:inline}.section-heading>p:not(.eyebrow){font-size:13px;line-height:1.6;color:#776255;margin:15px auto 0;max-width:590px}.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.product-card{border:1px solid #eee5dc;border-radius:21px;background:#fffdfa;overflow:hidden;padding:0;transition:transform .18s cubic-bezier(.23,1,.32,1),box-shadow .18s ease;text-align:left}.product-card:hover{transform:translateY(-4px);box-shadow:0 13px 24px rgba(91,64,52,.09)}.product-card.is-featured{border:2px solid #e69a8e}.product-image{aspect-ratio:1.43;position:relative;overflow:hidden;background:#eaddd2;margin:8px;border-radius:14px}.product-image img{height:100%;width:100%;object-fit:cover}.product-image span{position:absolute;top:9px;left:8px;border-radius:99px;color:#fff;padding:5px 8px;background:#8c473d;font-size:7px;font-weight:700;letter-spacing:.06em}.product-info{padding:5px 13px 16px;text-align:center}.product-info h3{font-size:17px;font-weight:600;margin:0 0 5px}.product-info p{font-size:9px;color:#8b776b;margin:0}.product-info i{font-style:normal;display:inline-grid;place-items:center;background:#efa496;color:#fff;border-radius:50%;font-size:9px;height:14px;width:14px}.all-categories{display:flex;margin:22px auto 0;min-height:36px;font-size:11px;padding:0 18px}
+        .faith-banner{display:grid;grid-template-columns:1.06fr .94fr;margin-top:47px;overflow:hidden;border-radius:26px;background:#f6e4de;min-height:305px}.faith-picture{min-height:290px}.faith-picture img{width:100%;height:100%;object-fit:cover}.faith-copy{padding:55px 45px;align-self:center}.faith-copy h2{font-size:42px;margin:10px 0}.faith-copy>p:not(.eyebrow){font-size:13px;color:#795f53;line-height:1.55;margin-bottom:20px}.faith-copy .round-button{min-height:38px;font-size:11px}
+        .lines-section{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;padding:88px 42px}.lines-intro h2{margin:11px 0 16px}.lines-intro>p:not(.eyebrow){font-size:13px;color:#776255;line-height:1.65}.lines-list{border-top:1px solid #eadfd5}.line-item{width:100%;border:0;border-bottom:1px solid #eadfd5;background:transparent;display:flex;align-items:center;gap:16px;padding:17px 5px;text-align:left;transition:padding .17s ease, color .17s ease}.line-item:hover{padding-left:10px;color:#d77c72}.line-item>i{font-style:normal;width:34px;text-align:center;color:#c28e68;font-size:16px}.line-item span{display:flex;flex:1;flex-direction:column;gap:3px}.line-item b{font-family:'Playfair Display',serif;font-size:18px;font-weight:600}.line-item small{font-size:10px;color:#91796b}
+        .steps-section{padding:60px 0 74px;background:#f4e6de}.steps-section .section-heading h2{margin-top:9px;display:block}.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px;margin-top:35px}.step-card{background:rgba(255,253,249,.93);border:1px solid #eadfd5;border-radius:20px;padding:22px 24px 25px;position:relative;box-shadow:0 8px 18px rgba(91,64,52,.045)}.step-number{display:block;color:#d0c3bc;font:600 20px 'Playfair Display',serif;margin-bottom:18px}.step-icon{position:absolute;right:22px;top:19px;height:35px;width:35px;display:grid;place-items:center;border-radius:11px;background:#f3dccf;color:#a5795e;font-size:17px}.step-card h3{font-size:24px;margin:8px 0}.step-card>p:not(.eyebrow){font-size:12px;color:#786357;line-height:1.55;min-height:42px}.step-card small{color:#a5806a;font-style:italic;font-size:10px}.step-card small i{font-style:normal;margin-left:5px;color:#ce7c71}
+        .material-section{padding:83px 42px 87px}.materials-list{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:38px}.material-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:26px 22px 24px;border:1px solid #eadfd5;border-radius:16px;background:rgba(255,253,249,.86);box-shadow:0 6px 16px rgba(91,64,52,.03)}.material-item>span{height:25px;width:25px;display:grid;place-items:center;border-radius:50%;font-size:10px;color:#c18071;background:#faeee7}.material-item h3{font-size:17px;font-weight:600;margin:0 0 8px}.material-item p{font-size:11px;line-height:1.55;color:#786357;margin:0}
+        .installation-section{display:grid;grid-template-columns:1.02fr .98fr;gap:68px;align-items:center;padding-bottom:94px}.installation-image{height:400px;border-radius:26px;overflow:hidden;position:relative}.installation-image img{width:100%;height:100%;object-fit:cover}.installation-image span{position:absolute;left:18px;bottom:18px;padding:8px 12px;border-radius:99px;background:rgba(255,250,244,.92);font-size:9px;color:#6c5345}.installation-copy h2{margin:10px 0 17px;font-size:38px}.installation-copy>p:not(.eyebrow){font-size:13px;color:#766053;line-height:1.65}.feature-tags{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0}.feature-tags span{font-size:10px;color:#896c59}.installation-copy .round-button{min-height:41px;font-size:11px}
+        .coordination-section{background:#fbf0e9;padding:65px 0}.coordination-inner{display:grid;grid-template-columns:.85fr 1.15fr;gap:120px;align-items:center}.coordination-inner h2{margin:9px 0 14px}.coordination-inner>div>p:not(.eyebrow){font-size:13px;color:#786255;line-height:1.6;margin-bottom:21px}.coordination-inner .round-button{min-height:41px;font-size:11px}.coordination-list{display:grid;gap:17px}.coordination-list>div{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #eaded5}.coordination-list>div>b{font:600 22px 'Playfair Display',serif;color:#c88074}.coordination-list span{display:flex;flex-direction:column;gap:4px}.coordination-list strong{font:600 15px 'Playfair Display',serif}.coordination-list small{font-size:11px;color:#846e61}
+        footer{padding:46px 0;background:#5b4034;color:#fdf6ed}.footer-inner{display:flex;justify-content:space-between;gap:80px}.footer-brand h2{font-size:30px;font-weight:500;margin:0 0 10px}.footer-brand sup{font-size:14px;color:#f3b6a8}.footer-brand p{max-width:330px;font-size:12px;color:#eadbd0;line-height:1.6}.footer-contact{display:flex;flex-direction:column;gap:9px;padding-top:6px;font-size:12px}.footer-contact a{color:#fff7ef}.footer-contact small{color:#d9c7ba;margin-top:9px;font-size:10px}.floating-whatsapp{position:fixed;z-index:12;right:22px;bottom:21px;background:#24c86e;color:#fff;border-radius:999px;padding:13px 17px;box-shadow:0 10px 22px rgba(36,200,110,.32);display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700}.cart-overlay{position:fixed;z-index:30;inset:0;display:flex;justify-content:flex-end}.overlay-close{position:absolute;inset:0;border:0;background:rgba(49,33,27,.34)}.cart-panel{position:relative;background:#fffaf4;width:min(420px,100%);height:100%;padding:40px 32px;box-shadow:-16px 0 45px rgba(58,40,30,.19);animation:cart-in .26s cubic-bezier(.23,1,.32,1)}.cart-close{position:absolute;right:22px;top:21px;border:0;background:#f4e6de;border-radius:50%;height:34px;width:34px;display:grid;place-items:center}.cart-panel h2{font-size:37px;margin:10px 0}.cart-panel h2 small{font:500 16px 'DM Sans',sans-serif;color:#b29889}.empty-cart{height:calc(100% - 100px);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#856f60}.empty-cart svg{color:#e49a8e}.empty-cart h3{font-size:26px;color:#5b4034;margin:18px 0 8px}.empty-cart p{font-size:13px;line-height:1.5;max-width:210px;margin:0 0 23px}@keyframes cart-in{from{transform:translateX(100%)}to{transform:translateX(0)}}
+        @media(max-width:850px){.shell{width:min(100% - 28px,700px)}.main-nav{display:none}.header-inner{height:72px}.brand-logo{height:49px;width:62px}.brand-copy b{font-size:20px}.menu-trigger{display:block}.category-rail{height:58px}.rail-label{flex-basis:76px;padding-left:11px}.category-scroll{overflow-x:auto}.category-scroll::-webkit-scrollbar{display:none}.payment-inner{gap:12px}.payment-inner h2{font-size:15px}.payment-list{overflow:hidden}.payment-card{width:77px;flex:0 0 77px;font-size:10px}.hero{grid-template-columns:1fr;padding:45px 28px 28px;gap:29px}.hero h1{font-size:54px}.hero-image{height:300px}.faith-banner,.installation-section,.lines-section,.coordination-inner{grid-template-columns:1fr;gap:32px}.faith-picture{min-height:250px}.faith-copy{padding:35px 28px}.lines-section{padding:67px 20px}.materials-list,.steps-grid{gap:15px}.installation-section{padding-bottom:64px}.installation-image{height:340px}.coordination-inner{gap:43px}.footer-inner{flex-direction:column;gap:20px}.footer-contact{padding:0}.hero-stars{right:15px;top:10px}.floating-whatsapp{right:16px;bottom:15px}}
+        @media(max-width:590px){.trust-strip{gap:14px;font-size:7px}.brand-copy small{font-size:5px}.header-actions{gap:0}.category-pill{font-size:9px}.payment-strip{display:none}.hero{width:100%;border-radius:0;margin-top:0;padding:40px 23px 25px}.hero h1{font-size:47px}.hero-description{font-size:12px}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .round-button{width:100%}.hero-stats{gap:10px}.hero-stats span{width:31%;font-size:7px}.hero-stats span+span{padding-left:10px}.hero-image{height:245px;border-radius:28px}.hero-image-caption{left:11px;bottom:11px;width:148px;padding:10px 12px}.catalogue-section{width:calc(100% - 20px);padding:27px 11px;margin-top:16px}.section-title{font-size:31px}.product-grid{grid-template-columns:1fr 1fr;gap:9px}.product-card{border-radius:15px}.product-image{margin:5px;border-radius:10px}.product-info{padding:3px 6px 11px}.product-info h3{font-size:14px}.product-info p{font-size:8px}.faith-banner{width:100%;border-radius:0;margin-top:30px}.faith-copy h2{font-size:36px}.lines-section{padding:54px 9px}.line-item b{font-size:16px}.steps-section{padding:51px 0}.steps-grid{grid-template-columns:1fr}.step-card{padding:19px 20px}.step-number{margin-bottom:8px}.material-section{padding:59px 10px}.materials-list{grid-template-columns:1fr}.installation-section{width:100%;gap:0;padding-bottom:58px}.installation-image{height:300px;border-radius:0}.installation-copy{padding:38px 21px 0}.installation-copy h2{font-size:32px}.coordination-section{padding:52px 0}.coordination-inner{gap:36px}.footer-inner{gap:13px}.floating-whatsapp{padding:12px 14px;font-size:10px}.search-bar{width:calc(100% - 28px)}.mobile-menu{display:flex;flex-direction:column;padding:12px 24px 19px;gap:11px;background:#fffdfa;border-top:1px solid #f0e4db;font-family:'Playfair Display',serif;font-size:14px}.cart-panel{padding:36px 24px}}
+      `}</style>
     </div>
   );
 }
