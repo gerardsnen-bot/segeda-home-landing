@@ -11,3 +11,8 @@
 - [x] Conservar los modelos navideños y cantidades en el carrito local.
 - [x] Mostrar la cantidad real del carrito en la cabecera y el panel del catálogo principal.
 - [x] Verificar que los artículos persisten al volver desde Preventa Navideña.
+- [x] Auditar las páginas originales de todas las categorías y agrupar sus patrones de interfaz.
+- [x] Corregir el encuadre de todas las fotos y recuperar cada imagen original correcta.
+- [x] Exponer precios, tamaños y detalles reales en todas las categorías de producto.
+- [x] Replicar filtros, selección de modelo y paneles de compra según cada plantilla original.
+- [x] Realizar una revisión visual completa de cada categoría en escritorio y móvil.

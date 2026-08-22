@@ -1,104 +1,103 @@
 /**
- * Réplica Segeda Home — vista de categoría conectada a la instantánea del catálogo original.
- * Mantiene el lenguaje editorial marfil/coral/cacao y muestra productos, imágenes y precios reales.
+ * Réplica integral de las categorías estándar de Segeda Home: catálogo real,
+ * imágenes sin recorte, precios, tamaños, filtros y detalle de producto.
  */
-import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, ChevronRight, MessageCircle, Sparkles } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, Check, ChevronDown, Heart, Search, ShoppingCart, SlidersHorizontal, X } from "lucide-react";
 import { Link, useRoute } from "wouter";
+import { SegedaCartItem, useSegedaCart } from "@/lib/segedaCart";
 
-const WHATSAPP = "https://wa.me/51978642447?text=";
-const CATALOG_URL = "/manus-storage/segeda-real-products_a00909f3.json";
+const CATALOG_URL = "/manus-storage/segeda-real-products_742b0de3.json";
 
-type CatalogProduct = {
-  id: number | string;
-  title: string;
-  description: string;
-  price: number;
-  compareAtPrice: number;
-  sizes: { label: string; price: number }[];
-  tags: string;
-  audience: string;
-  themeGroup: string;
-  estimatedDays: string;
-  featured: boolean;
-  imageUrl: string;
+type Size = { label: string; price: number };
+type Product = { id: number | string; title: string; description: string; price: number; compareAtPrice: number; sizes: Size[]; tags: string; audience: string; themeGroup: string; estimatedDays: string; featured: boolean; imageUrl: string; galleryUrls: string[] };
+type Snapshot = { collection: Record<string, Product[]> };
+type CategoryInfo = { title: string; icon: string };
+
+const categoryInfo: Record<string, CategoryInfo> = {
+  nubes: { title: "Nubes temáticas", icon: "☁" }, placas: { title: "Placas circulares", icon: "○" }, cuadros: { title: "Cuadros infantiles", icon: "▣" }, combo: { title: "Combo completo", icon: "✦" }, "nube-cuadros": { title: "Nube + cuadros", icon: "☁" }, "nube-cuadros-lampara": { title: "Nube + cuadros + lámpara", icon: "☼" }, "nombre-cuadros": { title: "Nombre + cuadros", icon: "Aa" }, packs: { title: "Packs lamparitas", icon: "✧" }, lamparas: { title: "Lámparas decorativas", icon: "☼" }, liquidacion: { title: "Liquidación", icon: "%" }, "fe-espiritualidad": { title: "Fe y espiritualidad", icon: "✦" }, alcancias: { title: "Alcancías y regalos", icon: "♡" }, didacticos: { title: "Didácticos", icon: "ABC" },
 };
 
-type CatalogSnapshot = { collection: Record<string, CatalogProduct[]> };
-type CategoryData = { title: string; kicker: string; description: string; image: string };
+const allLinks = [
+  ["✼", "Preventa Navideña", "navidad"], ["☁", "Nubes temáticas", "nubes"], ["○", "Placas circulares", "placas"], ["▣", "Cuadros infantiles", "cuadros"], ["✦", "Combo completo", "combo"], ["☁", "Nube + cuadros", "nube-cuadros"], ["☼", "Nube + cuadros + lámpara", "nube-cuadros-lampara"], ["Aa", "Nombre + cuadros", "nombre-cuadros"], ["✧", "Packs lamparitas", "packs"], ["☼", "Lámparas", "lamparas"], ["%", "Liquidación", "liquidacion"], ["✦", "Fe y espiritualidad", "fe-espiritualidad"], ["♡", "Alcancías y regalos", "alcancias"], ["ABC", "Didácticos", "didacticos"],
+];
 
-const categories: Record<string, CategoryData> = {
-  navidad: { title: "Preventa Navideña", kicker: "Colección especial 2026 · Desde S/79", description: "Letreros personalizados con el apellido de tu familia. Elige uno, combina varios o repite tu modelo favorito.", image: "/manus-storage/navidad_c98eafac.jpg" },
-  nubes: { title: "Nubes temáticas", kicker: "Colección destacada", description: "Nubes con nombres, personajes y luz cálida para transformar espacios infantiles.", image: "/manus-storage/nubes-portada-premium_f843e2ec.jpeg" },
-  placas: { title: "Placas circulares", kicker: "Diseños personalizados", description: "Placas redondas en MDF creadas con la temática, nombre y colores de su espacio.", image: "/manus-storage/placas_f2df896b.jpg" },
-  cuadros: { title: "Cuadros infantiles", kicker: "Detalles para su habitación", description: "Cuadros coordinados para acompañar nombres, personajes y composiciones infantiles.", image: "/manus-storage/cuadros_0fdc2e1c.jpg" },
-  combo: { title: "Combo completo", kicker: "Una composición lista para instalar", description: "Nombre, cuadros y luz diseñados como una sola composición para la habitación.", image: "/manus-storage/combo_d729a5a2.jpg" },
-  "nube-cuadros": { title: "Nube + cuadros", kicker: "Combinación favorita", description: "Una nube principal acompañada por cuadros para crear una pared con identidad.", image: "/manus-storage/nube-cuadros_4f013700.jpg" },
-  "nube-cuadros-lampara": { title: "Nube + cuadros + lámpara", kicker: "Composición iluminada", description: "Un set completo con iluminación cálida y detalles coordinados para su espacio.", image: "/manus-storage/nubes-portada-premium_f843e2ec.jpeg" },
-  "nombre-cuadros": { title: "Nombre + cuadros", kicker: "Un detalle para su pared", description: "Nombres en MDF y cuadros decorativos con la temática que imaginas.", image: "/manus-storage/combo_d729a5a2.jpg" },
-  packs: { title: "Packs lamparitas", kicker: "Luz cálida para su espacio", description: "Piezas de iluminación decorativa creadas para acompañar sus momentos cotidianos.", image: "/manus-storage/instalacion-real-nubes_eee88aa5.jpg" },
-  lamparas: { title: "Lámparas", kicker: "Iluminación cálida", description: "Lámparas decorativas con formas, colores y detalles especiales para cada habitación.", image: "/manus-storage/instalacion-real-nubes_eee88aa5.jpg" },
-  liquidacion: { title: "Liquidación", kicker: "Últimas unidades", description: "Diseños disponibles para coordinar por WhatsApp según stock y personalización.", image: "/manus-storage/navidad_c98eafac.jpg" },
-  "fe-espiritualidad": { title: "Fe y espiritualidad", kicker: "Nueva línea para el hogar", description: "Piezas que inspiran y dan significado a cada espacio, creadas en MDF con acabado cálido.", image: "/manus-storage/fe-espiritualidad_546155f2.png" },
-  alcancias: { title: "Alcancías y regalos", kicker: "Detalles para regalar", description: "Regalos personalizados para celebrar etapas, nombres y momentos importantes.", image: "/manus-storage/placas_f2df896b.jpg" },
-  didacticos: { title: "Didácticos", kicker: "Aprender también es jugar", description: "Recursos en MDF pensados para acompañar el aprendizaje desde el juego.", image: "/manus-storage/cuadros_0fdc2e1c.jpg" },
-};
-
-function readableTheme(theme: string) {
-  return theme ? theme.replaceAll("-", " ") : "Diseño personalizado";
-}
+const toLabel = (value: string) => value ? value.replaceAll("-", " ") : "Diseño personalizado";
+const priceText = (price: number) => `S/ ${price}`;
 
 export default function Category() {
   const [, params] = useRoute("/catalogo/:category");
   const slug = params?.category ?? "nubes";
-  const category = categories[slug] ?? categories.nubes;
-  const [snapshot, setSnapshot] = useState<CatalogSnapshot | null>(null);
+  const info = categoryInfo[slug] ?? categoryInfo.nubes;
+  const { quantity: cartQuantity, updateCart } = useSegedaCart();
+  const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
+  const [search, setSearch] = useState("");
+  const [audience, setAudience] = useState("todos");
+  const [theme, setTheme] = useState("todos");
+  const [sort, setSort] = useState("panel");
   const [visibleCount, setVisibleCount] = useState(12);
-  const [loading, setLoading] = useState(true);
+  const [activeProduct, setActiveProduct] = useState<Product | null>(null);
+  const [activePhoto, setActivePhoto] = useState(0);
+  const [selectedSize, setSelectedSize] = useState(0);
 
   useEffect(() => {
     let active = true;
-    setLoading(true);
-    setVisibleCount(12);
-    fetch(CATALOG_URL)
-      .then((response) => response.json())
-      .then((data: CatalogSnapshot) => { if (active) setSnapshot(data); })
-      .catch(() => { if (active) setSnapshot({ collection: {} }); })
-      .finally(() => { if (active) setLoading(false); });
+    setVisibleCount(12); setSearch(""); setAudience("todos"); setTheme("todos"); setActiveProduct(null);
+    fetch(CATALOG_URL).then((response) => response.json()).then((data: Snapshot) => { if (active) setSnapshot(data); }).catch(() => { if (active) setSnapshot({ collection: {} }); });
     return () => { active = false; };
   }, [slug]);
 
   const products = snapshot?.collection[slug] ?? [];
-  const shownProducts = products.slice(0, visibleCount);
-  const heroMessage = `Hola Segeda Home, quiero consultar por ${category.title}`;
+  const themes = useMemo(() => ["todos", ...Array.from(new Set(products.map((product) => product.themeGroup).filter(Boolean)))], [products]);
+  const filtered = useMemo(() => {
+    const keyword = search.trim().toLowerCase();
+    const result = products.filter((product) => {
+      const matchesSearch = !keyword || `${product.title} ${product.description} ${product.tags} ${product.themeGroup}`.toLowerCase().includes(keyword);
+      const matchesAudience = audience === "todos" || product.audience === audience;
+      const matchesTheme = theme === "todos" || product.themeGroup === theme;
+      return matchesSearch && matchesAudience && matchesTheme;
+    });
+    if (sort === "price-low") return [...result].sort((a, b) => a.price - b.price);
+    if (sort === "price-high") return [...result].sort((a, b) => b.price - a.price);
+    if (sort === "featured") return [...result].sort((a, b) => Number(b.featured) - Number(a.featured));
+    return result;
+  }, [products, search, audience, theme, sort]);
 
-  return (
-    <div className="category-page">
-      <div className="category-topbar"><span>♡ Hecho con amor</span><span>✦ Envíos a todo el Perú</span></div>
-      <header className="category-header">
-        <Link href="/catalogo" className="category-brand"><img src="/manus-storage/segeda-logo_2fda80cf.jpg" alt="Segeda Home" /><span><strong>Segeda Home</strong><small>DETALLES PERSONALIZADOS EN MDF</small></span></Link>
-        <Link href="/catalogo" className="category-back"><ArrowLeft size={16} /> Volver al catálogo</Link>
-      </header>
-      <main>
-        <section className="category-hero">
-          <div className="category-hero-copy"><p>{category.kicker}</p><h1>{category.title}</h1><span className="category-spark"><Sparkles size={15} /></span><p className="category-description">{category.description}</p><a href={`${WHATSAPP}${encodeURIComponent(heroMessage)}`} target="_blank" rel="noreferrer" className="category-whatsapp">Coordinar por WhatsApp <MessageCircle size={16} /></a></div>
-          <div className="category-hero-image"><img src={category.image} alt={category.title} /><span>Hecho a mano · MDF premium</span></div>
-        </section>
-        <section className="category-models">
-          <p className="category-kicker">✦ Modelos reales de la colección ✦</p>
-          <h2>Elige un diseño y <em>personalízalo a tu manera.</em></h2>
-          <p>{loading ? "Cargando los diseños disponibles…" : `${products.length} diseños disponibles. Elige un modelo y coordina nombre, medidas, colores y temática antes de elaborar.`}</p>
-          {loading ? <div className="category-loading">Preparando el catálogo…</div> : shownProducts.length ? <>
-            <div className="category-card-grid">{shownProducts.map((product) => <article key={String(product.id)} className="category-card"><img src={product.imageUrl} alt={product.title} loading="lazy" /><div><span>{readableTheme(product.themeGroup)}</span><h3>{product.title}</h3><p className="category-product-meta">{product.estimatedDays || "Personalizable"}{product.sizes.length ? ` · ${product.sizes[0].label}` : ""}</p><p className="category-price">{product.compareAtPrice > product.price && <del>S/{product.compareAtPrice}</del>} Personalizable desde <b>S/{product.price}</b></p><a href={`${WHATSAPP}${encodeURIComponent(`Hola Segeda Home, quiero el modelo ${product.title}`)}`} target="_blank" rel="noreferrer">Elegir este modelo <ArrowRight size={14} /></a></div></article>)}</div>
-            {shownProducts.length < products.length && <button className="category-load-more" onClick={() => setVisibleCount((count) => count + 12)}>Ver más diseños <ChevronRight size={16} /></button>}
-          </> : <div className="category-loading">No se encontraron modelos para esta colección.</div>}
-        </section>
-        <section className="category-next"><div><p>¿Buscas otra opción?</p><h2>Explora todas las categorías de Segeda Home.</h2></div><Link href="/catalogo" className="category-outline">Ver el catálogo <ChevronRight size={16} /></Link></section>
-      </main>
-      <footer className="category-footer"><span className="serif">Segeda Home<sup>♡</sup></span><p>Diseño y personalización en MDF para niños, hogares y momentos especiales.</p></footer>
-      <style>{`
-        .category-page{min-height:100vh;background:#fffaf4;color:#513a30;font-family:'DM Sans',Arial,sans-serif}.category-topbar{height:28px;background:#5b4034;color:#fffaf4;display:flex;align-items:center;justify-content:center;gap:42px;text-transform:uppercase;letter-spacing:.12em;font-size:8px;font-weight:700}.category-header{height:90px;display:flex;justify-content:space-between;align-items:center;width:min(1170px,calc(100% - 40px));margin:auto}.category-brand{display:flex;align-items:center;gap:10px}.category-brand img{height:60px;width:78px;object-fit:contain}.category-brand span{display:flex;flex-direction:column;gap:3px}.category-brand strong{font:600 24px 'Playfair Display',Georgia,serif}.category-brand small{font-size:7px;letter-spacing:.16em;color:#806a5e}.category-back{display:flex;align-items:center;gap:7px;font:600 12px 'DM Sans',sans-serif;color:#806a5e}.category-hero{display:grid;grid-template-columns:.88fr 1.12fr;gap:70px;align-items:center;width:min(1170px,calc(100% - 40px));margin:18px auto 0;padding:60px 65px;border-radius:30px;background:linear-gradient(118deg,#fff8f1 20%,#fae3d4 100%);box-shadow:0 17px 30px rgba(91,64,52,.06)}.category-hero-copy>p:first-child,.category-kicker{margin:0;color:#a37e55;font-weight:700;font-size:10px;letter-spacing:.17em;text-transform:uppercase}.category-hero h1,.category-models h2,.category-next h2{font:600 clamp(43px,5vw,64px)/.99 'Playfair Display',Georgia,serif;letter-spacing:-.045em;margin:13px 0 5px}.category-spark{color:#c69e68}.category-description{max-width:390px;color:#776255;line-height:1.65;font-size:14px;margin:17px 0 24px}.category-whatsapp{display:inline-flex;align-items:center;gap:8px;padding:14px 19px;border-radius:999px;background:#24c86e;color:#fff;font-weight:700;font-size:12px;box-shadow:0 9px 17px rgba(36,200,110,.22)}.category-hero-image{height:335px;border-radius:28px;overflow:hidden;position:relative;box-shadow:0 15px 25px rgba(91,64,52,.12)}.category-hero-image img{width:100%;height:100%;object-fit:cover}.category-hero-image span{position:absolute;right:14px;top:14px;border-radius:99px;padding:7px 10px;background:rgba(70,48,37,.86);color:#fff;font-size:8px;font-weight:700}.category-models{width:min(1100px,calc(100% - 40px));margin:83px auto 88px;text-align:center}.category-models h2{font-size:42px;max-width:650px;margin:10px auto 12px}.category-models h2 em{color:#c77f72;font-style:italic}.category-models>p:not(.category-kicker){max-width:610px;margin:0 auto 29px;color:#776255;font-size:13px;line-height:1.6}.category-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:left}.category-card{overflow:hidden;border:1px solid #eadfd5;border-radius:21px;background:#fffdf9;box-shadow:0 8px 20px rgba(91,64,52,.04);transition:transform .17s ease,box-shadow .17s ease}.category-card:hover{transform:translateY(-4px);box-shadow:0 15px 25px rgba(91,64,52,.10)}.category-card>img{width:100%;height:205px;object-fit:cover;display:block;background:#f4e8de}.category-card div{padding:16px 17px 18px}.category-card span{font-size:8px;letter-spacing:.14em;color:#a37e55;text-transform:uppercase;font-weight:700}.category-card h3{font:600 21px 'Playfair Display',Georgia,serif;margin:7px 0 7px}.category-product-meta{font-size:10px;color:#8c7567;margin:0 0 8px}.category-price{font-size:10px;color:#876e61;margin:0 0 13px}.category-price del{margin-right:4px;color:#aa978b}.category-price b{font-size:13px;color:#513a30}.category-card a{display:flex;align-items:center;gap:5px;color:#c77f72;font-size:11px;font-weight:700}.category-loading{margin:22px auto;padding:34px;max-width:400px;border:1px solid #eadfd5;border-radius:18px;color:#8c7567;font-size:13px;background:#fffdf9}.category-load-more{display:inline-flex;align-items:center;gap:7px;margin:27px auto 0;border:1px solid #e1c9bb;border-radius:999px;background:#fffdf9;color:#806a5e;padding:12px 19px;font:700 11px 'DM Sans',Arial,sans-serif;transition:transform .15s ease}.category-load-more:hover{transform:translateY(-2px)}.category-next{width:min(1170px,calc(100% - 40px));margin:0 auto 56px;padding:35px 42px;border-radius:23px;background:#f5e5dc;display:flex;align-items:center;justify-content:space-between;gap:32px}.category-next p{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#a37e55;margin:0 0 5px;font-weight:700}.category-next h2{font-size:29px;margin:0;letter-spacing:-.03em}.category-outline{display:flex;align-items:center;gap:7px;white-space:nowrap;border:1px solid #dccabc;border-radius:99px;background:#fffaf4;color:#806a5e;padding:12px 18px;font-size:11px;font-weight:700}.category-footer{background:#5b4034;color:#fffaf4;padding:33px max(20px,calc((100% - 1170px)/2));display:flex;justify-content:space-between;align-items:center;gap:25px}.category-footer span{font-size:26px}.category-footer sup{color:#f2b4a8;font-size:12px}.category-footer p{font-size:11px;color:#eadbd0;margin:0}@media(max-width:720px){.category-header{height:74px;width:calc(100% - 28px)}.category-brand img{height:46px;width:55px}.category-brand strong{font-size:19px}.category-brand small{font-size:5px}.category-back{font-size:10px}.category-topbar{gap:14px;font-size:7px}.category-hero{width:100%;margin:0;grid-template-columns:1fr;gap:27px;padding:42px 23px 25px;border-radius:0}.category-hero h1{font-size:47px}.category-hero-image{height:260px}.category-models{width:calc(100% - 28px);margin:58px auto}.category-models h2{font-size:33px}.category-card-grid{grid-template-columns:1fr;gap:13px}.category-card{display:grid;grid-template-columns:120px 1fr}.category-card>img{height:100%}.category-card div{padding:15px}.category-card h3{font-size:19px}.category-next{width:calc(100% - 28px);padding:27px 22px;align-items:flex-start;flex-direction:column}.category-next h2{font-size:26px}.category-footer{align-items:flex-start;flex-direction:column}.category-footer p{max-width:290px}}
-      `}</style>
-    </div>
-  );
+  const visible = filtered.slice(0, visibleCount);
+  const showDetail = (product: Product) => { setActiveProduct(product); setActivePhoto(0); setSelectedSize(0); };
+  const modalImages = activeProduct ? (activeProduct.galleryUrls.length ? activeProduct.galleryUrls : [activeProduct.imageUrl]) : [];
+  const selectedPrice = activeProduct?.sizes[selectedSize]?.price ?? activeProduct?.price ?? 0;
+
+  const addToCart = () => {
+    if (!activeProduct) return;
+    const size = activeProduct.sizes[selectedSize]?.label ?? "Personalizado";
+    const itemId = `${slug}-${activeProduct.id}-${size}`;
+    updateCart((current) => {
+      const found = current.find((item) => item.id === itemId);
+      const item: SegedaCartItem = { id: itemId, category: slug, title: `${activeProduct.title} · ${size}`, image: modalImages[activePhoto] ?? activeProduct.imageUrl, quantity: (found?.quantity ?? 0) + 1, unitPrice: selectedPrice };
+      return [...current.filter((entry) => entry.id !== itemId), item];
+    });
+    setActiveProduct(null);
+  };
+
+  return <div className="standard-category-page">
+    <div className="sc-trust"><span>♡ Hecho con amor</span><span>✦ Envíos a todo el Perú</span></div>
+    <header className="sc-header"><Link href="/catalogo" className="sc-brand"><img src="/manus-storage/segeda-logo_2fda80cf.jpg" alt="Segeda Home" /><span><b>Segeda Home</b><small>DETALLES PERSONALIZADOS EN MDF</small></span></Link><nav><Link href="/catalogo">Inicio</Link><Link href="/catalogo">Categorías</Link><a href="/catalogo#como-comprar">Cómo comprar</a><a href="/catalogo#contacto">Contacto</a></nav><Link href="/catalogo" aria-label="Abrir carrito" className="sc-cart"><ShoppingCart size={18} /><i>{cartQuantity}</i></Link></header>
+    <nav className="sc-rail"><div className="sc-rail-title"><span>✦</span><b>Explora</b><small>OTRAS<br />CATEGORÍAS</small></div><div className="sc-rail-scroll">{allLinks.map(([icon, title, linkSlug]) => <Link key={title} href={`/catalogo/${linkSlug}`} className={slug === linkSlug ? "current" : ""}><i>{icon}</i>{title}</Link>)}</div></nav>
+    <main>
+      <section className="sc-intro"><Link href="/catalogo" className="sc-back"><ArrowLeft size={14} /> Inicio</Link><p>CATÁLOGO SEGEDA HOME</p><h1>{info.icon} {info.title}</h1><span>{products.length} diseños disponibles</span></section>
+      <section className="sc-products"><header><div><p>{info.title} · {products.length} diseños</p><h2>Elige tu diseño favorito</h2><small>Abre cualquier producto para ver las fotos completas, precio y opciones.</small></div><div className="sc-count"><SlidersHorizontal size={15} /> {filtered.length} resultados</div></header>
+        <div className="sc-filterbar"><label><Search size={16} /><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Buscar producto, personaje o temática..." /></label><div className="sc-filter-buttons">{[["todos", "Todos"], ["niña", "Niña"], ["niño", "Niño"]].map(([value, label]) => <button key={value} onClick={() => setAudience(value)} className={audience === value ? "active" : ""}>{label}</button>)}</div><select value={sort} onChange={(event) => setSort(event.target.value)} aria-label="Ordenar productos"><option value="panel">Orden del panel</option><option value="featured">Destacados</option><option value="price-low">Menor precio</option><option value="price-high">Mayor precio</option></select></div>
+        {slug === "nubes" && <div className="sc-themes">{themes.map((value) => <button key={value} className={theme === value ? "active" : ""} onClick={() => setTheme(value)}>{value === "todos" ? "✦ Todos" : toLabel(value)}</button>)}</div>}
+        <div className="sc-grid">{visible.map((product) => <button key={String(product.id)} className="sc-product" onClick={() => showDetail(product)}><div className="sc-photo"><img src={product.imageUrl} alt={product.title} loading="lazy" /><span>Ver completa</span></div><div className="sc-product-text"><small>{product.themeGroup ? toLabel(product.themeGroup) : `Código SH-${product.id}`}</small><h3>{product.title}</h3><p>Desde <b>{priceText(product.price)}</b> · Personalizable</p>{product.sizes.length > 0 && <em>{product.sizes.map((size) => size.label).join(" · ")}</em>}</div></button>)}</div>
+        {!filtered.length && <div className="sc-empty">No encontramos diseños con esos filtros.</div>}
+        {visible.length < filtered.length && <button className="sc-more" onClick={() => setVisibleCount((count) => count + 12)}>Mostrar más diseños <ChevronDown size={16} /> <span>{filtered.length - visible.length} restantes</span></button>}
+      </section>
+    </main>
+    <footer className="sc-footer"><strong>Segeda Home<sup>♡</sup></strong><span>Diseño y personalización en MDF para niños, hogares y momentos especiales.</span><Link href="/catalogo">Volver a la tienda principal</Link></footer>
+    {activeProduct && <div className="sc-modal-backdrop" role="dialog" aria-modal="true" aria-label={`Detalle de ${activeProduct.title}`}><button className="sc-modal-dismiss" onClick={() => setActiveProduct(null)} aria-label="Cerrar detalle" /><aside className="sc-modal"><button className="sc-modal-close" onClick={() => setActiveProduct(null)} aria-label="Cerrar detalle"><X size={19} /></button><div className="sc-modal-media"><img src={modalImages[activePhoto]} alt={activeProduct.title} /><div>{modalImages.map((image, index) => <button key={image} onClick={() => setActivePhoto(index)} className={index === activePhoto ? "selected" : ""}><img src={image} alt="" /></button>)}</div></div><div className="sc-modal-copy"><p>{info.title}</p><h2>{activeProduct.title}</h2><span>{activeProduct.estimatedDays || "Producto personalizable"}</span>{activeProduct.description && <p className="sc-desc">{activeProduct.description}</p>}<div className="sc-size-block"><b>Elige la medida</b><div>{activeProduct.sizes.length ? activeProduct.sizes.map((size, index) => <button key={size.label} onClick={() => setSelectedSize(index)} className={index === selectedSize ? "selected" : ""}><span>{size.label}</span><strong>{priceText(size.price)}</strong></button>) : <button className="selected"><span>Personalizado</span><strong>{priceText(activeProduct.price)}</strong></button>}</div></div><div className="sc-detail-price">{activeProduct.compareAtPrice > selectedPrice && <del>{priceText(activeProduct.compareAtPrice)}</del>}<strong>{priceText(selectedPrice)}</strong><small>Precio referencial · personalizable</small></div><button className="sc-add" onClick={addToCart}><Check size={16} /> Agregar al carrito</button></div></aside></div>}
+    <style>{`
+      .standard-category-page{min-height:100vh;background:#fffaf4;color:#513a30;font-family:'DM Sans',Arial,sans-serif}.sc-trust{height:27px;display:flex;justify-content:center;align-items:center;gap:39px;background:#5b4034;color:#fffaf4;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}.sc-header{height:89px;display:flex;align-items:center;gap:33px;width:min(1180px,calc(100% - 40px));margin:auto}.sc-brand{display:flex;align-items:center;gap:10px}.sc-brand img{height:62px;width:79px;object-fit:contain}.sc-brand span{display:flex;flex-direction:column}.sc-brand b{font:600 25px 'Playfair Display',Georgia,serif}.sc-brand small{font-size:6px;font-weight:700;letter-spacing:.17em;color:#7c6558}.sc-header nav{display:flex;gap:30px;margin-left:auto;font:500 13px 'Playfair Display',Georgia,serif}.sc-header nav a{color:#60483b}.sc-cart{position:relative;display:grid;place-items:center;color:#634b3e;height:38px;width:38px}.sc-cart i{position:absolute;right:0;top:0;display:grid;place-items:center;min-width:13px;height:13px;border-radius:50%;background:#e98f84;color:#fff;font:700 8px 'DM Sans',Arial,sans-serif;font-style:normal}.sc-rail{height:64px;display:flex;align-items:stretch;background:#fffdfa;border-top:1px solid #f0e7df;border-bottom:1px solid #f0e7df}.sc-rail-title{flex:0 0 105px;display:grid;grid-template-columns:13px 1fr;grid-template-rows:20px 1fr;align-content:center;gap:0 3px;padding-left:27px;color:#6a5141}.sc-rail-title>span{grid-row:span 2;color:#b18861;font-size:11px}.sc-rail-title b{font:600 13px 'Playfair Display',Georgia,serif;line-height:1}.sc-rail-title small{font-size:5px;letter-spacing:.13em;font-weight:700;line-height:1.25}.sc-rail-scroll{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:0 12px;white-space:nowrap;scrollbar-width:none}.sc-rail-scroll::-webkit-scrollbar{display:none}.sc-rail-scroll a{display:flex;align-items:center;gap:6px;border:1px solid #eee4da;border-radius:6px;background:#fff;padding:10px 12px;color:#5b4438;font-size:10px}.sc-rail-scroll a i{font-style:normal;color:#c3917e}.sc-rail-scroll a.current{border-color:#d99385;background:#fff5ee}.sc-intro{padding:50px 20px 31px;text-align:center;background:linear-gradient(180deg,#fff9f1,#fbf0e6)}.sc-back{display:inline-flex;align-items:center;gap:6px;color:#9a7160;font-size:11px}.sc-intro p{margin:26px 0 9px;color:#c37d73;font-size:9px;letter-spacing:.18em;font-weight:700}.sc-intro h1{margin:0;font:500 clamp(36px,5vw,56px)/1 'Playfair Display',Georgia,serif;letter-spacing:-.04em}.sc-intro>span{display:block;margin-top:11px;color:#806a5d;font-size:12px}.sc-products{width:min(1170px,calc(100% - 40px));padding:49px 0 72px;margin:auto}.sc-products>header{display:flex;align-items:end;justify-content:space-between;gap:20px}.sc-products header p{margin:0 0 4px;color:#b27667;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.sc-products h2{margin:0;font:500 38px 'Playfair Display',Georgia,serif}.sc-products header small{color:#806b5e;font-size:12px}.sc-count{display:flex;align-items:center;gap:6px;border:1px solid #eaded4;border-radius:99px;padding:9px 12px;color:#806a5e;font-size:10px;white-space:nowrap}.sc-filterbar{display:grid;grid-template-columns:minmax(250px,1fr) auto 150px;gap:10px;align-items:center;margin:26px 0 15px}.sc-filterbar label{display:flex;align-items:center;gap:9px;border:1px solid #e8ddd3;border-radius:9px;background:#fffdf8;padding:0 12px;color:#947a6c}.sc-filterbar input{height:42px;width:100%;border:0;outline:0;background:transparent;color:#513a30;font-size:12px}.sc-filter-buttons{display:flex;border:1px solid #e8ddd3;border-radius:9px;overflow:hidden}.sc-filter-buttons button{border:0;border-right:1px solid #e8ddd3;background:#fffdf8;padding:12px 13px;color:#796256;font-size:11px}.sc-filter-buttons button:last-child{border-right:0}.sc-filter-buttons button.active{background:#f3ded4;color:#8c413c;font-weight:700}.sc-filterbar select{height:42px;border:1px solid #e8ddd3;border-radius:9px;background:#fffdf8;padding:0 10px;color:#796256;font-size:11px;outline:none}.sc-themes{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:17px}.sc-themes button{border:1px solid #eaded4;background:#fffdf8;border-radius:999px;padding:8px 11px;color:#82695c;font-size:10px;text-transform:capitalize}.sc-themes button.active{border-color:#c77f72;background:#f7e3db;color:#973f3b;font-weight:700}.sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.sc-product{overflow:hidden;padding:0;border:1px solid #eaded4;border-radius:15px;background:#fffdf9;text-align:left;transition:transform .16s ease,box-shadow .16s ease}.sc-product:hover{transform:translateY(-3px);box-shadow:0 11px 19px rgba(85,58,42,.1)}.sc-photo{height:210px;position:relative;display:grid;place-items:center;background:#f8f3e9;overflow:hidden}.sc-photo img{width:100%;height:100%;object-fit:contain;display:block}.sc-photo span{position:absolute;right:9px;bottom:8px;border-radius:999px;background:rgba(80,55,42,.84);padding:6px 8px;color:#fff;font-size:8px;font-weight:700;opacity:0;transition:opacity .16s ease}.sc-product:hover .sc-photo span{opacity:1}.sc-product-text{padding:12px 12px 14px}.sc-product-text small{color:#a77a61;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.sc-product-text h3{min-height:39px;margin:5px 0;color:#543d33;font:600 18px/1.05 'Playfair Display',Georgia,serif}.sc-product-text p{margin:0;color:#826a5c;font-size:10px}.sc-product-text p b{color:#5b4034;font-size:12px}.sc-product-text em{display:block;overflow:hidden;margin-top:8px;color:#ad9587;font-size:8px;font-style:normal;text-overflow:ellipsis;white-space:nowrap}.sc-empty{padding:45px;text-align:center;border:1px dashed #d9c2b4;border-radius:15px;color:#806a5d}.sc-more{display:flex;align-items:center;gap:7px;margin:27px auto 0;border:1px solid #d9c5b9;border-radius:999px;background:#fffdf9;padding:12px 17px;color:#735b4e;font-size:11px;font-weight:700}.sc-more span{color:#ab8e7f;font-weight:500}.sc-footer{display:flex;justify-content:center;align-items:center;gap:18px;padding:30px 20px;background:#5b4034;color:#fdf6ed}.sc-footer strong{font:600 21px 'Playfair Display',Georgia,serif}.sc-footer sup{color:#f4b9ab;font-size:11px}.sc-footer span{font-size:9px;color:#eadbd0}.sc-footer a{border-radius:999px;background:#736054;padding:7px 10px;color:#fffaf4;font-size:9px}.sc-modal-backdrop{position:fixed;z-index:50;inset:0;display:grid;place-items:center;padding:20px}.sc-modal-dismiss{position:absolute;inset:0;border:0;background:rgba(48,31,24,.52)}.sc-modal{position:relative;z-index:1;display:grid;grid-template-columns:1.06fr .94fr;max-height:min(720px,calc(100vh - 40px));width:min(990px,100%);overflow:auto;border-radius:22px;background:#fffaf4;box-shadow:0 25px 70px rgba(42,27,21,.28)}.sc-modal-close{position:absolute;right:16px;top:16px;z-index:2;display:grid;place-items:center;height:34px;width:34px;border:0;border-radius:50%;background:#fffaf4;color:#634b3f}.sc-modal-media{padding:25px;background:#f5ede3}.sc-modal-media>img{width:100%;height:440px;object-fit:contain;background:#fffdf9;border-radius:14px}.sc-modal-media>div{display:flex;gap:8px;margin-top:9px;overflow:auto}.sc-modal-media>div button{height:61px;width:61px;flex:0 0 61px;overflow:hidden;border:2px solid transparent;border-radius:8px;padding:0;background:#fff}.sc-modal-media>div button.selected{border-color:#c77f72}.sc-modal-media>div img{height:100%;width:100%;object-fit:cover}.sc-modal-copy{padding:50px 36px 33px}.sc-modal-copy>p{margin:0;color:#ab7b61;font-size:9px;letter-spacing:.12em;font-weight:700;text-transform:uppercase}.sc-modal-copy h2{margin:9px 0 5px;font:600 36px/1 'Playfair Display',Georgia,serif}.sc-modal-copy>span{font-size:11px;color:#806a5e}.sc-desc{margin:18px 0;color:#765f52;font-size:12px;line-height:1.6}.sc-size-block{margin-top:23px}.sc-size-block>b{font:600 16px 'Playfair Display',Georgia,serif}.sc-size-block>div{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.sc-size-block button{display:flex;flex-direction:column;gap:3px;border:1px solid #e4d5ca;border-radius:9px;background:#fffdf9;padding:9px;color:#806a5d;font-size:10px;text-align:left}.sc-size-block button.selected{border-color:#b9635d;background:#f9e5de;color:#943e39}.sc-size-block strong{font-size:11px}.sc-detail-price{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;align-items:end;margin:23px 0}.sc-detail-price del{color:#aa9587;font-size:12px}.sc-detail-price strong{font:600 34px 'Playfair Display',Georgia,serif}.sc-detail-price small{grid-column:1/-1;color:#8c7567;font-size:9px}.sc-add{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;border:0;border-radius:999px;background:#e78d81;padding:14px;color:#fff;font-size:12px;font-weight:700;box-shadow:0 8px 15px rgba(205,104,94,.23)}@media(max-width:850px){.sc-header{height:73px;width:calc(100% - 26px)}.sc-brand img{width:59px;height:50px}.sc-brand b{font-size:20px}.sc-header nav{display:none}.sc-rail{height:58px}.sc-rail-title{flex-basis:73px;padding-left:10px}.sc-products{width:calc(100% - 26px)}.sc-grid{grid-template-columns:repeat(3,1fr)}.sc-photo{height:180px}.sc-filterbar{grid-template-columns:1fr auto}.sc-filterbar select{grid-column:1/-1}.sc-modal{grid-template-columns:1fr;max-height:calc(100vh - 24px)}.sc-modal-media>img{height:330px}.sc-modal-copy{padding:29px}.sc-footer{flex-direction:column;gap:8px;text-align:center}}@media(max-width:540px){.sc-trust{font-size:6px;gap:13px}.sc-intro{padding:39px 14px 25px}.sc-intro h1{font-size:38px}.sc-products{padding-top:35px}.sc-products>header{display:block}.sc-products h2{font-size:32px}.sc-count{display:inline-flex;margin-top:12px}.sc-filterbar{grid-template-columns:1fr;margin:19px 0 11px}.sc-filter-buttons{width:max-content}.sc-filterbar select{grid-column:auto}.sc-themes{flex-wrap:nowrap;overflow:auto}.sc-grid{grid-template-columns:1fr 1fr;gap:9px}.sc-photo{height:147px}.sc-product-text{padding:9px}.sc-product-text h3{font-size:15px;min-height:32px}.sc-product-text p{font-size:8px}.sc-product-text p b{font-size:10px}.sc-footer{padding:24px 15px}.sc-modal-backdrop{padding:0}.sc-modal{height:100%;max-height:100%;border-radius:0}.sc-modal-media{padding:18px}.sc-modal-media>img{height:275px}.sc-modal-copy{padding:24px 20px}.sc-modal-copy h2{font-size:30px}.sc-size-block>div{grid-template-columns:repeat(2,1fr)}}
+    `}</style>
+  </div>;
 }
