@@ -16,3 +16,5 @@
 - [x] Exponer precios, tamaños y detalles reales en todas las categorías de producto.
 - [x] Replicar filtros, selección de modelo y paneles de compra según cada plantilla original.
 - [x] Realizar una revisión visual completa de cada categoría en escritorio y móvil.
+- [x] Reforzar la apariencia y los estados interactivos de los accesos de categoría.
+- [x] Comprobar la legibilidad y el énfasis de categorías en escritorio y móvil.
