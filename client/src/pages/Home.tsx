@@ -122,7 +122,7 @@ export default function Home() {
               <div className="product-info"><h3 className="serif">{product.title}</h3><p>{product.note} <i>→</i></p></div>
             </button>)}
           </div>
-          <button className="round-button round-button--outline all-categories" onClick={() => setCartOpen(true)}>Ver todas las categorías <ChevronRight size={15} /></button>
+          <button className="round-button round-button--outline all-categories" onClick={scrollToCatalog}>Ver todas las categorías <ChevronRight size={15} /></button>
         </section>
 
         <section className="faith-banner shell">

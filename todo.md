@@ -31,3 +31,5 @@
 - [x] Renovar los botones navideños con una paleta más clara y consistente.
 - [x] Añadir ayudas visuales para elegir varios modelos y gestionar cantidades.
 - [x] Validar la experiencia con varios modelos desde escritorio y móvil.
+- [x] Conectar el botón móvil “Ver todas las categorías” al catálogo completo.
+- [x] Comprobar que la navegación funciona desde un teléfono.
