@@ -18,3 +18,6 @@
 - [x] Realizar una revisión visual completa de cada categoría en escritorio y móvil.
 - [x] Reforzar la apariencia y los estados interactivos de los accesos de categoría.
 - [x] Comprobar la legibilidad y el énfasis de categorías en escritorio y móvil.
+- [x] Extraer y preparar los cuatro íconos de pago de la referencia visual.
+- [x] Reemplazar los íconos actuales de Visa, Mastercard, Yape y Plin en la franja de pago.
+- [x] Comprobar la escala y distribución de los nuevos íconos en escritorio y móvil.
