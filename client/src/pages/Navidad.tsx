@@ -25,9 +25,10 @@ const models = Array.from({ length: 9 }, (_, index) => ({
 }));
 
 export default function Navidad() {
-  const { items, quantity: cartQuantity, total, updateCart } = useSegedaCart();
+  const { items, quantity: cartQuantity, updateCart } = useSegedaCart();
   const amounts = useMemo(() => Object.fromEntries(items.filter((item) => item.category === "navidad").map((item) => [Number(item.id.replace("navidad-", "")), item.quantity])), [items]);
   const quantity = useMemo(() => Object.values(amounts).reduce<number>((sum, value) => sum + value, 0), [amounts]);
+  const navidadTotal = useMemo(() => items.filter((item) => item.category === "navidad").reduce((sum, item) => sum + item.quantity * item.unitPrice, 0), [items]);
   const unitPrice = quantity >= 2 ? 69 : 79;
   const selected = models.filter((model) => amounts[model.id]).map((model) => `${model.title} × ${amounts[model.id]}`).join(", ");
 
@@ -46,7 +47,7 @@ export default function Navidad() {
   const scrollToModels = () => document.getElementById("navidad-modelos")?.scrollIntoView({ behavior: "smooth" });
   const sendOrder = () => {
     if (!quantity) { scrollToModels(); return; }
-    const message = `Hola Segeda Home, quiero reservar ${quantity} letrero${quantity > 1 ? "s" : ""} de Preventa Navideña. Modelos: ${selected}. Total de preventa: S/${total}.`;
+    const message = `Hola Segeda Home, quiero reservar ${quantity} letrero${quantity > 1 ? "s" : ""} de Preventa Navideña. Modelos: ${selected}. Total de preventa: S/${navidadTotal}.`;
     window.open(`${WHATSAPP}${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
 
@@ -70,7 +71,7 @@ export default function Navidad() {
         </section>
 
         <section id="navidad-modelos" className="navidad-models"><p className="navidad-kicker">Compra fácil y rápida</p><h2>Elige tus modelos favoritos</h2><p>Usa + para seleccionar. Puedes escoger modelos diferentes o pedir dos iguales.</p><div className="navidad-grid">{models.map((model) => { const selectedAmount = amounts[model.id] ?? 0; return <article className="navidad-model" key={model.id}><img src={model.image} alt={`Letrero navideño ${model.title}`} /><div className="navidad-model-copy"><p>PREVENTA NAVIDEÑA</p><h3>{model.title}</h3><span>Personalizado con el apellido de tu familia</span><div className="quantity-control"><button onClick={() => changeAmount(model.id, -1)} disabled={!selectedAmount} aria-label={`Quitar ${model.title}`}><Minus size={15} /></button><div><b>{selectedAmount}</b><small>{selectedAmount === 1 ? "ELEGIDO" : "ELEGIDOS"}</small></div><button onClick={() => changeAmount(model.id, 1)} aria-label={`Seleccionar ${model.title}`}><Plus size={16} /></button></div><button className="select-model" onClick={() => changeAmount(model.id, 1)}>{selectedAmount ? "Agregar otro" : "Seleccionar modelo"}</button></div></article>; })}</div>
-          <section className="navidad-summary"><div><p>{quantity} PRODUCTO{quantity !== 1 ? "S" : ""} NAVIDEÑO{quantity !== 1 ? "S" : ""} EN EL CARRITO</p><h3>{quantity ? "Modelos seleccionados" : "Elige tu modelo favorito"}</h3></div><div className="summary-total"><p>TOTAL PREVENTA</p><strong>S/{total}</strong></div><button onClick={sendOrder}><ShoppingCart size={16} /> {quantity ? "Pedir por WhatsApp" : "Elegir modelos"}</button></section>
+          <section className="navidad-summary"><div><p>{quantity} PRODUCTO{quantity !== 1 ? "S" : ""} NAVIDEÑO{quantity !== 1 ? "S" : ""} EN EL CARRITO</p><h3>{quantity ? "Modelos seleccionados" : "Elige tu modelo favorito"}</h3></div><div className="summary-total"><p>TOTAL PREVENTA</p><strong>S/{navidadTotal}</strong></div><button onClick={sendOrder}><ShoppingCart size={16} /> {quantity ? "Pedir por WhatsApp" : "Elegir modelos"}</button></section>
         </section>
       </main>
 
@@ -80,6 +81,8 @@ export default function Navidad() {
         .navidad-model>img{object-fit:contain!important;background:#f8f1e4!important}
         /* Navegación de categorías destacada para la preventa. */
         .navidad-pill{min-height:39px;border-color:#e4cbbb!important;background:linear-gradient(145deg,#fffdf9,#faeee5)!important;box-shadow:0 5px 10px rgba(106,68,48,.08)!important;font-weight:700;transition:transform .16s ease,box-shadow .16s ease}.navidad-pill i{display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#f2d8c7;color:#994e45!important}.navidad-pill:hover{transform:translateY(-3px);border-color:#bb6658!important;box-shadow:0 9px 15px rgba(128,66,54,.15)!important}.navidad-pill.selected{border-color:#9d433c!important;background:linear-gradient(135deg,#b85247,#823b39)!important;box-shadow:0 7px 14px rgba(139,52,48,.25)!important;color:#fff}.navidad-pill.selected i{background:rgba(255,255,255,.2);color:#fff!important}
+        /* Resumen posicionado al final: acompaña la selección sin ocultar ningún modelo. */
+        .navidad-summary{position:relative!important;bottom:auto!important;z-index:1!important;grid-template-columns:minmax(0,1fr) 155px auto!important;max-width:870px!important;margin:34px auto 0!important;padding:18px 22px!important;border:1px solid #dcc9ad!important;border-top:4px solid #b72637!important;border-radius:17px!important;background:#fffdf7!important;box-shadow:0 11px 24px rgba(96,65,44,.10)!important;color:#5b4136!important}.navidad-summary::before{content:'✦';position:absolute;right:14px;top:-16px;display:grid;place-items:center;width:25px;height:25px;border:1px solid #e4c99d;border-radius:50%;background:#fff9eb;color:#b72637;font-size:10px}.navidad-summary p{color:#a07358!important;font-size:8px!important}.navidad-summary h3{color:#5b4136!important;font-size:21px!important}.summary-total{border-color:#eadbca!important}.summary-total strong{color:#b72637!important;font-size:30px!important}.navidad-summary>button{border:0!important;border-radius:999px!important;background:linear-gradient(100deg,#b72637,#8d2230)!important;box-shadow:0 7px 13px rgba(166,39,54,.18)!important;color:#fff!important;padding:12px 17px!important}.navidad-summary>button:hover{transform:translateY(-1px)}@media(max-width:700px){.navidad-summary{grid-template-columns:1fr auto!important;gap:9px!important;margin-top:24px!important;padding:15px!important}.navidad-summary h3{font-size:17px!important}.summary-total strong{font-size:25px!important}.navidad-summary>button{grid-column:1/-1!important;width:100%!important;justify-content:center!important}.navidad-summary::before{right:10px}}
       `}</style>
     </div>
   );

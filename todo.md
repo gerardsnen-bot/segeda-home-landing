@@ -21,3 +21,5 @@
 - [x] Extraer y preparar los cuatro íconos de pago de la referencia visual.
 - [x] Reemplazar los íconos actuales de Visa, Mastercard, Yape y Plin en la franja de pago.
 - [x] Comprobar la escala y distribución de los nuevos íconos en escritorio y móvil.
+- [x] Rediseñar el resumen navideño para reducir su peso visual y evitar que cubra las fotos.
+- [x] Validar el resumen navideño en escritorio y móvil con artículos seleccionados.
