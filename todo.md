@@ -36,3 +36,16 @@
 - [x] Crear el panel de cuadrícula con todas las categorías y sus imágenes de referencia.
 - [x] Conectar cada tarjeta del panel con su categoría real.
 - [x] Validar la apertura del panel y sus enlaces en escritorio y móvil.
+- [ ] Completar la auditoría del requerimiento full stack y documentar el alcance ejecutable.
+- [ ] Habilitar base de datos, autenticación y almacenamiento administrables.
+- [ ] Crear y verificar un proyecto Supabase aislado para Segeda Home.
+- [ ] Completar la auditoría de la guía visual MDFantasy y sus requisitos de preservación funcional.
+- [ ] Aplicar la paleta negro, dorado, champagne y marfil sin cambiar datos ni flujos existentes.
+- [ ] Rediseñar la navegación de categorías en dos filas compactas y responsive.
+- [ ] Actualizar header, hero, tarjetas, botones, etiquetas y secciones al sistema visual MDFantasy.
+- [ ] Validar contraste, interacción, responsive y consistencia visual en todas las rutas públicas.
+- [ ] Crear el modelo de datos, permisos, migraciones y carga inicial de catálogo.
+- [ ] Conectar el catálogo público a contenido administrable sin perder su diseño.
+- [ ] Crear panel administrativo, acceso protegido y módulos de gestión.
+- [ ] Implementar editor visual, contenido comercial, medios, SEO e historial.
+- [ ] Verificar permisos, flujos críticos y experiencia responsive antes de entregar.
