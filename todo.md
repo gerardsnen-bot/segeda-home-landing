@@ -115,7 +115,7 @@
 - [ ] Validar resultados, filtros, panel y responsive; documentar los totales, ambiguos y errores encontrados.
 - [x] Auditar los padres, alturas, overflow, transforms y z-index del encabezado, navegación de categorías y carrito.
 - [x] Estabilizar el encabezado y la barra de categorías bajo alturas reales, con jerarquía correcta frente al overlay y drawer del carrito.
-- [ ] Probar scroll lento/rápido, carrito abierto, navegación entre categorías y anchos de 1920 a 390 px sin saltos ni solapamientos.
+- [x] Probar scroll lento/rápido, carrito abierto, navegación entre categorías y anchos de 1920 a 390 px sin saltos ni solapamientos.
 - [x] Aplicar ahora el backfill exclusivamente a las 431 clasificaciones visuales verificadas y marcar las 252 restantes como pendientes de revisión.
 - [x] Añadir y persistir el estado de revisión de clasificación para identificar explícitamente los productos pendientes.
 - [x] Conservar la clasificación automática por separado para que el selector Automático revierta un override manual sin perder la evidencia visual.
@@ -125,10 +125,10 @@
 - [x] Reemplazar la referencia de Instagram por TikTok: MDFantasy en el bloque de contacto visible de la landing.
 - [x] Confirmar en producción la propagación del cambio de Instagram a TikTok MDFantasy tras el checkpoint publicado.
 - [x] Ejecutar y documentar pruebas explícitas de scroll lento y scroll rápido con la barra fija activa, verificando ausencia de saltos de layout.
-- [ ] Validar en navegador real la navegación desde la barra fija hacia varias categorías y la ausencia de solapamientos de carrito/overlay en escritorio y móvil.
+- [x] Validar en navegador real la navegación desde la barra fija hacia varias categorías y la ausencia de solapamientos de carrito/overlay en escritorio y móvil.
 - [x] Sustituir el comportamiento sticky inconsistente detectado durante scroll por una cabecera fija con espaciador responsive y validarla de nuevo.
-- [ ] Revalidar tras la cabecera fija los breakpoints 1920, 1440, 1024, 768 y 390 px, confirmando ausencia de saltos y solapamientos.
-- [ ] Ejecutar y documentar pruebas reales en móvil de barra fija, navegación a categorías y carrito/overlay posteriores a la corrección final.
-- [ ] Revisar visualmente y documentar de forma explícita cada captura post-fix de 1920, 1440, 1024, 768 y 390 px.
-- [ ] Capturar y revisar visualmente el overlay móvil post-fix sobre la cabecera fija, sin controles solapados.
+- [x] Revalidar tras la cabecera fija los breakpoints 1920, 1440, 1024, 768 y 390 px, confirmando ausencia de saltos y solapamientos.
+- [x] Ejecutar y documentar pruebas reales en móvil de barra fija, navegación a categorías y carrito/overlay posteriores a la corrección final.
+- [x] Revisar visualmente y documentar de forma explícita cada captura post-fix de 1920, 1440, 1024, 768 y 390 px.
+- [x] Capturar y revisar visualmente el overlay móvil post-fix sobre la cabecera fija, sin controles solapados.
 - [x] Generar capturas locales post-fix de los cinco breakpoints para revisión visual verificable y conservarlas con la evidencia de navegación.
