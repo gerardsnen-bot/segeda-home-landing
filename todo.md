@@ -105,7 +105,7 @@
 - [x] Hacer robusta la resolución de archivos estáticos en producción y verificar que una solicitud nueva a /catalogo devuelve 200.
 - [x] Verificar la presentación responsive en el dominio publicado para Home, una categoría estándar y Preventa Navideña, y registrar la evidencia.
 - [x] Entregar al usuario el dictamen final PASS/GO con las pruebas y riesgos no bloqueantes de la auditoría.
-- [ ] Auditar los campos actuales, la disponibilidad de imagen principal y la lógica de filtros Niño/Niña para definir el backfill visual.
+- [x] Auditar los campos actuales, la disponibilidad de imagen principal y la lógica de filtros Niño/Niña para definir el backfill visual.
 - [x] Añadir a Supabase la clasificación persistente `gender_target`, `gender_confidence` y `gender_source` con soporte de override manual.
 - [ ] Analizar visualmente la imagen principal de todos los productos y clasificar cada uno como niña, niño o unisex con nivel de confianza.
 - [ ] Guardar el backfill sin sobrescribir clasificaciones manuales y revisar los casos ambiguos como unisex.

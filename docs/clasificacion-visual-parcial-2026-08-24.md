@@ -24,3 +24,11 @@ El gestor administrativo incorpora el selector **Automático, Niña, Niño y Uni
 ## Continuidad
 
 Se programó una ejecución única para retomar en 12 horas exclusivamente los 252 productos `pending_review`. El proceso deberá comprobar disponibilidad antes de llamar al servicio de visión, conservar los resultados verificables, respetar cualquier `gender_source = manual` y actualizar los conteos finales.
+
+## Validación de persistencia y experiencia
+
+Una consulta directa a Supabase posterior al backfill confirmó cuatro grupos exactos: **67** `boy / classified / auto`, **170** `girl / classified / auto`, **194** `unisex / classified / auto` y **252** `unisex / pending_review / auto`. No se detectaron overrides manuales existentes, por lo que el backfill no reemplazó decisiones del administrador. Los 252 pendientes permanecen como unisex provisional únicamente para no ocultar productos y no se consideran clasificación visual verificada.
+
+La ruta Nubes temáticas volvió a cargar después de sustituir un join público inestable por un filtro explícito de `category_id`; los controles públicos Niña y Niño mostraron sus resultados parciales sin esperar los pendientes. El panel administrativo mostró el selector Automático, Niña, Niño y Unisex. La validación técnica aprobó `lint`, **13 pruebas**, comprobación de tipos y build. Las pruebas responsive y de navegación fija se documentan en [`validacion-navegacion-fija.md`](./validacion-navegacion-fija.md).
+
+La comprobación en el dominio publicado confirmó **47 resultados** con el filtro **Niña** y **13 resultados** con el filtro **Niño** dentro de Nubes temáticas. Ambas vistas mostraron tarjetas de producto reales, precios y medidas; por tanto, los filtros ya consumen datos persistentes del backfill parcial.
