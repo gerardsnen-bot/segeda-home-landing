@@ -10,6 +10,8 @@ export type CatalogProduct = {
   sizes: CatalogSize[];
   tags: string;
   audience: string;
+  genderTarget: "girl" | "boy" | "unisex";
+  genderReviewStatus: "classified" | "pending_review";
   themeGroup: string;
   estimatedDays: string;
   featured: boolean;
@@ -47,6 +49,8 @@ type ProductRow = {
   description: string | null;
   short_description: string | null;
   audience: string | null;
+  gender_target: "girl" | "boy" | "unisex" | null;
+  gender_review_status: "classified" | "pending_review" | null;
   theme_group: string | null;
   estimated_days: string | null;
   featured: boolean;
@@ -65,6 +69,13 @@ type CategoryRow = {
 
 const LEGACY_CATALOG_URL = "/manus-storage/segeda-real-products_742b0de3.json";
 
+export function genderTargetToAudience(target: "girl" | "boy" | "unisex" | null, fallback: string | null): string {
+  if (target === "girl") return "niña";
+  if (target === "boy") return "niño";
+  if (target === "unisex") return "unisex";
+  return fallback ?? "unisex";
+}
+
 function mapProduct(row: ProductRow): CatalogProduct {
   const variants = [...(row.product_variants ?? [])].sort((a, b) => a.sort_order - b.sort_order);
   const images = [...(row.product_images ?? [])].sort((a, b) => a.sort_order - b.sort_order).map((image) => image.image_url);
@@ -77,7 +88,9 @@ function mapProduct(row: ProductRow): CatalogProduct {
     compareAtPrice: Number(firstVariant?.compare_at_price ?? 0),
     sizes: variants.map((variant) => ({ label: variant.label, price: Number(variant.price) })),
     tags: "",
-    audience: row.audience ?? "",
+    audience: genderTargetToAudience(row.gender_target, row.audience),
+    genderTarget: row.gender_target ?? "unisex",
+    genderReviewStatus: row.gender_review_status ?? "pending_review",
     themeGroup: row.theme_group ?? "",
     estimatedDays: row.estimated_days ?? "",
     featured: row.featured,
@@ -96,11 +109,20 @@ async function readLegacyCategory(slug: string): Promise<CatalogProduct[]> {
 export async function getCatalogCategory(slug: string): Promise<CatalogProduct[]> {
   if (!supabase) return readLegacyCategory(slug);
 
+  const { data: category, error: categoryError } = await supabase
+    .from("categories")
+    .select("id")
+    .eq("slug", slug)
+    .eq("active", true)
+    .maybeSingle();
+  if (categoryError || !category?.id) return [];
+
   const { data, error } = await supabase
     .from("products")
-    .select("id,name,description,short_description,audience,theme_group,estimated_days,featured,product_variants(label,price,compare_at_price,sort_order),product_images(image_url,sort_order),categories!inner(slug)")
+    .select("id,name,description,short_description,audience,gender_target,gender_review_status,theme_group,estimated_days,featured,product_variants(label,price,compare_at_price,sort_order),product_images(image_url,sort_order)")
     .eq("status", "active")
-    .eq("categories.slug", slug)
+    .eq("category_id", category.id)
+    .is("deleted_at", null)
     .order("sort_order", { ascending: true });
 
   if (error || !data?.length) return [];

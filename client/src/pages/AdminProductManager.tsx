@@ -11,7 +11,22 @@ import { toast } from "sonner";
 type Role = "user" | "editor" | "admin" | "super_admin";
 type Category = { id: string; name: string; slug: string; active: boolean; sort_order: number };
 type ProductImage = { id: string; image_url: string; is_primary: boolean; sort_order: number };
-type Product = { id: string; category_id: string | null; name: string; sku: string; status: "draft" | "active" | "hidden" | "archived"; product_images: ProductImage[] | null };
+type GenderTarget = "girl" | "boy" | "unisex";
+type GenderChoice = "auto" | GenderTarget;
+type Product = {
+  id: string;
+  category_id: string | null;
+  name: string;
+  sku: string;
+  status: "draft" | "active" | "hidden" | "archived";
+  gender_target: GenderTarget;
+  gender_source: "auto" | "manual";
+  gender_review_status: "classified" | "pending_review";
+  gender_auto_target: GenderTarget | null;
+  gender_auto_confidence: number | null;
+  gender_auto_analysis: Record<string, unknown> | null;
+  product_images: ProductImage[] | null;
+};
 
 const isStaff = (role: Role | null) => role === "editor" || role === "admin" || role === "super_admin";
 
@@ -32,7 +47,7 @@ export default function AdminProductManager() {
     const [{ data: profile }, { data: categoryRows }, { data: productRows }] = await Promise.all([
       supabase.from("profiles").select("role").eq("id", authData.user.id).maybeSingle(),
       supabase.from("categories").select("id,name,slug,active,sort_order").is("deleted_at", null).order("sort_order"),
-      supabase.from("products").select("id,category_id,name,sku,status,product_images(id,image_url,is_primary,sort_order)").is("deleted_at", null).order("created_at", { ascending: false }).limit(1000),
+      supabase.from("products").select("id,category_id,name,sku,status,gender_target,gender_source,gender_review_status,gender_auto_target,gender_auto_confidence,gender_auto_analysis,product_images(id,image_url,is_primary,sort_order)").is("deleted_at", null).order("created_at", { ascending: false }).limit(1000),
     ]);
     setRole((profile?.role as Role | undefined) ?? "user");
     const nextCategories = (categoryRows as Category[] | null) ?? [];
@@ -109,11 +124,36 @@ export default function AdminProductManager() {
     await load();
   };
 
+  const updateGender = async (product: Product, choice: GenderChoice) => {
+    if (!supabase) return;
+    if (choice === "auto" && !product.gender_auto_target) {
+      toast.message("Este producto sigue pendiente de revisión visual.");
+      return;
+    }
+    const payload = choice === "auto"
+      ? {
+          gender_target: product.gender_auto_target,
+          gender_confidence: product.gender_auto_confidence,
+          gender_analysis: product.gender_auto_analysis ?? {},
+          gender_source: "auto" as const,
+          gender_review_status: "classified" as const,
+        }
+      : {
+          gender_target: choice,
+          gender_source: "manual" as const,
+          gender_review_status: "classified" as const,
+        };
+    const { error } = await supabase.from("products").update(payload).eq("id", product.id);
+    if (error) return toast.error(error.message);
+    toast.success(choice === "auto" ? "Clasificación automática restaurada." : "Clasificación manual guardada.");
+    await load();
+  };
+
   if (checking) return <DashboardLayout><div className="flex min-h-[60vh] items-center justify-center"><Loader2 className="animate-spin text-[#B99137]" /></div></DashboardLayout>;
   if (!isStaff(role)) return <DashboardLayout><section className="mx-auto max-w-2xl rounded-[28px] border border-[#B99137]/30 bg-white p-8"><CircleAlert className="text-[#B99137]" size={28} /><h1 className="mt-4 font-serif text-4xl text-[#171717]">Acceso administrativo requerido</h1><p className="mt-3 text-sm leading-6 text-[#6e665d]">Inicia sesión con una cuenta administradora para organizar y editar el catálogo.</p></section></DashboardLayout>;
 
   return <DashboardLayout><main className="mx-auto max-w-7xl space-y-7"><header className="rounded-[28px] bg-[#171717] px-7 py-8 text-white"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#F4D98A]">MDFantasy Studio</p><h1 className="mt-2 font-serif text-4xl">Productos por categoría</h1><p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">Abre una categoría para revisar sus productos. En cada tarjeta puedes subir, reemplazar o retirar la imagen principal sin perder el orden del catálogo.</p></header>
     <form onSubmit={createProduct} className="grid gap-3 rounded-2xl border border-[#B99137]/25 bg-white p-5 md:grid-cols-[1.4fr_.7fr_1fr_auto] md:items-end"><div className="space-y-2"><Label>Nuevo producto</Label><Input value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} placeholder="Nombre del producto" required /></div><div className="space-y-2"><Label>Precio inicial</Label><Input type="number" min="0" step="0.01" value={draft.price} onChange={(event) => setDraft({ ...draft, price: event.target.value })} placeholder="S/" required /></div><div className="space-y-2"><Label>Categoría</Label><select value={draft.categoryId} onChange={(event) => setDraft({ ...draft, categoryId: event.target.value })} className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm" required><option value="">Selecciona una categoría</option>{categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></div><Button className="bg-[#171717] hover:bg-[#2b2b2b]" disabled={busy}><Plus className="mr-2" size={15} />Crear</Button></form>
-    <section className="space-y-3">{grouped.map((category) => <details key={category.id} open={expandedId === category.id} onToggle={(event) => setExpandedId((event.currentTarget as HTMLDetailsElement).open ? category.id : null)} className="overflow-hidden rounded-2xl border border-[#B99137]/25 bg-white"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 marker:content-none"><div><p className="text-xs font-bold uppercase tracking-[.14em] text-[#8B6A24]">/{category.slug}</p><h2 className="mt-1 font-serif text-2xl text-[#171717]">{category.name}</h2></div><div className="flex items-center gap-3"><span className="rounded-full bg-[#F5EFE3] px-3 py-1 text-xs font-bold text-[#8B6A24]">{category.products.length} productos</span><ChevronDown className="text-[#B99137] transition-transform [[open]_&]:rotate-180" size={19} /></div></summary><div className="border-t border-[#F5EFE3] p-4"><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{category.products.map((product) => { const image = (product.product_images ?? []).find((item) => item.is_primary) ?? product.product_images?.[0]; return <article key={product.id} className="overflow-hidden rounded-xl border border-[#F5EFE3] bg-[#FFFEFB]"><div className="relative aspect-[4/3] bg-[#F5EFE3]">{image ? <img src={image.image_url} alt={product.name} className="h-full w-full object-contain" /> : <div className="flex h-full flex-col items-center justify-center gap-2 text-[#8B6A24]"><ImagePlus size={24} /><span className="text-xs font-bold">Sin imagen</span></div>}<label className="absolute bottom-3 left-3 inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#171717] px-3 py-2 text-xs font-bold text-white shadow-lg"><UploadCloud size={14} />{uploadingId === product.id ? "Subiendo…" : image ? "Reemplazar" : "Subir imagen"}<input className="hidden" type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" disabled={uploadingId === product.id} onChange={(event) => { const file = event.target.files?.[0]; if (file) replaceImage(product, file); }} /></label>{image && <Button type="button" size="sm" variant="secondary" className="absolute right-3 top-3 z-10 bg-white/95 text-[#9e3f3a] shadow-md hover:bg-white" onClick={() => removeImage(product)}><ImagePlus className="mr-1" size={13} />Quitar</Button>}</div><div className="p-4"><p className="text-[10px] font-bold uppercase tracking-[.12em] text-[#8B6A24]">{product.sku}</p><h3 className="mt-1 min-h-11 font-serif text-xl text-[#171717]">{product.name}</h3><div className="mt-4 flex flex-wrap gap-2"><Button variant="outline" size="sm" onClick={() => updateStatus(product)}>{product.status === "active" ? "Pasar a borrador" : "Publicar"}</Button><Button variant="ghost" size="sm" className="text-red-700 hover:bg-red-50 hover:text-red-700" onClick={() => archiveProduct(product)}><Trash2 size={14} /></Button></div></div></article>; })}</div>{!category.products.length && <div className="rounded-xl border border-dashed border-[#B99137]/35 bg-[#FAF8F3] p-8 text-center text-sm text-[#746b62]">Esta categoría aún no tiene productos.</div>}</div></details>)}</section>
+    <section className="space-y-3">{grouped.map((category) => <details key={category.id} open={expandedId === category.id} onToggle={(event) => setExpandedId((event.currentTarget as HTMLDetailsElement).open ? category.id : null)} className="overflow-hidden rounded-2xl border border-[#B99137]/25 bg-white"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 marker:content-none"><div><p className="text-xs font-bold uppercase tracking-[.14em] text-[#8B6A24]">/{category.slug}</p><h2 className="mt-1 font-serif text-2xl text-[#171717]">{category.name}</h2></div><div className="flex items-center gap-3"><span className="rounded-full bg-[#F5EFE3] px-3 py-1 text-xs font-bold text-[#8B6A24]">{category.products.length} productos</span><ChevronDown className="text-[#B99137] transition-transform [[open]_&]:rotate-180" size={19} /></div></summary><div className="border-t border-[#F5EFE3] p-4"><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{category.products.map((product) => { const image = (product.product_images ?? []).find((item) => item.is_primary) ?? product.product_images?.[0]; const currentChoice: GenderChoice = product.gender_source === "manual" ? product.gender_target : "auto"; const automaticLabel = product.gender_auto_target ? `Automático · ${product.gender_auto_target === "girl" ? "Niña" : product.gender_auto_target === "boy" ? "Niño" : "Unisex"}` : "Automático · Pendiente"; return <article key={product.id} className="overflow-hidden rounded-xl border border-[#F5EFE3] bg-[#FFFEFB]"><div className="relative aspect-[4/3] bg-[#F5EFE3]">{image ? <img src={image.image_url} alt={product.name} className="h-full w-full object-contain" /> : <div className="flex h-full flex-col items-center justify-center gap-2 text-[#8B6A24]"><ImagePlus size={24} /><span className="text-xs font-bold">Sin imagen</span></div>}<label className="absolute bottom-3 left-3 inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#171717] px-3 py-2 text-xs font-bold text-white shadow-lg"><UploadCloud size={14} />{uploadingId === product.id ? "Subiendo…" : image ? "Reemplazar" : "Subir imagen"}<input className="hidden" type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" disabled={uploadingId === product.id} onChange={(event) => { const file = event.target.files?.[0]; if (file) replaceImage(product, file); }} /></label>{image && <Button type="button" size="sm" variant="secondary" className="absolute right-3 top-3 z-10 bg-white/95 text-[#9e3f3a] shadow-md hover:bg-white" onClick={() => removeImage(product)}><ImagePlus className="mr-1" size={13} />Quitar</Button>}</div><div className="p-4"><p className="text-[10px] font-bold uppercase tracking-[.12em] text-[#8B6A24]">{product.sku}</p><h3 className="mt-1 min-h-11 font-serif text-xl text-[#171717]">{product.name}</h3><div className="mt-3 rounded-lg border border-[#B99137]/20 bg-[#FAF8F3] p-2"><Label htmlFor={`gender-${product.id}`} className="text-[10px] font-bold uppercase tracking-[.12em] text-[#8B6A24]">Público</Label><select id={`gender-${product.id}`} value={currentChoice} onChange={(event) => updateGender(product, event.target.value as GenderChoice)} className="mt-1 h-9 w-full rounded-md border border-[#B99137]/30 bg-white px-2 text-xs text-[#171717]"><option value="auto">{automaticLabel}</option><option value="girl">Niña</option><option value="boy">Niño</option><option value="unisex">Unisex</option></select><p className="mt-1 text-[10px] text-[#746b62]">{product.gender_review_status === "pending_review" ? "Pendiente de análisis visual" : product.gender_source === "manual" ? "Override manual" : "Clasificación visual"}</p></div><div className="mt-4 flex flex-wrap gap-2"><Button variant="outline" size="sm" onClick={() => updateStatus(product)}>{product.status === "active" ? "Pasar a borrador" : "Publicar"}</Button><Button variant="ghost" size="sm" className="text-red-700 hover:bg-red-50 hover:text-red-700" onClick={() => archiveProduct(product)}><Trash2 size={14} /></Button></div></div></article>; })}</div>{!category.products.length && <div className="rounded-xl border border-dashed border-[#B99137]/35 bg-[#FAF8F3] p-8 text-center text-sm text-[#746b62]">Esta categoría aún no tiene productos.</div>}</div></details>)}</section>
   </main></DashboardLayout>;
 }
