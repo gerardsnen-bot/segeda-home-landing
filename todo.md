@@ -43,24 +43,30 @@
 - [x] Aplicar la paleta negro, dorado, champagne y marfil sin cambiar datos ni flujos existentes.
 - [x] Rediseñar la navegación de categorías en dos filas compactas y responsive.
 - [x] Actualizar header, hero, tarjetas, botones, etiquetas y secciones al sistema visual MDFantasy.
-- [ ] Validar contraste, interacción, responsive y consistencia visual en todas las rutas públicas.
+- [x] Validar contraste, interacción, responsive y consistencia visual en todas las rutas públicas.
 - [x] Crear el modelo de datos, permisos, migraciones y carga inicial de catálogo.
 - [x] Conectar el catálogo público a contenido administrable sin perder su diseño.
 - [x] Crear panel administrativo, acceso protegido y módulos de gestión.
-- [ ] Implementar editor visual, contenido comercial, medios, SEO e historial.
-- [ ] Verificar permisos, flujos críticos y experiencia responsive antes de entregar.
+- [x] Implementar editor visual, contenido comercial, medios, SEO e historial.
+- [ ] Verificar permisos y flujos críticos del panel con una sesión administrativa activa en este navegador.
 - [x] Migrar Preventa Navideña para consumir sus modelos y precios desde Supabase.
 - [x] Aplicar MDFantasy a las vistas internas de categoría manteniendo filtros, precios y medidas.
-- [ ] Inventariar todas las categorías, productos, datos y fotografías visibles sin modificar la web.
-- [ ] Preparar los activos y la información verificada para el catálogo PDF MDFantasy.
-- [ ] Generar el PDF A4 completo con portada, índice, categorías, productos y cierre de contacto.
-- [ ] Validar el PDF y entregar el archivo descargable directamente en el chat.
-- [ ] Excluir del PDF únicamente los productos sin fotografía accesible, según la autorización del usuario.
-- [ ] Reorganizar el catálogo PDF en un formato visual de diez imágenes por página.
-- [ ] Reducir el PDF a índice, nombres de categoría, imágenes y numeración de página.
-- [ ] Verificar el peso, la claridad y la paginación de la versión visual reducida.
+- [x] Inventariar todas las categorías, productos, datos y fotografías visibles sin modificar la web.
+- [x] Preparar los activos y la información verificada para el catálogo PDF MDFantasy.
+- [x] Generar el PDF A4 completo con portada, índice, categorías, productos y cierre de contacto.
+- [x] Validar el PDF y entregar el archivo descargable directamente en el chat.
+- [x] Excluir del PDF únicamente los productos sin fotografía accesible, según la autorización del usuario.
+- [x] Reorganizar el catálogo PDF en un formato visual de diez imágenes por página.
+- [x] Reducir el PDF a índice, nombres de categoría, imágenes y numeración de página.
+- [x] Verificar el peso, la claridad y la paginación de la versión visual reducida.
 - [x] Auditar las vistas públicas y los endpoints administrativos pendientes de integración.
 - [x] Conectar Home y Preventa Navideña a los datos administrables de Supabase.
 - [x] Crear rutas, autorización y panel de administración para catálogo y contenido.
 - [ ] Validar creación, edición y visibilidad de contenido desde el panel con la primera cuenta administradora.
+- [x] Verificar la cuenta administradora confirmada y su rol en Supabase.
+- [x] Completar recursos, permisos y almacenamiento administrables de Supabase.
+- [ ] Validar con la cuenta administradora real la subida de medios, los cambios de contenido, SEO e historial de auditoría.
+- [ ] Confirmar que los cambios administrativos se reflejan de inmediato en la landing pública.
+- [x] Verificar de forma autónoma los recursos, el rol, la biblioteca inicial y el historial técnico de Supabase.
+- [x] Corregir detalles finales de flujo, roles o interfaz detectados durante la revisión autónoma.
 - [x] Resolver el error de runtime de dotenv y revalidar el arranque full stack, la suite de pruebas y la compilación.

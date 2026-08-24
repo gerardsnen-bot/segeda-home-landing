@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useLocation } from "wouter";
 import { useSegedaCart } from "@/lib/segedaCart";
-import { getCatalogOverview, getPublicSections, ManagedCategory, ManagedSection } from "@/lib/catalogData";
+import { getCatalogOverview, getPublicSeo, getPublicSections, ManagedCategory, ManagedSection } from "@/lib/catalogData";
 
 const WHATSAPP = "https://wa.me/51978642447?text=Hola%20MDFantasy%2C%20quiero%20crear%20un%20producto%20personalizado";
 
@@ -89,6 +89,23 @@ export default function Home() {
     let active = true;
     getPublicSections().then((sections) => { if (active && sections.length) setManagedSections(sections); }).catch(() => undefined);
     return () => { active = false; };
+  }, []);
+  useEffect(() => {
+    const setMeta = (selector: string, value: string) => {
+      if (!value) return;
+      let element = document.head.querySelector(selector) as HTMLMetaElement | null;
+      if (!element) { element = document.createElement("meta"); const attribute = selector.includes("og:") ? "property" : "name"; element.setAttribute(attribute, selector.match(/['\"]([^'\"]+)/)?.[1] ?? "description"); document.head.appendChild(element); }
+      element.content = value;
+    };
+    getPublicSeo().then((seo) => {
+      if (!seo) return;
+      if (seo.title) document.title = seo.title;
+      setMeta('meta[name="description"]', seo.description);
+      setMeta('meta[name="keywords"]', seo.keywords);
+      setMeta('meta[property="og:title"]', seo.title);
+      setMeta('meta[property="og:description"]', seo.description);
+      setMeta('meta[property="og:image"]', seo.image);
+    }).catch(() => undefined);
   }, []);
 
   const catalogueCategories = managedCategories.length

@@ -39,6 +39,8 @@ export type ManagedSection = {
   payload: Record<string, unknown>;
 };
 
+export type PublicSeo = { title: string; description: string; keywords: string; image: string };
+
 type ProductRow = {
   id: string;
   name: string;
@@ -148,4 +150,17 @@ export async function getPublicSections(): Promise<ManagedSection[]> {
     ctaUrl: section.cta_url ?? "",
     payload: (section.payload as Record<string, unknown> | null) ?? {},
   }));
+}
+
+export async function getPublicSeo(): Promise<PublicSeo | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase.from("site_settings").select("seo_defaults").eq("singleton", true).maybeSingle();
+  if (error || !data?.seo_defaults || typeof data.seo_defaults !== "object") return null;
+  const seo = data.seo_defaults as Partial<PublicSeo>;
+  return {
+    title: seo.title ?? "",
+    description: seo.description ?? "",
+    keywords: seo.keywords ?? "",
+    image: seo.image ?? "",
+  };
 }
