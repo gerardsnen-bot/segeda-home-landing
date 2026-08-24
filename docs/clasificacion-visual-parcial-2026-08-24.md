@@ -23,7 +23,7 @@ El gestor administrativo incorpora el selector **Automático, Niña, Niño y Uni
 
 ## Continuidad
 
-Se programó una ejecución única para retomar en 12 horas exclusivamente los 252 productos `pending_review`. El proceso deberá comprobar disponibilidad antes de llamar al servicio de visión, conservar los resultados verificables, respetar cualquier `gender_source = manual` y actualizar los conteos finales.
+Se programó una ejecución única para retomar exclusivamente los 252 productos `pending_review` el **25 de agosto de 2026 a las 02:46 (America/Bogota)**, doce horas después de la confirmación del usuario. El proceso deberá comprobar disponibilidad antes de llamar al servicio de visión, conservar los resultados verificables, respetar cualquier `gender_source = manual` y actualizar los conteos finales.
 
 ## Validación de persistencia y experiencia
 
