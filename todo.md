@@ -122,6 +122,7 @@
 - [x] Reanudar dentro de 12 horas el análisis visual de los 252 productos pendientes, sin sobrescribir clasificaciones manuales.
 - [ ] Reanudar de inmediato el análisis visual de los 252 productos pendientes y completar el backfill verificable.
 - [ ] Reintentar el lote pendiente cuando el servicio de visión vuelva a estar disponible, sin sustituir pendientes por inferencias textuales.
+- [x] Alinear la documentación de reanudación con el modo de confirmación activo de la programación visual pendiente.
 - [x] Verificar la disponibilidad del dominio publicado después del timeout HTTP observado y documentar si se trata de una incidencia real o transitoria (el navegador real confirmó carga correcta; el timeout fue transitorio).
 - [x] Reforzar los botones Inicio, Categorías, Cómo comprar y Contacto con mayor tamaño, contraste y distribución equilibrada.
 - [x] Hacer más notorios y accesibles los botones de búsqueda y carrito sin alterar sus flujos existentes.
