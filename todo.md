@@ -102,3 +102,4 @@
 - [x] Analizar y resolver o documentar las alertas de seguridad y deduplicación reportadas por las dependencias de producción.
 - [x] Investigar y corregir la ausencia de imagen en el Hero observada durante el smoke test de producción (la segunda comprobación confirmó su carga completa).
 - [ ] Confirmar que producción sirve el bundle de la versión auditada y re-publicar si persiste una versión anterior en caché.
+- [ ] Hacer robusta la resolución de archivos estáticos en producción y verificar que una solicitud nueva a /catalogo devuelve 200.
