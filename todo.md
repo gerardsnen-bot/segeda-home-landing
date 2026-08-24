@@ -100,3 +100,5 @@
 - [x] Validar visualmente en móvil el nuevo logo oficial de las cabeceras de categoría y Preventa Navideña, sin recortes.
 - [x] Corregir el número de WhatsApp heredado en la migración de contenido navideño para mantener el historial de esquema alineado con el contacto oficial.
 - [x] Analizar y resolver o documentar las alertas de seguridad y deduplicación reportadas por las dependencias de producción.
+- [x] Investigar y corregir la ausencia de imagen en el Hero observada durante el smoke test de producción (la segunda comprobación confirmó su carga completa).
+- [ ] Confirmar que producción sirve el bundle de la versión auditada y re-publicar si persiste una versión anterior en caché.

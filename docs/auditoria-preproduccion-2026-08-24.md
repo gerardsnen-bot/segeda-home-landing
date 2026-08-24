@@ -70,6 +70,10 @@ La comprobación final de dependencias ejecutó `pnpm dedupe --check` sin cambio
 
 Los enlaces renderizados de Home para contacto y creación personalizada apuntan a `https://wa.me/51938634695`; el mensaje codificado es “Hola MDFantasy, quiero crear un producto personalizado”. En categorías estándar, el artículo se agrega al carrito persistente y el usuario continúa por el checkout de Home; no se abre un mensaje desde la ficha. En Preventa Navideña, el flujo construye localmente el mensaje de reserva con modelos, cantidades y total antes de abrir `https://wa.me/51938634695?text=…`. Se inspeccionaron esas construcciones sin abrir ni enviar conversaciones.
 
+## Smoke test de producción
+
+La versión publicada en `https://segcatalogo-enteya63.manus.space/catalogo` respondió correctamente y mostró el nuevo logo, la barra de categorías de dos filas, las rutas públicas y el Hero con su fotografía. En la primera captura el Hero aún estaba cargando. La inspección posterior del HTML publicado identificó la URL efectiva de la imagen en el bucket público de Supabase y la solicitud HTTP devolvió `200`, `image/jpeg` y `115378` bytes; por tanto, no se identificó un defecto persistente de carga.
+
 ## Criterio de salida
 
 La decisión final será **GO** si, después del checkpoint publicado, el dominio de producción responde en `/catalogo`, `/catalogo/nubes`, `/catalogo/navidad` y `/admin`, con el logo oficial visible, datos cargados y sin errores de consola o red que bloqueen la experiencia.
