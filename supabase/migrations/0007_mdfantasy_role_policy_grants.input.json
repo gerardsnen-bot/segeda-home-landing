@@ -1,0 +1,5 @@
+{
+  "project_id": "vrusfoxihkjywmvdveoy",
+  "name": "mdfantasy_role_policy_grants",
+  "query": "grant execute on function public.is_admin() to authenticated;\ngrant execute on function public.is_staff() to authenticated;"
+}

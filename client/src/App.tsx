@@ -10,6 +10,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Category from "./pages/Category";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminHistory from "./pages/AdminHistory";
+import AdminProductManager from "./pages/AdminProductManager";
 import AdminSeo from "./pages/AdminSeo";
 import AdminVisualEditor from "./pages/AdminVisualEditor";
 import Home from "./pages/Home";
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/catalogo/navidad" component={Navidad} />
       <Route path="/catalogo/:category" component={Category} />
       <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin/productos" component={AdminProductManager} />
       <Route path="/admin/historial" component={AdminHistory} />
       <Route path="/admin/editor" component={AdminVisualEditor} />
       <Route path="/admin/seo" component={AdminSeo} />

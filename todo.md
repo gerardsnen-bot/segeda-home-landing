@@ -48,7 +48,7 @@
 - [x] Conectar el catálogo público a contenido administrable sin perder su diseño.
 - [x] Crear panel administrativo, acceso protegido y módulos de gestión.
 - [x] Implementar editor visual, contenido comercial, medios, SEO e historial.
-- [ ] Verificar permisos y flujos críticos del panel con una sesión administrativa activa en este navegador.
+- [x] Verificar permisos y flujos críticos del panel con una sesión administrativa activa en este navegador.
 - [x] Migrar Preventa Navideña para consumir sus modelos y precios desde Supabase.
 - [x] Aplicar MDFantasy a las vistas internas de categoría manteniendo filtros, precios y medidas.
 - [x] Inventariar todas las categorías, productos, datos y fotografías visibles sin modificar la web.
@@ -62,11 +62,15 @@
 - [x] Auditar las vistas públicas y los endpoints administrativos pendientes de integración.
 - [x] Conectar Home y Preventa Navideña a los datos administrables de Supabase.
 - [x] Crear rutas, autorización y panel de administración para catálogo y contenido.
-- [ ] Validar creación, edición y visibilidad de contenido desde el panel con la primera cuenta administradora.
+- [x] Validar creación, edición y visibilidad de contenido desde el panel con la primera cuenta administradora.
 - [x] Verificar la cuenta administradora confirmada y su rol en Supabase.
 - [x] Completar recursos, permisos y almacenamiento administrables de Supabase.
-- [ ] Validar con la cuenta administradora real la subida de medios, los cambios de contenido, SEO e historial de auditoría.
-- [ ] Confirmar que los cambios administrativos se reflejan de inmediato en la landing pública.
+- [x] Validar con la cuenta administradora real la subida de medios, los cambios de contenido, SEO e historial de auditoría.
+- [x] Confirmar que los cambios administrativos se reflejan de inmediato en la landing pública.
+- [x] Agrupar el catálogo administrativo por categorías desplegables con sus productos.
+- [x] Añadir controles de subida, reemplazo y eliminación de imágenes en cada producto.
+- [x] Verificar organización, carga de imagen y persistencia por producto en el panel.
+- [ ] Realizar una comprobación manual adicional del retiro de imagen desde una tarjeta de producto.
 - [x] Verificar de forma autónoma los recursos, el rol, la biblioteca inicial y el historial técnico de Supabase.
 - [x] Corregir detalles finales de flujo, roles o interfaz detectados durante la revisión autónoma.
 - [x] Resolver el error de runtime de dotenv y revalidar el arranque full stack, la suite de pruebas y la compilación.
