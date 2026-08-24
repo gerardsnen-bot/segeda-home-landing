@@ -123,6 +123,7 @@
 - [ ] Reanudar de inmediato el análisis visual de los 252 productos pendientes y completar el backfill verificable.
 - [ ] Reintentar el lote pendiente cuando el servicio de visión vuelva a estar disponible, sin sustituir pendientes por inferencias textuales.
 - [x] Reemplazar la referencia de Instagram por TikTok: MDFantasy en el bloque de contacto visible de la landing.
+- [x] Confirmar en producción la propagación del cambio de Instagram a TikTok MDFantasy tras el checkpoint publicado.
 - [x] Ejecutar y documentar pruebas explícitas de scroll lento y scroll rápido con la barra fija activa, verificando ausencia de saltos de layout.
 - [ ] Validar en navegador real la navegación desde la barra fija hacia varias categorías y la ausencia de solapamientos de carrito/overlay en escritorio y móvil.
 - [x] Sustituir el comportamiento sticky inconsistente detectado durante scroll por una cabecera fija con espaciador responsive y validarla de nuevo.
