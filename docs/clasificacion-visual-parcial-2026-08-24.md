@@ -34,3 +34,5 @@ La ruta Nubes temáticas volvió a cargar después de sustituir un join público
 La comprobación en el dominio publicado confirmó **47 resultados** con el filtro **Niña** y **13 resultados** con el filtro **Niño** dentro de Nubes temáticas. Ambas vistas mostraron tarjetas de producto reales, precios y medidas; por tanto, los filtros ya consumen datos persistentes del backfill parcial.
 
 Un reintento inmediato posterior generó 32 respuestas temporales sin contenido clasificable. Esas filas se conservan únicamente como registro técnico local y **no** se enviaron a Supabase ni se añadieron al backfill. La fuente de verdad publicada permanece en las 431 clasificaciones verificadas y los 252 registros `pending_review`.
+
+El bloque de contacto publicado fue actualizado y verificado con el canal **TikTok: MDFantasy**; la referencia anterior de Instagram ya no se muestra.
