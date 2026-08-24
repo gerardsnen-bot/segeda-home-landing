@@ -4,9 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createProductSku, toCatalogSlug } from "@/lib/adminUtils";
 import { supabase } from "@/lib/supabase";
+import { getImageUploadError } from "@/lib/imageUploadValidation";
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
-import { BarChart3, Box, CheckCircle2, CircleAlert, FileText, FolderTree, ImagePlus, LayoutPanelLeft, Loader2, LogIn, Plus, Save, Settings2, ShieldCheck, Tag, Trash2, UploadCloud } from "lucide-react";
+import { BarChart3, Box, CheckCircle2, CircleAlert, FolderTree, LayoutPanelLeft, Loader2, LogIn, Plus, Save, Settings2, ShieldCheck, Tag, UploadCloud } from "lucide-react";
 import { toast } from "sonner";
 
 type Role = "user" | "editor" | "admin" | "super_admin";
@@ -62,8 +63,6 @@ function AdminContent() {
   const [productForm, setProductForm] = useState({ name: "", price: "", categoryId: "" });
   const [busy, setBusy] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [uploadingProductId, setUploadingProductId] = useState<string | null>(null);
-  const [expandedCategoryId, setExpandedCategoryId] = useState<string | null>(null);
   const section = sectionFromPath(location);
 
   const loadData = async () => {
@@ -82,7 +81,6 @@ function AdminContent() {
     setRole((profile?.role as Role | undefined) ?? "user");
     setProducts((productRows as unknown as AdminProduct[] | null) ?? []);
     setCategories((categoryRows as AdminCategory[] | null) ?? []);
-    setExpandedCategoryId((current) => current || categoryRows?.[0]?.id || null);
     const nextSections = (sectionRows as SiteSection[] | null) ?? [];
     setSiteSections(nextSections);
     setSelectedSectionId((current) => current || nextSections[0]?.id || "");
@@ -118,37 +116,6 @@ function AdminContent() {
     await loadData();
   };
 
-  const uploadProductImage = async (product: AdminProduct, file: File) => {
-    if (!supabase) return;
-    setUploadingProductId(product.id);
-    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
-    const path = `productos/${product.id}/${Date.now()}-${safeName}`;
-    const { error: storageError } = await supabase.storage.from("mdfantasy-media").upload(path, file, { contentType: file.type, upsert: false });
-    if (storageError) { setUploadingProductId(null); return toast.error(storageError.message); }
-    const { data: urlData } = supabase.storage.from("mdfantasy-media").getPublicUrl(path);
-    const { data: media, error: mediaError } = await supabase.from("media_library").insert({ storage_path: path, public_url: urlData.publicUrl, file_name: file.name, mime_type: file.type, size_bytes: file.size }).select("id").single();
-    if (mediaError || !media) { setUploadingProductId(null); return toast.error(mediaError?.message ?? "No se pudo registrar la imagen."); }
-    const primaryImage = (product.product_images ?? []).find((image) => image.is_primary) ?? product.product_images?.[0];
-    const imagePayload = { image_url: urlData.publicUrl, media_id: media.id, alt_text: product.name, is_primary: true, sort_order: 0 };
-    const { error: relationError } = primaryImage
-      ? await supabase.from("product_images").update(imagePayload).eq("id", primaryImage.id)
-      : await supabase.from("product_images").insert({ ...imagePayload, product_id: product.id });
-    setUploadingProductId(null);
-    if (relationError) return toast.error(relationError.message);
-    toast.success(primaryImage ? "Imagen principal reemplazada." : "Imagen principal agregada.");
-    await loadData();
-  };
-
-  const removeProductImage = async (product: AdminProduct) => {
-    if (!supabase) return;
-    const primaryImage = (product.product_images ?? []).find((image) => image.is_primary) ?? product.product_images?.[0];
-    if (!primaryImage) return;
-    const { error } = await supabase.from("product_images").delete().eq("id", primaryImage.id);
-    if (error) return toast.error(error.message);
-    toast.success("Imagen retirada del producto.");
-    await loadData();
-  };
-
   const toggleCategory = async (category: AdminCategory) => {
     if (!supabase) return;
     const { error } = await supabase.from("categories").update({ active: !category.active }).eq("id", category.id);
@@ -181,8 +148,10 @@ function AdminContent() {
   const uploadMedia = async (file: File) => {
     if (!supabase) return;
     setUploading(true);
+    const validationError = getImageUploadError(file);
+    if (validationError) { setUploading(false); return toast.error(validationError); }
     const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
-    const path = `catalogo/${Date.now()}-${safeName}`;
+    const path = `secciones/${selectedContent?.id ?? "biblioteca"}/${crypto.randomUUID()}-${safeName}`;
     const { error } = await supabase.storage.from("mdfantasy-media").upload(path, file, { contentType: file.type, upsert: false });
     if (error) { setUploading(false); return toast.error(error.message); }
     const { data: urlData } = supabase.storage.from("mdfantasy-media").getPublicUrl(path);
@@ -194,7 +163,6 @@ function AdminContent() {
   };
 
   const visibleProducts = useMemo(() => products.filter((product) => product.status === "active").length, [products]);
-  const productsByCategory = useMemo(() => categories.map((category) => ({ ...category, products: products.filter((product) => product.category_id === category.id) })), [categories, products]);
   const dashboardTabs = [{ id: "overview", label: "Resumen", icon: BarChart3 }, { id: "products", label: "Productos", icon: Box }, { id: "categories", label: "Categorías", icon: FolderTree }, { id: "content", label: "Contenido", icon: LayoutPanelLeft }, { id: "settings", label: "Configuración", icon: Settings2 }];
   const overviewStats = [{ label: "Productos", value: products.length, icon: <Box className="text-[#B99137]" size={18} /> }, { label: "Publicados", value: visibleProducts, icon: <CheckCircle2 className="text-[#B99137]" size={18} /> }, { label: "Categorías", value: categories.length, icon: <FolderTree className="text-[#B99137]" size={18} /> }, { label: "Borradores", value: products.filter((product) => product.status === "draft").length, icon: <Tag className="text-[#B99137]" size={18} /> }];
 

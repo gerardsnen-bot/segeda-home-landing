@@ -74,12 +74,29 @@
 - [x] Verificar de forma autónoma los recursos, el rol, la biblioteca inicial y el historial técnico de Supabase.
 - [x] Corregir detalles finales de flujo, roles o interfaz detectados durante la revisión autónoma.
 - [x] Resolver el error de runtime de dotenv y revalidar el arranque full stack, la suite de pruebas y la compilación.
-- [ ] Crear respaldo GitHub con el commit backup-before-final-audit.
-- [ ] Auditar repositorio, secretos, dependencias, duplicados y documentación.
-- [ ] Auditar TypeScript, lint, build, imports, datos estáticos y URLs duplicadas.
-- [ ] Auditar Supabase, RLS, Storage, integridad de datos y políticas públicas.
-- [ ] Verificar la protección de mutaciones administrativas frente a usuarios públicos.
-- [ ] Probar flujos del panel, catálogo, carrito, WhatsApp y navegación pública.
-- [ ] Corregir enlaces, botones, cálculos, SEO, seguridad o rendimiento de prioridad alta.
+- [x] Crear respaldo GitHub con el commit backup-before-final-audit.
+- [x] Auditar repositorio, secretos, dependencias, duplicados y documentación.
+- [x] Auditar TypeScript, lint, build, imports, datos estáticos y URLs duplicadas.
+- [x] Auditar Supabase, RLS, Storage, integridad de datos y políticas públicas.
+- [x] Verificar la protección de mutaciones administrativas frente a usuarios públicos.
+- [x] Probar flujos del panel, catálogo, carrito, WhatsApp y navegación pública.
+- [x] Corregir enlaces, botones, cálculos, SEO, seguridad o rendimiento de prioridad alta.
 - [ ] Validar responsive, build y smoke test en producción.
 - [ ] Crear commit final-production-audit-and-fixes y entregar el informe PASS/FAIL.
+- [x] Sustituir el logo del encabezado por el logo oficial MDFantasy aportado por el usuario y validarlo en escritorio y móvil.
+- [x] Añadir una guarda de interfaz de rol al módulo SEO para no mostrar controles de edición a usuarios sin sesión administrativa.
+- [x] Actualizar el número de WhatsApp administrable de Supabase al contacto oficial 51938634695.
+- [x] Corregir los títulos de documento heredados de Segeda Home en las rutas de categoría, Navidad y administración.
+- [x] Unificar el logo oficial MDFantasy en las cabeceras públicas de categorías y preventa navideña.
+- [x] Adaptar la página 404 a español y a la identidad MDFantasy para mantener una experiencia pública consistente.
+- [x] Intentar una mutación administrativa real sin sesión administradora y documentar que RLS la bloquea.
+- [x] Generar evidencia de revisión de secretos, dependencias y referencias de URL duplicadas en todo el repositorio.
+- [x] Verificar y documentar las URL finales de WhatsApp generadas desde Home, categoría y Preventa sin enviar mensajes.
+- [x] Habilitar la selección y subida directa desde dispositivo para la imagen de Hero y todos los bloques administrables.
+- [x] Probar la carga directa, guardar el bloque y verificar que la nueva imagen se refleje en la vista previa y la landing.
+- [x] Sustituir el logo público por la nueva versión oficial aportada por el usuario y asegurar que se muestre completo en escritorio y móvil.
+- [x] Convertir la barra de categorías de la landing en navegación fija durante el scroll, con dos líneas de botones equitativos, legibles y estilo cristal dorado.
+- [x] Probar la barra fija en escritorio y móvil durante el desplazamiento, sin ocultar contenido ni perder los enlaces de categoría.
+- [x] Validar visualmente en móvil el nuevo logo oficial de las cabeceras de categoría y Preventa Navideña, sin recortes.
+- [x] Corregir el número de WhatsApp heredado en la migración de contenido navideño para mantener el historial de esquema alineado con el contacto oficial.
+- [x] Analizar y resolver o documentar las alertas de seguridad y deduplicación reportadas por las dependencias de producción.

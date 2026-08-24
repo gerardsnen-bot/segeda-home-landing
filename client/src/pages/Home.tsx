@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
-  Check,
   ChevronRight,
   Heart,
   Menu,
@@ -18,23 +17,7 @@ import { useLocation } from "wouter";
 import { useSegedaCart } from "@/lib/segedaCart";
 import { getCatalogOverview, getPublicSeo, getPublicSections, ManagedCategory, ManagedSection } from "@/lib/catalogData";
 
-const WHATSAPP = "https://wa.me/51978642447?text=Hola%20MDFantasy%2C%20quiero%20crear%20un%20producto%20personalizado";
-
-const categoryLinks = [
-  ["✼", "Preventa Navideña", "navidad"], ["☁", "Nubes temáticas", "nubes"], ["○", "Placas circulares", "placas"],
-  ["▣", "Cuadros infantiles", "cuadros"], ["✦", "Combo completo", "combo"], ["☁", "Nube + cuadros", "nube-cuadros"],
-  ["☼", "Nube + cuadros + lámpara", "nube-cuadros-lampara"], ["Aa", "Nombre + cuadros", "nombre-cuadros"], ["✧", "Packs lamparitas", "packs"],
-  ["⋯", "Todas las categorías", "todas"],
-];
-
-const products = [
-  { title: "Preventa Navideña", note: "9 modelos · Ver preventa", image: "/manus-storage/navidad_c98eafac.jpg", badge: "PREVENTA · DESDE S/79", featured: true, slug: "navidad" },
-  { title: "Nubes temáticas", note: "Ver diseños", image: "/manus-storage/nubes-portada-premium_f843e2ec.jpeg", slug: "nubes" },
-  { title: "Placas circulares", note: "Ver diseños", image: "/manus-storage/placas_f2df896b.jpg", slug: "placas" },
-  { title: "Cuadros infantiles", note: "Ver diseños", image: "/manus-storage/cuadros_0fdc2e1c.jpg", slug: "cuadros" },
-  { title: "Combo completo", note: "Ver diseños", image: "/manus-storage/combo_d729a5a2.jpg", slug: "combo" },
-  { title: "Nube + cuadros", note: "Ver diseños", image: "/manus-storage/nube-cuadros_4f013700.jpg", slug: "nube-cuadros" },
-];
+const WHATSAPP = "https://wa.me/51938634695?text=Hola%20MDFantasy%2C%20quiero%20crear%20un%20producto%20personalizado";
 
 const serviceLines = [
   { icon: "⌂", title: "Decoración para el hogar", note: "Próximamente", slug: "nubes" },
@@ -94,7 +77,7 @@ export default function Home() {
     const setMeta = (selector: string, value: string) => {
       if (!value) return;
       let element = document.head.querySelector(selector) as HTMLMetaElement | null;
-      if (!element) { element = document.createElement("meta"); const attribute = selector.includes("og:") ? "property" : "name"; element.setAttribute(attribute, selector.match(/['\"]([^'\"]+)/)?.[1] ?? "description"); document.head.appendChild(element); }
+      if (!element) { element = document.createElement("meta"); const attribute = selector.includes("og:") ? "property" : "name"; element.setAttribute(attribute, selector.match(/['"]([^'"]+)/)?.[1] ?? "description"); document.head.appendChild(element); }
       element.content = value;
     };
     getPublicSeo().then((seo) => {
@@ -132,8 +115,7 @@ export default function Home() {
       <header className="site-header">
         <div className="shell header-inner">
           <a href="#inicio" className="brand" aria-label="Ir al inicio">
-            <span className="mdf-symbol" aria-hidden="true">✦</span>
-            <span className="brand-copy"><b className="serif">MDFantasy</b><small>DISEÑO PERSONALIZADO EN MDF</small></span>
+            <img src="/manus-storage/mdfantasy-logo-oficial-agosto-2026_3627de6b.png" alt="MDFantasy — Hecho a tu medida, hecho con amor" className="brand-logo" />
           </a>
           <nav className="main-nav" aria-label="Navegación principal">
             <a href="#inicio" className="active">Inicio</a><a href="#colecciones">Categorías</a><a href="#como-comprar">Cómo comprar</a><a href="#contacto">Contacto</a>
@@ -147,6 +129,7 @@ export default function Home() {
         {searchOpen && <div className="search-bar shell"><Search size={16} /><input autoFocus placeholder="Busca una colección" /><button onClick={() => setSearchOpen(false)} aria-label="Cerrar búsqueda"><X size={17} /></button></div>}
         {mobileOpen && <nav className="mobile-menu"><a href="#inicio" onClick={() => setMobileOpen(false)}>Inicio</a><button onClick={() => { setMobileOpen(false); setCategoriesOpen(true); }}>Categorías</button><a href="#como-comprar" onClick={() => setMobileOpen(false)}>Cómo comprar</a><a href="#contacto" onClick={() => setMobileOpen(false)}>Contacto</a></nav>}
       </header>
+      <style>{`.brand{gap:0}.site-header .header-inner{height:118px!important}.site-header .brand-logo{display:block;width:112px!important;height:112px!important;object-fit:contain!important;object-position:center!important}@media(max-width:850px){.site-header .header-inner{height:100px!important}.site-header .brand-logo{width:92px!important;height:92px!important}}@media(max-width:590px){.site-header .header-inner{height:88px!important}.site-header .brand-logo{width:78px!important;height:78px!important}}`}</style>
 
       <section className="category-rail" aria-label="Explora otras categorías">
         <div className="rail-label"><span>✦</span><strong>Explora</strong><small>OTRAS<br />CATEGORÍAS</small></div>
@@ -154,6 +137,16 @@ export default function Home() {
           {managedCategoryLinks.map(([icon, label, slug]) => <button key={label} onClick={() => slug === "todas" ? setCategoriesOpen(true) : setLocation(`/catalogo/${slug}`)} className="category-pill"><i>{icon}</i>{label}</button>)}
         </div>
       </section>
+      <style>{`
+        .category-rail{position:sticky!important;top:0!important;z-index:45!important;display:grid!important;grid-template-columns:112px minmax(0,1fr)!important;align-items:stretch!important;min-height:106px!important;background:linear-gradient(118deg,rgba(255,255,255,.93),rgba(250,245,233,.86) 48%,rgba(242,223,173,.52))!important;border-top:1px solid rgba(185,145,55,.35)!important;border-bottom:1px solid rgba(185,145,55,.48)!important;box-shadow:0 12px 28px rgba(68,49,18,.15),inset 0 1px 0 rgba(255,255,255,.95)!important;backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%)}
+        .category-rail::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,rgba(255,255,255,.34),transparent 36%,rgba(255,236,180,.28));}
+        .rail-label{position:relative;z-index:1;flex:initial!important;display:grid!important;grid-template-columns:16px 1fr!important;grid-template-rows:20px 1fr!important;align-content:center!important;gap:0 4px!important;padding:0 12px 0 25px!important;border-right:1px solid rgba(185,145,55,.28)!important;color:#171717!important;text-shadow:0 1px 0 #fff!important}.rail-label span{color:#B99137!important;font-size:13px!important}.rail-label strong{font-size:14px!important;letter-spacing:-.02em}.rail-label small{font-size:6px!important;letter-spacing:.15em!important;color:#8B6A24!important}
+        .category-scroll{position:relative;z-index:1;width:auto!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;grid-template-rows:repeat(2,minmax(40px,1fr))!important;gap:9px 10px!important;overflow:visible!important;padding:12px 18px!important;white-space:normal!important}
+        .category-pill{display:flex!important;width:100%!important;min-width:0!important;min-height:40px!important;justify-content:center!important;gap:7px!important;border:1px solid rgba(185,145,55,.45)!important;border-radius:12px!important;background:linear-gradient(145deg,rgba(255,255,255,.84),rgba(250,238,204,.6))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.96),0 5px 12px rgba(93,68,20,.1)!important;color:#2e2a21!important;font-size:10px!important;font-weight:800!important;line-height:1.15!important;text-align:center!important;text-shadow:0 1px 0 rgba(255,255,255,.8)!important;white-space:normal!important;transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .16s ease,border-color .16s ease,background .16s ease!important}.category-pill i{width:20px!important;height:20px!important;flex:0 0 20px!important;border:1px solid rgba(185,145,55,.32)!important;background:radial-gradient(circle at 30% 25%,#fffdf5,#eacb7c)!important;color:#6b5016!important;box-shadow:inset 0 1px 1px #fff,0 2px 5px rgba(91,67,15,.16)!important}
+        .category-pill:hover{transform:translateY(-2px)!important;border-color:#B99137!important;background:linear-gradient(145deg,#fffdf8,#f7df9c)!important;box-shadow:inset 0 1px 0 #fff,0 9px 16px rgba(119,83,9,.19)!important}.category-pill:active{transform:scale(.98)!important}.category-pill:focus-visible{outline:3px solid rgba(185,145,55,.62)!important;outline-offset:2px!important}.category-pill:first-child{border-color:#171717!important;background:linear-gradient(135deg,#2d2a23,#171717 58%,#60481a)!important;color:#fff9e9!important;box-shadow:inset 0 1px 0 rgba(244,217,138,.48),0 7px 14px rgba(0,0,0,.2)!important;text-shadow:none!important}.category-pill:first-child i{border-color:rgba(244,217,138,.5)!important;background:radial-gradient(circle at 30% 25%,#f9e7b0,#B99137)!important;color:#171717!important}
+        @media(max-width:850px){.category-rail{grid-template-columns:82px minmax(0,1fr)!important;min-height:100px!important}.rail-label{padding-left:11px!important}.category-scroll{gap:7px!important;padding:9px 10px!important}.category-pill{min-height:39px!important;font-size:9px!important;padding:7px 5px!important}.category-pill i{display:none!important}}
+        @media(max-width:590px){.category-rail{grid-template-columns:1fr!important;min-height:96px!important}.rail-label{display:none!important}.category-scroll{grid-template-columns:repeat(5,minmax(0,1fr))!important;grid-template-rows:repeat(2,40px)!important;gap:6px!important;padding:8px 7px!important}.category-pill{min-height:40px!important;border-radius:9px!important;font-size:7.4px!important;letter-spacing:0!important;padding:5px 3px!important;overflow:hidden!important}.category-pill i{display:none!important}}
+      `}</style>
 
       <section className="payment-strip"><div className="shell payment-inner">
         <div><p className="eyebrow">✦ Paga fácil y seguro</p></div><h2 className="serif">Medios de pago</h2>
@@ -206,7 +199,7 @@ export default function Home() {
 
         <section className="material-section shell">
           <header className="section-heading"><span className="spark">✦</span><h2 className="section-title">Detalles que se sienten especiales</h2><span className="spark">✦</span><p>Materiales, relieve e iluminación pensados para dar presencia a cada pieza.</p></header>
-          <div className="materials-list">{materialDetails.map(([title, text], index) => <article key={title} className="material-item"><span>✦</span><div><h3 className="serif">{title}</h3><p>{text}</p></div></article>)}</div>
+          <div className="materials-list">{materialDetails.map(([title, text]) => <article key={title} className="material-item"><span>✦</span><div><h3 className="serif">{title}</h3><p>{text}</p></div></article>)}</div>
         </section>
 
         <section className="installation-section shell">
@@ -217,13 +210,13 @@ export default function Home() {
         <section className="coordination-section"><div className="shell coordination-inner"><div><p className="eyebrow">✦ Acompañamiento real</p><h2 className="section-title">Tu pedido,<br /><em>claro y coordinado</em></h2><p>Antes de elaborar confirmamos contigo lo esencial por WhatsApp.</p><a className="round-button round-button--wa" href={WHATSAPP} target="_blank" rel="noreferrer">Coordinar mi pedido <MessageCircle size={15} /></a></div><div className="coordination-list">{[['01','Confirmamos tu pedido','Producto, medida y personalización.'],['02','Coordinamos diseño y pago','Todo queda definido antes de elaborar.'],['03','Preparamos y enviamos','Empaque protegido y datos de seguimiento.']].map(([number, title, note]) => <div key={number}><b>{number}</b><span><strong>{title}</strong><small>{note}</small></span></div>)}</div></div></section>
       </main>
 
-      <footer id="contacto"><div className="shell footer-inner"><div className="footer-brand"><h2 className="serif">MDFantasy<sup>✦</sup></h2><p>Diseño y personalización en MDF para niños, hogares y momentos especiales.</p></div><div className="footer-contact"><a href="https://wa.me/51978642447" target="_blank" rel="noreferrer">WhatsApp: 978 642 447</a><a href="https://www.instagram.com/segedahome1" target="_blank" rel="noreferrer">Instagram: @segedahome1</a><small>Envíos a todo el Perú por Olva Courier o Shalom</small></div></div></footer>
+      <footer id="contacto"><div className="shell footer-inner"><div className="footer-brand"><h2 className="serif">MDFantasy<sup>✦</sup></h2><p>Diseño y personalización en MDF para niños, hogares y momentos especiales.</p></div><div className="footer-contact"><a href="https://wa.me/51938634695" target="_blank" rel="noreferrer">WhatsApp: 938 634 695</a><a href="https://www.instagram.com/segedahome1" target="_blank" rel="noreferrer">Instagram: @segedahome1</a><small>Envíos a todo el Perú por Olva Courier o Shalom</small></div></div></footer>
 
       <a className="floating-whatsapp" href={WHATSAPP} target="_blank" rel="noreferrer"><MessageCircle size={20} /> ¿Necesitas ayuda?</a>
 
       {categoriesOpen && <div className="categories-overlay" role="dialog" aria-modal="true" aria-label="Todas las categorías"><button className="categories-dismiss" onClick={() => setCategoriesOpen(false)} aria-label="Cerrar categorías" /><section className="categories-panel"><header><div><p className="eyebrow">✦ Catálogo completo ✦</p><h2 className="serif">Todas las categorías</h2><span>Elige una colección para descubrir sus modelos.</span></div><button className="categories-close" onClick={() => setCategoriesOpen(false)} aria-label="Cerrar categorías"><X size={20} /></button></header><div className="categories-all-grid">{catalogueCategories.map((category) => <button key={category.title} className={`category-all-card ${category.featured ? "featured" : ""}`} onClick={() => { setCategoriesOpen(false); setLocation(`/catalogo/${category.slug}`); }}><div><img src={category.image} alt={category.title} />{category.badge && <span>{category.badge}</span>}{("upcoming" in category && category.upcoming) && <i>⌂</i>}</div><div className="category-all-card-copy"><h3 className="serif">{category.title}</h3><p>{category.note} <b>›</b></p></div></button>)}</div></section></div>}
 
-      {cartOpen && <div className="cart-overlay" role="dialog" aria-modal="true" aria-label="Tu pedido"><button className="overlay-close" onClick={() => setCartOpen(false)} aria-label="Cerrar carrito" /><aside className="cart-panel"><button className="cart-close" onClick={() => setCartOpen(false)} aria-label="Cerrar carrito"><X size={20} /></button><p className="eyebrow">Tu pedido</p><h2 className="serif">Carrito <small>{cartQuantity}</small></h2>{cartItems.length ? <div className="cart-content"><div className="cart-items">{cartItems.map((item) => <article className="cart-item" key={item.id}><img src={item.image} alt={item.title} /><div><span>{item.category === "navidad" ? "Preventa navideña" : "Producto"}</span><h3 className="serif">{item.title}</h3><p>{item.quantity} × S/{item.unitPrice}</p></div><button onClick={() => removeItem(item.id)} aria-label={`Quitar ${item.title}`}><X size={14} /></button></article>)}</div><div className="cart-total"><span>Total preventa</span><b className="serif">S/{cartTotal}</b></div><button className="round-button round-button--wa cart-whatsapp" onClick={() => { const detail = cartItems.map((item) => `${item.title} × ${item.quantity}`).join(", "); window.open(`https://wa.me/51978642447?text=${encodeURIComponent(`Hola Segeda Home, quiero coordinar mi pedido: ${detail}. Total: S/${cartTotal}.`)}`, "_blank", "noopener,noreferrer"); }}>Coordinar por WhatsApp <MessageCircle size={15} /></button></div> : <div className="empty-cart"><Heart size={34} strokeWidth={1.4} /><h3 className="serif">Tu carrito está vacío</h3><p>Elige una categoría y personaliza un producto.</p><button className="round-button round-button--coral" onClick={() => { setCartOpen(false); scrollToCatalog(); }}>Ver productos</button></div>}</aside></div>}
+      {cartOpen && <div className="cart-overlay" role="dialog" aria-modal="true" aria-label="Tu pedido"><button className="overlay-close" onClick={() => setCartOpen(false)} aria-label="Cerrar carrito" /><aside className="cart-panel"><button className="cart-close" onClick={() => setCartOpen(false)} aria-label="Cerrar carrito"><X size={20} /></button><p className="eyebrow">Tu pedido</p><h2 className="serif">Carrito <small>{cartQuantity}</small></h2>{cartItems.length ? <div className="cart-content"><div className="cart-items">{cartItems.map((item) => <article className="cart-item" key={item.id}><img src={item.image} alt={item.title} /><div><span>{item.category === "navidad" ? "Preventa navideña" : "Producto"}</span><h3 className="serif">{item.title}</h3><p>{item.quantity} × S/{item.unitPrice}</p></div><button onClick={() => removeItem(item.id)} aria-label={`Quitar ${item.title}`}><X size={14} /></button></article>)}</div><div className="cart-total"><span>Total preventa</span><b className="serif">S/{cartTotal}</b></div><button className="round-button round-button--wa cart-whatsapp" onClick={() => { const detail = cartItems.map((item) => `${item.title} × ${item.quantity}`).join(", "); window.open(`https://wa.me/51938634695?text=${encodeURIComponent(`Hola MDFantasy, quiero coordinar mi pedido: ${detail}. Total: S/${cartTotal}.`)}`, "_blank", "noopener,noreferrer"); }}>Coordinar por WhatsApp <MessageCircle size={15} /></button></div> : <div className="empty-cart"><Heart size={34} strokeWidth={1.4} /><h3 className="serif">Tu carrito está vacío</h3><p>Elige una categoría y personaliza un producto.</p><button className="round-button round-button--coral" onClick={() => { setCartOpen(false); scrollToCatalog(); }}>Ver productos</button></div>}</aside></div>}
 
       <style>{`
         .trust-strip { height:27px; background:#5b4034; color:#fffaf4; display:flex; justify-content:center; align-items:center; gap:42px; font-size:9px; font-weight:600; letter-spacing:.11em; text-transform:uppercase; }.trust-strip span{display:flex;align-items:center;gap:5px}

@@ -137,7 +137,7 @@ create table public.collection_products (
 create table public.site_settings (
   singleton boolean primary key default true check (singleton),
   business_name text not null default 'MDFantasy',
-  whatsapp_number text not null default '51978642447',
+  whatsapp_number text not null default '51938634695',
   default_whatsapp_message text,
   email text,
   phone text,
@@ -411,5 +411,5 @@ create policy "mdfantasy_media_staff_update" on storage.objects for update to au
 create policy "mdfantasy_media_staff_delete" on storage.objects for delete to authenticated using (bucket_id = 'mdfantasy-media' and public.is_staff());
 
 insert into public.site_settings (singleton, business_name, whatsapp_number, default_whatsapp_message, city, country)
-values (true, 'MDFantasy', '51978642447', 'Hola MDFantasy, quiero consultar por un producto personalizado.', 'Lima', 'Perú')
+values (true, 'MDFantasy', '51938634695', 'Hola MDFantasy, quiero consultar por un producto personalizado.', 'Lima', 'Perú')
 on conflict (singleton) do nothing;

@@ -55,6 +55,7 @@ export default function DashboardLayout({
 
   useEffect(() => {
     localStorage.setItem(SIDEBAR_WIDTH_KEY, sidebarWidth.toString());
+    document.title = "MDFantasy Studio | Administración";
   }, [sidebarWidth]);
 
   if (loading) {

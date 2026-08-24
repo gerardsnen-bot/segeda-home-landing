@@ -6,7 +6,7 @@ values (
   'Preventa Navideña',
   'Elige uno, combina varios o repite tu modelo favorito. Los detalles de cada diseño se coordinan cómodamente por WhatsApp.',
   'Pedir por WhatsApp',
-  'https://wa.me/51978642447',
+  'https://wa.me/51938634695',
   true,
   20,
   '{"regular_price":109,"single_price":79,"multi_price":69,"multi_minimum":2,"production_days":"5 a 7 días","reserve_message":"Reserva con 50%","shipping_message":"Envíos a todo el Perú"}'::jsonb

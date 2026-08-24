@@ -3,7 +3,7 @@
  * imágenes sin recorte, precios, tamaños, filtros y detalle de producto.
  */
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Check, ChevronDown, Heart, Search, ShoppingCart, SlidersHorizontal, X } from "lucide-react";
+import { ArrowLeft, Check, ChevronDown, Search, ShoppingCart, SlidersHorizontal, X } from "lucide-react";
 import { Link, useRoute } from "wouter";
 import { SegedaCartItem, useSegedaCart } from "@/lib/segedaCart";
 import { CatalogProduct, getCatalogCategory } from "@/lib/catalogData";
@@ -39,10 +39,11 @@ export default function Category() {
 
   useEffect(() => {
     let active = true;
+    document.title = `${info.title} | MDFantasy`;
     setVisibleCount(12); setSearch(""); setAudience("todos"); setTheme("todos"); setActiveProduct(null);
     getCatalogCategory(slug).then((catalogProducts) => { if (active) setProducts(catalogProducts); }).catch(() => { if (active) setProducts([]); });
     return () => { active = false; };
-  }, [slug]);
+  }, [slug, info.title]);
 
   const themes = useMemo(() => ["todos", ...Array.from(new Set(products.map((product) => product.themeGroup).filter(Boolean)))], [products]);
   const filtered = useMemo(() => {
@@ -78,7 +79,8 @@ export default function Category() {
 
   return <div className="standard-category-page">
     <div className="sc-trust"><span>♡ Hecho con amor</span><span>✦ Envíos a todo el Perú</span></div>
-    <header className="sc-header"><Link href="/catalogo" className="sc-brand"><i aria-hidden="true">✦</i><span><b>MDFantasy</b><small>DISEÑO PERSONALIZADO EN MDF</small></span></Link><nav><Link href="/catalogo">Inicio</Link><Link href="/catalogo">Categorías</Link><a href="/catalogo#como-comprar">Cómo comprar</a><a href="/catalogo#contacto">Contacto</a></nav><Link href="/catalogo" aria-label="Abrir carrito" className="sc-cart"><ShoppingCart size={18} /><i>{cartQuantity}</i></Link></header>
+    <header className="sc-header"><Link href="/catalogo" className="sc-brand" aria-label="MDFantasy, volver al catálogo"><img src="/manus-storage/mdfantasy-logo-oficial-agosto-2026_3627de6b.png" alt="MDFantasy — Hecho a tu medida, hecho con amor" /></Link><nav><Link href="/catalogo">Inicio</Link><Link href="/catalogo">Categorías</Link><a href="/catalogo#como-comprar">Cómo comprar</a><a href="/catalogo#contacto">Contacto</a></nav><Link href="/catalogo" aria-label="Abrir carrito" className="sc-cart"><ShoppingCart size={18} /><i>{cartQuantity}</i></Link></header>
+    <style>{`.standard-category-page .sc-header{height:112px!important}.sc-brand img{display:block!important;width:104px!important;height:104px!important;object-fit:contain!important;object-position:center!important}@media(max-width:700px){.standard-category-page .sc-header{height:94px!important}.sc-brand img{width:84px!important;height:84px!important}}`}</style>
     <nav className="sc-rail"><div className="sc-rail-title"><span>✦</span><b>Explora</b><small>OTRAS<br />CATEGORÍAS</small></div><div className="sc-rail-scroll">{allLinks.map(([icon, title, linkSlug]) => <Link key={title} href={`/catalogo/${linkSlug}`} className={slug === linkSlug ? "current" : ""}><i>{icon}</i>{title}</Link>)}</div></nav>
     <main>
       <section className="sc-intro"><Link href="/catalogo" className="sc-back"><ArrowLeft size={14} /> Inicio</Link><p>CATÁLOGO SEGEDA HOME</p><h1>{info.icon} {info.title}</h1><span>{products.length} diseños disponibles</span></section>

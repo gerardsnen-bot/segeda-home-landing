@@ -7,7 +7,7 @@ import { Link } from "wouter";
 import { SegedaCartItem, useSegedaCart } from "@/lib/segedaCart";
 import { getCatalogCategory, getPublicSections } from "@/lib/catalogData";
 
-const WHATSAPP = "https://wa.me/51978642447?text=";
+const WHATSAPP = "https://wa.me/51938634695?text=";
 
 const categoryLinks = [
   ["✼", "Preventa Navideña", "navidad"], ["☁", "Nubes temáticas", "nubes"], ["○", "Placas circulares", "placas"],
@@ -27,6 +27,7 @@ export default function Navidad() {
   const [zoomedModel, setZoomedModel] = useState<NavidadModel | null>(null);
   useEffect(() => {
     let active = true;
+    document.title = "Preventa Navideña | MDFantasy";
     Promise.all([getCatalogCategory("navidad"), getPublicSections()]).then(([products, sections]) => {
       if (!active) return;
       setModels(products.map((product, index) => ({ id: String(product.id), title: product.title || `Modelo ${index + 1}`, image: product.imageUrl, price: product.price })));
@@ -66,9 +67,10 @@ export default function Navidad() {
   return (
     <div className="navidad-page">
       <header className="navidad-header">
-        <Link href="/catalogo" className="navidad-brand"><i aria-hidden="true">✦</i><span><strong>MDFantasy</strong><small>PREVENTA NAVIDEÑA</small></span></Link>
+        <Link href="/catalogo" className="navidad-brand" aria-label="MDFantasy, volver al catálogo"><img src="/manus-storage/mdfantasy-logo-oficial-agosto-2026_3627de6b.png" alt="MDFantasy — Hecho a tu medida, hecho con amor" /></Link>
         <div className="navidad-actions"><button onClick={scrollToModels}>Ver modelos</button><Link href="/catalogo" aria-label="Abrir el carrito principal" className="navidad-cart"><ShoppingCart size={16} /><i>{cartQuantity}</i></Link></div>
       </header>
+      <style>{`.navidad-page .navidad-header{height:104px!important}.navidad-brand img{display:block!important;width:96px!important;height:96px!important;object-fit:contain!important;object-position:center!important}@media(max-width:700px){.navidad-page .navidad-header{height:90px!important}.navidad-brand img{width:78px!important;height:78px!important}}`}</style>
 
       <nav className="navidad-rail" aria-label="Explora otras categorías"><div className="navidad-rail-title"><span>✦</span><b>Explora</b><small>OTRAS<br />CATEGORÍAS</small></div><div className="navidad-rail-items">{categoryLinks.map(([icon, title, slug]) => <Link key={title} href={`/catalogo/${slug}`} className={`navidad-pill ${slug === "navidad" ? "selected" : ""}`}><i>{icon}</i>{title}</Link>)}</div></nav>
 
