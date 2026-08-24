@@ -125,6 +125,8 @@
 - [x] Alinear la documentación de reanudación con el modo de confirmación activo de la programación visual pendiente.
 - [x] Mostrar en la barra promocional negra la oferta: 8% de descuento por la compra de 3 productos.
 - [x] Validar la oferta promocional en escritorio y móvil sin afectar la legibilidad de los avisos existentes.
+- [x] Sustituir la fotografía de la sección de instalación por la imagen mejorada aportada por el usuario.
+- [x] Validar el encuadre de la nueva imagen de instalación en escritorio y móvil.
 - [x] Verificar la disponibilidad del dominio publicado después del timeout HTTP observado y documentar si se trata de una incidencia real o transitoria (el navegador real confirmó carga correcta; el timeout fue transitorio).
 - [x] Reforzar los botones Inicio, Categorías, Cómo comprar y Contacto con mayor tamaño, contraste y distribución equilibrada.
 - [x] Hacer más notorios y accesibles los botones de búsqueda y carrito sin alterar sus flujos existentes.

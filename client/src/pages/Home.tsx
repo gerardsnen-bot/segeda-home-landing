@@ -226,7 +226,7 @@ export default function Home() {
         </section>
 
         <section className="installation-section shell">
-          <div className="installation-image"><img src="/manus-storage/instalacion-real-nubes_eee88aa5.jpg" alt="Decoración de luna y nubes con iluminación cálida instalada en una habitación infantil" /><span>Foto real de instalación</span></div>
+          <div className="installation-image"><img src="/manus-storage/mdfantasy-instalacion-mejorada_ad830076.png" alt="Decoración infantil de luna, estrellas y nubes iluminadas instalada en una habitación" /><span>Foto real de instalación</span></div>
           <div className="installation-copy"><p className="eyebrow">Luz que transforma el espacio</p><h2 className="section-title">Así se siente una habitación con un detalle hecho especialmente para ella.</h2><p>La iluminación cálida y suave acompaña la decoración sin perder la ternura del ambiente. Cada composición puede adaptarse a los colores, formas y temática de su habitación.</p><div className="feature-tags"><span>✦ Luz cálida</span><span>♡ Diseño personalizado</span><span>⌂ Listo para instalar</span></div><button className="round-button round-button--coral" onClick={() => setCartOpen(true)}>Ver diseños personalizados <ArrowRight size={15} /></button></div>
         </section>
 
