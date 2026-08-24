@@ -120,6 +120,9 @@
 - [x] Añadir y persistir el estado de revisión de clasificación para identificar explícitamente los productos pendientes.
 - [x] Conservar la clasificación automática por separado para que el selector Automático revierta un override manual sin perder la evidencia visual.
 - [x] Reanudar dentro de 12 horas el análisis visual de los 252 productos pendientes, sin sobrescribir clasificaciones manuales.
+- [ ] Reanudar de inmediato el análisis visual de los 252 productos pendientes y completar el backfill verificable.
+- [ ] Reintentar el lote pendiente cuando el servicio de visión vuelva a estar disponible, sin sustituir pendientes por inferencias textuales.
+- [x] Reemplazar la referencia de Instagram por TikTok: MDFantasy en el bloque de contacto visible de la landing.
 - [x] Ejecutar y documentar pruebas explícitas de scroll lento y scroll rápido con la barra fija activa, verificando ausencia de saltos de layout.
 - [ ] Validar en navegador real la navegación desde la barra fija hacia varias categorías y la ausencia de solapamientos de carrito/overlay en escritorio y móvil.
 - [x] Sustituir el comportamiento sticky inconsistente detectado durante scroll por una cabecera fija con espaciador responsive y validarla de nuevo.
