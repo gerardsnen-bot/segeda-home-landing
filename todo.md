@@ -81,8 +81,8 @@
 - [x] Verificar la protección de mutaciones administrativas frente a usuarios públicos.
 - [x] Probar flujos del panel, catálogo, carrito, WhatsApp y navegación pública.
 - [x] Corregir enlaces, botones, cálculos, SEO, seguridad o rendimiento de prioridad alta.
-- [ ] Validar responsive, build y smoke test en producción.
-- [ ] Crear commit final-production-audit-and-fixes y entregar el informe PASS/FAIL.
+- [x] Validar responsive, build y smoke test en producción.
+- [x] Crear commit final-production-audit-and-fixes y entregar el informe PASS/FAIL.
 - [x] Sustituir el logo del encabezado por el logo oficial MDFantasy aportado por el usuario y validarlo en escritorio y móvil.
 - [x] Añadir una guarda de interfaz de rol al módulo SEO para no mostrar controles de edición a usuarios sin sesión administrativa.
 - [x] Actualizar el número de WhatsApp administrable de Supabase al contacto oficial 51938634695.
@@ -101,5 +101,7 @@
 - [x] Corregir el número de WhatsApp heredado en la migración de contenido navideño para mantener el historial de esquema alineado con el contacto oficial.
 - [x] Analizar y resolver o documentar las alertas de seguridad y deduplicación reportadas por las dependencias de producción.
 - [x] Investigar y corregir la ausencia de imagen en el Hero observada durante el smoke test de producción (la segunda comprobación confirmó su carga completa).
-- [ ] Confirmar que producción sirve el bundle de la versión auditada y re-publicar si persiste una versión anterior en caché.
-- [ ] Hacer robusta la resolución de archivos estáticos en producción y verificar que una solicitud nueva a /catalogo devuelve 200.
+- [x] Confirmar que producción sirve el bundle de la versión auditada y re-publicar si persiste una versión anterior en caché.
+- [x] Hacer robusta la resolución de archivos estáticos en producción y verificar que una solicitud nueva a /catalogo devuelve 200.
+- [x] Verificar la presentación responsive en el dominio publicado para Home, una categoría estándar y Preventa Navideña, y registrar la evidencia.
+- [x] Entregar al usuario el dictamen final PASS/GO con las pruebas y riesgos no bloqueantes de la auditoría.

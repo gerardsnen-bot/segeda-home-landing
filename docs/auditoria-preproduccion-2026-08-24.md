@@ -2,7 +2,7 @@
 
 **Fecha:** 24 de agosto de 2026  
 **Alcance:** catálogo público, preventa navideña, carrito, WhatsApp, administración Supabase, seguridad, SEO, diseño responsive, compilación y publicación.  
-**Estado actual:** **GO condicionado** — las validaciones locales, de datos y de control de acceso están aprobadas; queda pendiente el checkpoint con publicación automática y la prueba de humo sobre el dominio de producción.
+**Estado actual:** **PASS / GO** — la versión publicada superó las validaciones de datos, acceso, calidad técnica, responsive y smoke test de producción.
 
 ## Resumen ejecutivo
 
@@ -15,8 +15,8 @@ La revisión confirmó que el catálogo administrable conserva sus datos reales,
 | Contacto comercial | Aprobado | `site_settings.whatsapp_number` verificado como `51938634695` después de la migración `0011`. |
 | Flujos públicos | Aprobado | Selector de categorías, búsqueda, ficha de producto, carrito persistente y preventa con precio escalonado probados en navegador. |
 | Administración | Aprobado | Dashboard, productos, contenido, editor visual, SEO e historial validados con sesión administradora real. |
-| Calidad técnica | Aprobado | `pnpm lint`, `pnpm test` y `pnpm check` sin errores; 4 archivos de prueba y 6 pruebas aprobadas. |
-| Producción | Pendiente de smoke test | `pnpm build` aprobado; publicación y verificación remota pendientes del checkpoint final. |
+| Calidad técnica | Aprobado | `pnpm lint`, `pnpm test`, `pnpm check`, `pnpm build`, `pnpm audit --prod` y `pnpm dedupe --check` sin fallos bloqueantes; 8 archivos de prueba y 11 pruebas aprobadas. |
+| Producción | Aprobado | Smoke test HTTP `200`, bundle actualizado, Home, categoría estándar y Navidad verificados en el dominio publicado. |
 
 ## Correcciones aplicadas
 
@@ -47,7 +47,7 @@ La revisión confirmó que el catálogo administrable conserva sus datos reales,
 | Comando | Resultado |
 | --- | --- |
 | `pnpm lint` | Aprobado sin advertencias. |
-| `pnpm test` | Aprobado: 4 archivos, 6 pruebas. Incluye lectura segura y depuración del carrito persistente. |
+| `pnpm test` | Aprobado: 8 archivos, 11 pruebas. Incluye carrito, validación de imágenes, RLS, proxy de Storage y fallback estático. |
 | `pnpm check` | Aprobado sin errores TypeScript. |
 | `pnpm build` | Aprobado. Genera el bundle de cliente y servidor. |
 | Reinicio limpio del servidor | Aprobado. No reapareció el fallo histórico de OAuth sobre tabla `users` después del reinicio. |
@@ -74,6 +74,12 @@ Los enlaces renderizados de Home para contacto y creación personalizada apuntan
 
 La versión publicada en `https://segcatalogo-enteya63.manus.space/catalogo` respondió correctamente y mostró el nuevo logo, la barra de categorías de dos filas, las rutas públicas y el Hero con su fotografía. En la primera captura el Hero aún estaba cargando. La inspección posterior del HTML publicado identificó la URL efectiva de la imagen en el bucket público de Supabase y la solicitud HTTP devolvió `200`, `image/jpeg` y `115378` bytes; por tanto, no se identificó un defecto persistente de carga.
 
-## Criterio de salida
+Un primer despliegue expuso un `500` únicamente en solicitudes nuevas, mientras que el artefacto local respondía `200`. Se reforzó el fallback estático para resolver primero `dist/public` desde el directorio de trabajo, se añadió manejo explícito de error de `index.html` y se eliminó la dependencia de un comodín de router para el fallback. La reproducción local en modo producción devolvió `200`; tras la re-publicación, una solicitud HTTP nueva a `/catalogo` devolvió `200` y sirvió el bundle `index-BSJ04kFk.js`. Finalmente, las rutas de producción `/catalogo/nubes` y `/catalogo/navidad` cargaron catálogo, 213 productos de Nubes, nueve modelos y las tarifas navideñas `S/79` y `S/69`, con títulos MDFantasy correctos.
 
-La decisión final será **GO** si, después del checkpoint publicado, el dominio de producción responde en `/catalogo`, `/catalogo/nubes`, `/catalogo/navidad` y `/admin`, con el logo oficial visible, datos cargados y sin errores de consola o red que bloqueen la experiencia.
+Las comprobaciones responsive sobre el **dominio publicado** con viewport móvil de `390 × 844` confirmaron el ajuste de Home, la categoría Nubes y Preventa Navideña. Las capturas almacenadas en `mdfantasy_final_audit/production-responsive/` muestran que, en Home, las acciones principales, métricas y Hero mantienen jerarquía legible; en Nubes, el buscador, filtros, categorías temáticas y contador se adaptan a una sola columna sin recortes; y en Navidad, las dos ofertas, indicadores y acceso a modelos se conservan con tamaño y separación táctil adecuados. La misma versión de interfaz quedó publicada y validada en escritorio mediante los smoke tests del dominio.
+
+## Dictamen final
+
+> **PASS / GO para producción.** La versión `8dcc4bb3` quedó publicada y las rutas públicas `/catalogo`, `/catalogo/nubes` y `/catalogo/navidad` respondieron correctamente en producción. Las comprobaciones cubrieron el catálogo y sus datos, carrito, administración, RLS, Storage, WhatsApp, SEO, diseño responsive, seguridad de dependencias y fallback estático del servidor.
+
+Quedan dos recomendaciones no bloqueantes para una iteración posterior: dividir dinámicamente módulos para reducir el bundle principal y revisar en futuras actualizaciones las advertencias de compatibilidad del complemento de localización de Vite. Ninguna de ellas impidió la compilación, el arranque, las pruebas, la carga de recursos o los flujos de compra y administración auditados.
