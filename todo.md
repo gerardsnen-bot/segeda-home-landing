@@ -74,3 +74,12 @@
 - [x] Verificar de forma autónoma los recursos, el rol, la biblioteca inicial y el historial técnico de Supabase.
 - [x] Corregir detalles finales de flujo, roles o interfaz detectados durante la revisión autónoma.
 - [x] Resolver el error de runtime de dotenv y revalidar el arranque full stack, la suite de pruebas y la compilación.
+- [ ] Crear respaldo GitHub con el commit backup-before-final-audit.
+- [ ] Auditar repositorio, secretos, dependencias, duplicados y documentación.
+- [ ] Auditar TypeScript, lint, build, imports, datos estáticos y URLs duplicadas.
+- [ ] Auditar Supabase, RLS, Storage, integridad de datos y políticas públicas.
+- [ ] Verificar la protección de mutaciones administrativas frente a usuarios públicos.
+- [ ] Probar flujos del panel, catálogo, carrito, WhatsApp y navegación pública.
+- [ ] Corregir enlaces, botones, cálculos, SEO, seguridad o rendimiento de prioridad alta.
+- [ ] Validar responsive, build y smoke test en producción.
+- [ ] Crear commit final-production-audit-and-fixes y entregar el informe PASS/FAIL.
