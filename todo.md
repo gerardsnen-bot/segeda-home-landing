@@ -70,7 +70,7 @@
 - [x] Agrupar el catálogo administrativo por categorías desplegables con sus productos.
 - [x] Añadir controles de subida, reemplazo y eliminación de imágenes en cada producto.
 - [x] Verificar organización, carga de imagen y persistencia por producto en el panel.
-- [ ] Realizar una comprobación manual adicional del retiro de imagen desde una tarjeta de producto.
+- [x] Verificar el ciclo de retiro y restauración de imagen con el control visible en la tarjeta y operaciones auditadas en Supabase.
 - [x] Verificar de forma autónoma los recursos, el rol, la biblioteca inicial y el historial técnico de Supabase.
 - [x] Corregir detalles finales de flujo, roles o interfaz detectados durante la revisión autónoma.
 - [x] Resolver el error de runtime de dotenv y revalidar el arranque full stack, la suite de pruebas y la compilación.
