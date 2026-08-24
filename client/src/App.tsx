@@ -8,6 +8,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Category from "./pages/Category";
+import AdminDashboard from "./pages/AdminDashboard";
 import Home from "./pages/Home";
 import Navidad from "./pages/Navidad";
 function Router() {
@@ -18,6 +19,8 @@ function Router() {
       <Route path="/catalogo" component={Home} />
       <Route path="/catalogo/navidad" component={Navidad} />
       <Route path="/catalogo/:category" component={Category} />
+      <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin/:section" component={AdminDashboard} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

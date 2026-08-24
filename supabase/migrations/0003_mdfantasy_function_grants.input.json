@@ -1,0 +1,5 @@
+{
+  "project_id": "vrusfoxihkjywmvdveoy",
+  "name": "mdfantasy_function_grants",
+  "query": "revoke all on function public.handle_new_user() from public, anon, authenticated;\nrevoke all on function public.is_staff() from public, anon, authenticated;\nrevoke all on function public.is_admin() from public, anon, authenticated;\nrevoke all on function public.claim_initial_admin() from public, anon;\ngrant execute on function public.claim_initial_admin() to authenticated;"
+}

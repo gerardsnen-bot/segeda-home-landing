@@ -36,16 +36,31 @@
 - [x] Crear el panel de cuadrícula con todas las categorías y sus imágenes de referencia.
 - [x] Conectar cada tarjeta del panel con su categoría real.
 - [x] Validar la apertura del panel y sus enlaces en escritorio y móvil.
-- [ ] Completar la auditoría del requerimiento full stack y documentar el alcance ejecutable.
-- [ ] Habilitar base de datos, autenticación y almacenamiento administrables.
-- [ ] Crear y verificar un proyecto Supabase aislado para Segeda Home.
-- [ ] Completar la auditoría de la guía visual MDFantasy y sus requisitos de preservación funcional.
-- [ ] Aplicar la paleta negro, dorado, champagne y marfil sin cambiar datos ni flujos existentes.
-- [ ] Rediseñar la navegación de categorías en dos filas compactas y responsive.
-- [ ] Actualizar header, hero, tarjetas, botones, etiquetas y secciones al sistema visual MDFantasy.
+- [x] Completar la auditoría del requerimiento full stack y documentar el alcance ejecutable.
+- [x] Habilitar base de datos, autenticación y almacenamiento administrables.
+- [x] Crear y verificar un proyecto Supabase aislado para Segeda Home.
+- [x] Completar la auditoría de la guía visual MDFantasy y sus requisitos de preservación funcional.
+- [x] Aplicar la paleta negro, dorado, champagne y marfil sin cambiar datos ni flujos existentes.
+- [x] Rediseñar la navegación de categorías en dos filas compactas y responsive.
+- [x] Actualizar header, hero, tarjetas, botones, etiquetas y secciones al sistema visual MDFantasy.
 - [ ] Validar contraste, interacción, responsive y consistencia visual en todas las rutas públicas.
-- [ ] Crear el modelo de datos, permisos, migraciones y carga inicial de catálogo.
-- [ ] Conectar el catálogo público a contenido administrable sin perder su diseño.
-- [ ] Crear panel administrativo, acceso protegido y módulos de gestión.
+- [x] Crear el modelo de datos, permisos, migraciones y carga inicial de catálogo.
+- [x] Conectar el catálogo público a contenido administrable sin perder su diseño.
+- [x] Crear panel administrativo, acceso protegido y módulos de gestión.
 - [ ] Implementar editor visual, contenido comercial, medios, SEO e historial.
 - [ ] Verificar permisos, flujos críticos y experiencia responsive antes de entregar.
+- [x] Migrar Preventa Navideña para consumir sus modelos y precios desde Supabase.
+- [x] Aplicar MDFantasy a las vistas internas de categoría manteniendo filtros, precios y medidas.
+- [ ] Inventariar todas las categorías, productos, datos y fotografías visibles sin modificar la web.
+- [ ] Preparar los activos y la información verificada para el catálogo PDF MDFantasy.
+- [ ] Generar el PDF A4 completo con portada, índice, categorías, productos y cierre de contacto.
+- [ ] Validar el PDF y entregar el archivo descargable directamente en el chat.
+- [ ] Excluir del PDF únicamente los productos sin fotografía accesible, según la autorización del usuario.
+- [ ] Reorganizar el catálogo PDF en un formato visual de diez imágenes por página.
+- [ ] Reducir el PDF a índice, nombres de categoría, imágenes y numeración de página.
+- [ ] Verificar el peso, la claridad y la paginación de la versión visual reducida.
+- [x] Auditar las vistas públicas y los endpoints administrativos pendientes de integración.
+- [x] Conectar Home y Preventa Navideña a los datos administrables de Supabase.
+- [x] Crear rutas, autorización y panel de administración para catálogo y contenido.
+- [ ] Validar creación, edición y visibilidad de contenido desde el panel con la primera cuenta administradora.
+- [x] Resolver el error de runtime de dotenv y revalidar el arranque full stack, la suite de pruebas y la compilación.

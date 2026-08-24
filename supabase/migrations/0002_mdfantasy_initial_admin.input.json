@@ -1,0 +1,5 @@
+{
+  "project_id": "vrusfoxihkjywmvdveoy",
+  "name": "mdfantasy_initial_admin",
+  "query": "create or replace function public.claim_initial_admin()\nreturns public.app_role\nlanguage plpgsql\nsecurity definer\nset search_path = public\nas $$\ndeclare\n  current_role public.app_role;\nbegin\n  if auth.uid() is null then\n    raise exception 'Authentication is required';\n  end if;\n\n  perform pg_advisory_xact_lock(hashtext('mdfantasy-initial-admin'));\n\n  select role into current_role from public.profiles where id = auth.uid();\n  if current_role is null then\n    insert into public.profiles (id, role, active)\n    values (auth.uid(), 'user', true)\n    on conflict (id) do nothing;\n    select role into current_role from public.profiles where id = auth.uid();\n  end if;\n\n  if exists (select 1 from public.profiles where role in ('admin', 'super_admin')) then\n    return current_role;\n  end if;\n\n  update public.profiles\n  set role = 'admin', active = true\n  where id = auth.uid();\n\n  return 'admin';\nend;\n$$;\n\nrevoke all on function public.claim_initial_admin() from public;\ngrant execute on function public.claim_initial_admin() to authenticated;"
+}

@@ -174,3 +174,11 @@ Las políticas RLS deberán permitir lectura pública solamente de entidades pub
 ## Decisión de ejecución inmediata
 
 La siguiente acción segura es habilitar la capacidad full stack del proyecto, crear el respaldo de código y obtener el esquema de backend generado por la plataforma. A continuación se definirá la migración SQL y se preparará una importación no destructiva del catálogo existente. Ningún arreglo actual ni activo será eliminado hasta que la copia en base de datos haya sido verificada.
+
+## Actualización de ejecución
+
+Se creó el proyecto Supabase aislado **`mdfantasy-segeda-home`** en la región `sa-east-1` y se aplicó una migración PostgreSQL aditiva con tablas de catálogo, medios, contenido, pedidos, importaciones y auditoría. La fuente de importación es el inventario estructurado recuperado de `https://segeda-home-tienda.mad-elynnlevon7.chatgpt.site`, almacenado de forma local en `segeda-reference-data/` para preservar los productos, precios, medidas y galerías originales.
+
+La primera carga creó las 14 categorías y 683 productos, con 750 variantes y dos secciones públicas de contenido. Antes de activar la lectura pública contra Supabase se realizará una verificación adicional de cobertura de galerías e imágenes por producto para garantizar que ninguna tarjeta visible quede sin medio asociado.
+
+La cobertura de imágenes quedó corregida: los 683 productos tienen al menos una imagen asociada. La ruta pública `/catalogo/nubes` ya consume Supabase y fue validada con 213 diseños, filtros, galerías, precios y medidas visibles.
