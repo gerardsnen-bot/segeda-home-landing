@@ -122,6 +122,13 @@
 - [x] Reanudar dentro de 12 horas el análisis visual de los 252 productos pendientes, sin sobrescribir clasificaciones manuales.
 - [ ] Reanudar de inmediato el análisis visual de los 252 productos pendientes y completar el backfill verificable.
 - [ ] Reintentar el lote pendiente cuando el servicio de visión vuelva a estar disponible, sin sustituir pendientes por inferencias textuales.
+- [x] Verificar la disponibilidad del dominio publicado después del timeout HTTP observado y documentar si se trata de una incidencia real o transitoria (el navegador real confirmó carga correcta; el timeout fue transitorio).
+- [x] Reforzar los botones Inicio, Categorías, Cómo comprar y Contacto con mayor tamaño, contraste y distribución equilibrada.
+- [x] Hacer más notorios y accesibles los botones de búsqueda y carrito sin alterar sus flujos existentes.
+- [x] Validar la navegación superior mejorada en escritorio y móvil, incluida la apertura de búsqueda y carrito.
+- [x] Probar en escritorio la apertura y cierre del buscador y del carrito con los nuevos controles reforzados, y guardar evidencia verificable.
+- [x] Documentar la validación desktop de la navegación superior mejorada, incluidos búsqueda, carrito y enlaces principales.
+- [x] Probar en escritorio los enlaces Inicio, Categorías, Cómo comprar y Contacto del encabezado reforzado, guardando evidencia verificable.
 - [x] Reemplazar la referencia de Instagram por TikTok: MDFantasy en el bloque de contacto visible de la landing.
 - [x] Confirmar en producción la propagación del cambio de Instagram a TikTok MDFantasy tras el checkpoint publicado.
 - [x] Ejecutar y documentar pruebas explícitas de scroll lento y scroll rápido con la barra fija activa, verificando ausencia de saltos de layout.

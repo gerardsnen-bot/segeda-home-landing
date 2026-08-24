@@ -45,3 +45,9 @@ La inspección local final de `postfix-breakpoints/landing_390.png` verificó qu
 La captura móvil final de carrito (`mdfantasy_final_audit/mobile_sticky_cart_overlay.png`) confirma visualmente que el drawer ocupa el primer plano de toda la pantalla: no queda cabecera ni botón de categoría por encima, el control de cierre resulta visible, y el contenido del carrito mantiene su jerarquía. Esta evidencia visual coincide con la inspección DOM del overlay (`z-index: 900`, scroll bloqueado) y con el cierre correcto por Escape.
 
 La revalidación más reciente reprodujo el mismo comportamiento a 390 × 844 px: `scrollY: 1073`, bloque fijo en `top: 0` con 212 px de alto, overlay `z-index: 900`, scroll del cuerpo bloqueado y restaurado con Escape. La pulsación de una categoría navegó a `/catalogo/nubes`; la captura visual del drawer confirma de nuevo que ningún elemento de la cabecera aparece por encima.
+
+## Navegación superior reforzada
+
+La cabecera se actualizó con cuatro botones principales de mayor tamaño y controles de búsqueda y carrito destacados. La prueba automatizada a **1440 × 900 px** confirmó que el botón de búsqueda abre su campo con foco y se cierra correctamente; el carrito abre un overlay con `z-index: 900`, bloquea el scroll y se cierra con Escape. La evidencia visual `desktop_sticky_cart_overlay.png` confirma que el drawer cubre la navegación superior sin controles superpuestos. La misma prueba a **390 × 844 px** validó los flujos móviles y la navegación desde una categoría hacia `/catalogo/nubes`.
+
+En la misma ejecución de escritorio, los enlaces **Inicio**, **Categorías**, **Cómo comprar** y **Contacto** actualizaron respectivamente el hash a `#inicio`, `#colecciones`, `#como-comprar` y `#contacto`, con desplazamiento efectivo a sus secciones. Esta evidencia confirma que el rediseño visual no alteró la navegación por anclas del encabezado.
