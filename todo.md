@@ -126,6 +126,8 @@
 - [ ] Ejecutar una sonda estructurada de visión sobre un producto pending_review y continuar el backfill solo si la evidencia es verificable.
 - [ ] Revalidar la distribución resultante y los filtros Niño/Niña antes de declarar finalizada la clasificación visual.
 - [x] Ejecutar una sonda estructurada de visión sobre un producto pending_review y detener el lote al detectar evidencia insuficiente, sin modificar Supabase.
+- [x] Confirmar en Supabase y en el dominio público que los productos pending_review siguen publicados y visibles en el catálogo.
+- [ ] Corregir la carga pública que muestra cero productos en categorías pese a que los 683 productos están activos en Supabase.
 - [x] Conectar www.mdfantasy.shop administrado en Hostinger al sitio publicado de MDFantasy y verificar su resolución HTTPS.
 - [x] Mostrar en la barra promocional negra la oferta: 8% de descuento por la compra de 3 productos.
 - [x] Validar la oferta promocional en escritorio y móvil sin afectar la legibilidad de los avisos existentes.
