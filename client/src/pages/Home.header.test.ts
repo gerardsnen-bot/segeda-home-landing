@@ -26,4 +26,9 @@ describe("encabezado MDFantasy", () => {
     expect(homeSource).toContain('Hablar por WhatsApp');
     expect(homeSource).not.toMatch(/testimonio|reseña|opinión de cliente/i);
   });
+
+  it("mantiene la ruta legada de Nubes temáticas asociada a su categoría publicada", () => {
+    const categorySource = readFileSync(new URL("./Category.tsx", import.meta.url), "utf8");
+    expect(categorySource).toContain('"nubes-tematicas": "nubes"');
+  });
 });

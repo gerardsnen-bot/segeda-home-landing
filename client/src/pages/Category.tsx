@@ -15,6 +15,10 @@ const categoryInfo: Record<string, CategoryInfo> = {
   nubes: { title: "Nubes temáticas", icon: "☁" }, placas: { title: "Placas circulares", icon: "○" }, cuadros: { title: "Cuadros infantiles", icon: "▣" }, combo: { title: "Combo completo", icon: "✦" }, "nube-cuadros": { title: "Nube + cuadros", icon: "☁" }, "nube-cuadros-lampara": { title: "Nube + cuadros + lámpara", icon: "☼" }, "nombre-cuadros": { title: "Nombre + cuadros", icon: "Aa" }, packs: { title: "Packs lamparitas", icon: "✧" }, lamparas: { title: "Lámparas decorativas", icon: "☼" }, liquidacion: { title: "Liquidación", icon: "%" }, "fe-espiritualidad": { title: "Fe y espiritualidad", icon: "✦" }, alcancias: { title: "Alcancías y regalos", icon: "♡" }, didacticos: { title: "Didácticos", icon: "ABC" },
 };
 
+const categoryAliases: Record<string, string> = {
+  "nubes-tematicas": "nubes",
+};
+
 const allLinks = [
   ["✼", "Preventa Navideña", "navidad"], ["☁", "Nubes temáticas", "nubes"], ["○", "Placas circulares", "placas"], ["▣", "Cuadros infantiles", "cuadros"], ["✦", "Combo completo", "combo"], ["☁", "Nube + cuadros", "nube-cuadros"], ["☼", "Nube + cuadros + lámpara", "nube-cuadros-lampara"], ["Aa", "Nombre + cuadros", "nombre-cuadros"], ["✧", "Packs lamparitas", "packs"], ["☼", "Lámparas", "lamparas"], ["%", "Liquidación", "liquidacion"], ["✦", "Fe y espiritualidad", "fe-espiritualidad"], ["♡", "Alcancías y regalos", "alcancias"], ["ABC", "Didácticos", "didacticos"],
 ];
@@ -24,7 +28,8 @@ const priceText = (price: number) => `S/ ${price}`;
 
 export default function Category() {
   const [, params] = useRoute("/catalogo/:category");
-  const slug = params?.category ?? "nubes";
+  const requestedSlug = params?.category ?? "nubes";
+  const slug = categoryAliases[requestedSlug] ?? requestedSlug;
   const info = categoryInfo[slug] ?? categoryInfo.nubes;
   const { quantity: cartQuantity, updateCart } = useSegedaCart();
   const [products, setProducts] = useState<Product[]>([]);
