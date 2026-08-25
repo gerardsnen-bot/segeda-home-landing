@@ -123,6 +123,9 @@
 - [ ] Reanudar de inmediato el análisis visual de los 252 productos pendientes y completar el backfill verificable.
 - [ ] Reintentar el lote pendiente cuando el servicio de visión vuelva a estar disponible, sin sustituir pendientes por inferencias textuales.
 - [x] Alinear la documentación de reanudación con el modo de confirmación activo de la programación visual pendiente.
+- [ ] Ejecutar una sonda estructurada de visión sobre un producto pending_review y continuar el backfill solo si la evidencia es verificable.
+- [ ] Revalidar la distribución resultante y los filtros Niño/Niña antes de declarar finalizada la clasificación visual.
+- [x] Ejecutar una sonda estructurada de visión sobre un producto pending_review y detener el lote al detectar evidencia insuficiente, sin modificar Supabase.
 - [x] Conectar www.mdfantasy.shop administrado en Hostinger al sitio publicado de MDFantasy y verificar su resolución HTTPS.
 - [x] Mostrar en la barra promocional negra la oferta: 8% de descuento por la compra de 3 productos.
 - [x] Validar la oferta promocional en escritorio y móvil sin afectar la legibilidad de los avisos existentes.
