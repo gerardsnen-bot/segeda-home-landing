@@ -123,6 +123,7 @@
 - [ ] Reanudar de inmediato el análisis visual de los 252 productos pendientes y completar el backfill verificable.
 - [ ] Reintentar el lote pendiente cuando el servicio de visión vuelva a estar disponible, sin sustituir pendientes por inferencias textuales.
 - [x] Alinear la documentación de reanudación con el modo de confirmación activo de la programación visual pendiente.
+- [x] Conectar www.mdfantasy.shop administrado en Hostinger al sitio publicado de MDFantasy y verificar su resolución HTTPS.
 - [x] Mostrar en la barra promocional negra la oferta: 8% de descuento por la compra de 3 productos.
 - [x] Validar la oferta promocional en escritorio y móvil sin afectar la legibilidad de los avisos existentes.
 - [x] Sustituir la fotografía de la sección de instalación por la imagen mejorada aportada por el usuario.
