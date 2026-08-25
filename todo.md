@@ -151,3 +151,5 @@
 - [x] Revisar visualmente y documentar de forma explícita cada captura post-fix de 1920, 1440, 1024, 768 y 390 px.
 - [x] Capturar y revisar visualmente el overlay móvil post-fix sobre la cabecera fija, sin controles solapados.
 - [x] Generar capturas locales post-fix de los cinco breakpoints para revisión visual verificable y conservarlas con la evidencia de navegación.
+- [x] Ampliar la landing MDFantasy con nuevas secciones de inspiración, beneficios y llamada a la acción, sin inventar reseñas de clientes.
+- [x] Validar las nuevas secciones en escritorio y móvil, con enlaces funcionales y coherencia visual respecto al encabezado.

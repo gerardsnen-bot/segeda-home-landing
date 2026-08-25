@@ -18,4 +18,12 @@ describe("encabezado MDFantasy", () => {
     expect(homeSource).toContain('<a href="#como-comprar">Cómo comprar</a>');
     expect(homeSource).toContain('<a href="#contacto">Contacto</a>');
   });
+
+  it("incluye secciones de inspiración, ocasiones y conversión sin reseñas inventadas", () => {
+    expect(homeSource).toContain('className="inspiration-section shell"');
+    expect(homeSource).toContain('className="occasions-section"');
+    expect(homeSource).toContain('className="signature-cta shell"');
+    expect(homeSource).toContain('Hablar por WhatsApp');
+    expect(homeSource).not.toMatch(/testimonio|reseña|opinión de cliente/i);
+  });
 });
