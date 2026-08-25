@@ -133,6 +133,8 @@
 - [x] Hacer más notorios y accesibles los botones de búsqueda y carrito sin alterar sus flujos existentes.
 - [x] Validar la navegación superior mejorada en escritorio y móvil, incluida la apertura de búsqueda y carrito.
 - [x] Probar en escritorio la apertura y cierre del buscador y del carrito con los nuevos controles reforzados, y guardar evidencia verificable.
+- [x] Sustituir el botón de menú de tres líneas por accesos a TikTok, Facebook y WhatsApp en la esquina superior derecha.
+- [x] Validar los accesos sociales del encabezado en escritorio y móvil, incluidos sus destinos externos.
 - [x] Documentar la validación desktop de la navegación superior mejorada, incluidos búsqueda, carrito y enlaces principales.
 - [x] Probar en escritorio los enlaces Inicio, Categorías, Cómo comprar y Contacto del encabezado reforzado, guardando evidencia verificable.
 - [x] Reemplazar la referencia de Instagram por TikTok: MDFantasy en el bloque de contacto visible de la landing.
@@ -141,6 +143,10 @@
 - [x] Validar en navegador real la navegación desde la barra fija hacia varias categorías y la ausencia de solapamientos de carrito/overlay en escritorio y móvil.
 - [x] Sustituir el comportamiento sticky inconsistente detectado durante scroll por una cabecera fija con espaciador responsive y validarla de nuevo.
 - [x] Revalidar tras la cabecera fija los breakpoints 1920, 1440, 1024, 768 y 390 px, confirmando ausencia de saltos y solapamientos.
+- [x] Rediseñar la franja superior del encabezado con menor altura, una composición dorada y marfil más elegante y mayor presencia del logo en el bloque izquierdo.
+- [x] Validar el encabezado refinado y los tres accesos sociales en escritorio y móvil antes de publicarlo.
+- [x] Restaurar una navegación móvil visible para Inicio, Categorías, Cómo comprar y Contacto sin reintroducir el menú de tres líneas.
+- [x] Probar en navegador los enlaces sociales del encabezado y revalidar la barra refinada sin regresiones en móvil.
 - [x] Ejecutar y documentar pruebas reales en móvil de barra fija, navegación a categorías y carrito/overlay posteriores a la corrección final.
 - [x] Revisar visualmente y documentar de forma explícita cada captura post-fix de 1920, 1440, 1024, 768 y 390 px.
 - [x] Capturar y revisar visualmente el overlay móvil post-fix sobre la cabecera fija, sin controles solapados.
