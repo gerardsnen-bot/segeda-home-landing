@@ -164,3 +164,5 @@
 - [x] Generar capturas locales post-fix de los cinco breakpoints para revisión visual verificable y conservarlas con la evidencia de navegación.
 - [x] Ampliar la landing MDFantasy con nuevas secciones de inspiración, beneficios y llamada a la acción, sin inventar reseñas de clientes.
 - [x] Validar las nuevas secciones en escritorio y móvil, con enlaces funcionales y coherencia visual respecto al encabezado.
+- [x] Reemplazar el bloque “Explora otras categorías” por un espacio cuadrado para el logo y desplazar la fila de categorías a la derecha.
+- [x] Validar el nuevo bloque de logo y la distribución de categorías en escritorio y móvil.
