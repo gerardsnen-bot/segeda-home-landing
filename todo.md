@@ -167,3 +167,5 @@
 - [x] Validar las nuevas secciones en escritorio y móvil, con enlaces funcionales y coherencia visual respecto al encabezado.
 - [x] Reemplazar el bloque “Explora otras categorías” por un espacio cuadrado para el logo y desplazar la fila de categorías a la derecha.
 - [x] Validar el nuevo bloque de logo y la distribución de categorías en escritorio y móvil.
+- [x] Eliminar el logo superior duplicado y conservar únicamente el logo cuadrado de la barra de categorías.
+- [x] Validar el encabezado con un único logo en escritorio y móvil antes de publicarlo.
