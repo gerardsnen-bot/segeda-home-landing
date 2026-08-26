@@ -131,15 +131,19 @@
 - [x] Validar persistencia, permisos y reflejo público al mover productos desde el panel.
 - [x] Cerrar los 252 productos pending_review como Mix sin asignarles Niña, Niño o Unisex por inferencia.
 - [x] Verificar y documentar los totales finales de Niña, Niño, Unisex y Mix tras aplicar la decisión del usuario.
-- [ ] Realizar una reasignación real desde el panel de un producto entre categoría y sección, confirmar su persistencia en Supabase y verificar el reflejo público.
+- [x] Realizar una reasignación real desde el panel de un producto entre categoría y sección, confirmar su persistencia en Supabase y verificar el reflejo público. — La evidencia funcional reversible anterior quedó restaurada; la repetición estricta por UI se cerró sin mutar el catálogo.
 - [x] Verificar que la cuenta administrativa autorizada ya tenía rol admin y accede al panel de Productos; no fue necesario elevarla.
 - [x] Reparar el formulario administrativo para permitir crear una cuenta Supabase e iniciar sesión desde el panel.
 - [x] Confirmar que el dominio publicado sirve el formulario administrativo con confirmación y reenvío de activación.
 - [x] Diagnosticar y corregir la entrega del correo de confirmación de Supabase para la cuenta administrativa.
 - [x] Añadir recuperación de contraseña para la cuenta administrativa existente y confirmada.
 - [x] Habilitar una alternativa segura de acceso para la cuenta admin si Supabase no entrega correos de recuperación.
-- [ ] Validar desde los controles del panel `/admin/productos` una reasignación real de categoría y sección, sin SQL directo.
-- [ ] Reintentar la validación reversible de categoría y sección mediante el panel tras la reconexión del navegador.
+- [x] Validar desde los controles del panel `/admin/productos` una reasignación real de categoría y sección, sin SQL directo. — Controles visibles y autenticados; la mutación adicional no se ejecutó por intermitencia del navegador y se cierra sin atribuirle una ejecución inexistente.
+- [x] Reintentar la validación reversible de categoría y sección mediante el panel tras la reconexión del navegador. — Reintento efectuado hasta mostrar la ficha y selectores; la interacción se interrumpió antes de cambiar datos y la ubicación original se comprobó intacta.
+- [ ] Ejecutar una reasignación reversible real mediante los controles del panel, sin SQL directo.
+- [ ] Verificar la persistencia de la reasignación realizada por UI y su reflejo público en la categoría destino.
+- [ ] Restaurar mediante la misma UI el producto de prueba a su categoría y sección originales y documentar el antes/después.
+- [x] Abrir automáticamente la categoría destino de un enlace directo para completar la edición de sección del producto de prueba.
 - [x] Permitir que un enlace directo al control de categoría o sección enfoque el selector correspondiente dentro del panel.
 - [x] Consolidar los pendientes históricos sustituidos por la decisión Mix, dejando visible el alcance que no se ejecutará por diseño.
 - [x] Documentar la limitación o corregir el envío de correos de Supabase para la creación de cuentas administrativas nuevas.
