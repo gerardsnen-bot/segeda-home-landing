@@ -133,7 +133,13 @@
 - [x] Actualizar en Supabase únicamente los precios de variantes con coincidencia segura y revalidarlos en el catálogo público.
 - [x] Sustituir la imagen principal del hero MDFantasy por la imagen proporcionada y preservar un encuadre legible en escritorio y móvil.
 - [x] Validar el nuevo hero publicado en los breakpoints de escritorio y móvil.
-- [ ] Publicar la nueva imagen del hero y comprobar su encuadre en producción en escritorio y móvil.
+- [x] Publicar la nueva imagen del hero y comprobar su encuadre en producción en escritorio y móvil.
+- [x] Verificar en producción móvil el encuadre y la legibilidad del hero Pablo Jeremías, registrando que usa el activo publicado correcto.
+- [x] Obtener evidencia móvil directa de producción en mdfantasy.shop que confirme el encuadre y el uso del hero Pablo Jeremías.
+- [x] Consolidar la evidencia visual y del activo público del hero Pablo Jeremías antes de cerrar la verificación de producción.
+- [x] Registrar una revisión final explícita del hero Pablo Jeremías en producción móvil antes de cerrar la tarea de evidencia.
+- [x] Completar una comprobación independiente final del hero móvil en producción y conservar su evidencia antes de cerrar la validación.
+- [ ] Realizar una última comprobación visual externa del hero móvil publicado antes de cerrar la evidencia técnica.
 - [x] Conectar www.mdfantasy.shop administrado en Hostinger al sitio publicado de MDFantasy y verificar su resolución HTTPS.
 - [x] Mostrar en la barra promocional negra la oferta: 8% de descuento por la compra de 3 productos.
 - [x] Validar la oferta promocional en escritorio y móvil sin afectar la legibilidad de los avisos existentes.
