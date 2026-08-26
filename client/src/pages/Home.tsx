@@ -19,6 +19,7 @@ import { useSegedaCart } from "@/lib/segedaCart";
 import { getCatalogOverview, getPublicSeo, getPublicSections, ManagedCategory, ManagedSection } from "@/lib/catalogData";
 
 const WHATSAPP = "https://wa.me/51938634695?text=Hola%20MDFantasy%2C%20quiero%20crear%20un%20producto%20personalizado";
+const HERO_IMAGE = "/manus-storage/mdfantasy-hero-pablo-jeremias_f72bc070.png";
 
 const serviceLines = [
   { icon: "⌂", title: "Decoración para el hogar", note: "Próximamente", slug: "nubes" },
@@ -211,7 +212,7 @@ export default function Home() {
             <div className="hero-stats"><span><b>100%</b>personalizado</span><span><b>5–7 días</b>de elaboración</span><span><b>Todo Perú</b>con envío seguro</span></div>
           </div>
           <button onClick={scrollToCatalog} className="hero-image reveal reveal-delay" aria-label="Ver colección de nubes temáticas">
-            <img src={heroSection?.imageUrl || "/manus-storage/nubes-portada-premium_f843e2ec.jpeg"} alt="Nube temática personalizada con iluminación" />
+            <img src={heroSection?.imageUrl || HERO_IMAGE} alt="Composición personalizada en MDF con el nombre Pablo Jeremías y leones infantiles" />
             <span className="craft-tag">Hecho a mano · MDF premium</span>
             <span className="hero-image-caption"><small>COLECCIÓN DESTACADA</small><b className="serif">Nubes temáticas</b><em>Ver diseños →</em></span>
           </button>

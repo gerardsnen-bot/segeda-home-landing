@@ -129,6 +129,11 @@
 - [x] Confirmar en Supabase y en el dominio público que los productos pending_review siguen publicados y visibles en el catálogo.
 - [x] Corregir la carga pública que muestra cero productos en categorías pese a que los 683 productos están activos en Supabase.
 - [ ] Publicar el alias de la ruta descriptiva de Nubes temáticas y verificar en producción que carga los productos publicados.
+- [ ] Extraer de la web original los precios por producto y variante, conservando evidencia de origen y asociaciones verificables.
+- [ ] Actualizar en Supabase únicamente los precios de variantes con coincidencia segura y revalidarlos en el catálogo público.
+- [x] Sustituir la imagen principal del hero MDFantasy por la imagen proporcionada y preservar un encuadre legible en escritorio y móvil.
+- [x] Validar el nuevo hero publicado en los breakpoints de escritorio y móvil.
+- [ ] Publicar la nueva imagen del hero y comprobar su encuadre en producción en escritorio y móvil.
 - [x] Conectar www.mdfantasy.shop administrado en Hostinger al sitio publicado de MDFantasy y verificar su resolución HTTPS.
 - [x] Mostrar en la barra promocional negra la oferta: 8% de descuento por la compra de 3 productos.
 - [x] Validar la oferta promocional en escritorio y móvil sin afectar la legibilidad de los avisos existentes.
