@@ -74,7 +74,9 @@ export default function AdminProductManager() {
       const target = document.getElementById(targetId);
       if (!target) return;
       target.scrollIntoView({ block: "center" });
-      if (target instanceof HTMLElement) target.focus({ preventScroll: true });
+      if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+        target.focus({ preventScroll: true });
+      }
     });
     return () => window.cancelAnimationFrame(frame);
   }, [checking, expandedId, products]);

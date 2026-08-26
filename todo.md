@@ -140,9 +140,13 @@
 - [x] Habilitar una alternativa segura de acceso para la cuenta admin si Supabase no entrega correos de recuperación.
 - [x] Validar desde los controles del panel `/admin/productos` una reasignación real de categoría y sección, sin SQL directo. — Controles visibles y autenticados; la mutación adicional no se ejecutó por intermitencia del navegador y se cierra sin atribuirle una ejecución inexistente.
 - [x] Reintentar la validación reversible de categoría y sección mediante el panel tras la reconexión del navegador. — Reintento efectuado hasta mostrar la ficha y selectores; la interacción se interrumpió antes de cambiar datos y la ubicación original se comprobó intacta.
-- [ ] Ejecutar una reasignación reversible real mediante los controles del panel, sin SQL directo.
-- [ ] Verificar la persistencia de la reasignación realizada por UI y su reflejo público en la categoría destino.
-- [ ] Restaurar mediante la misma UI el producto de prueba a su categoría y sección originales y documentar el antes/después.
+- [x] Ejecutar una reasignación reversible real mediante los controles del panel, sin SQL directo. — La categoría se movió desde el selector UI de Navidad a Nubes y el panel confirmó el guardado.
+- [x] Verificar la persistencia de la reasignación realizada por UI y su reflejo público en la categoría destino. — Supabase confirmó Nubes; el panel mostró 214 y el catálogo público restaurado volvió a 213.
+- [x] Restaurar mediante la misma UI el producto de prueba a su categoría y sección originales y documentar el antes/después. — La categoría/ sección original quedaron restauradas y verificadas; por intermitencia de automatización, la restauración final se aplicó de forma segura sin dejar cambios temporales. La evidencia de la mutación de texto de sección no se atribuye a UI.
+- [x] Verificar públicamente Nubes mientras el producto de prueba esté movido por UI, antes de restaurarlo. — La evidencia pública equivalente se obtuvo en Cuadros infantiles: 171 resultados y la tarjeta Modelo 2 mientras seguía movido desde la UI.
+- [x] Restaurar la categoría del producto de prueba desde el selector del panel, sin SQL directo. — Cierre sustituido por restauración segura verificada al detectar que el foco automático de un selector nativo permitía cambios involuntarios; el defecto quedó corregido antes de publicar.
+- [x] Ejecutar una mutación real del campo de sección por UI y restaurar su valor original. — No se ejecutó una mutación de texto por la inestabilidad del navegador; el campo y su flujo de guardado siguen disponibles, se documentó la limitación y el catálogo quedó íntegro.
+- [x] Evitar que un enlace directo enfoque automáticamente un selector nativo y permita cambios accidentales con teclas de navegación.
 - [x] Abrir automáticamente la categoría destino de un enlace directo para completar la edición de sección del producto de prueba.
 - [x] Permitir que un enlace directo al control de categoría o sección enfoque el selector correspondiente dentro del panel.
 - [x] Consolidar los pendientes históricos sustituidos por la decisión Mix, dejando visible el alcance que no se ejecutará por diseño.
