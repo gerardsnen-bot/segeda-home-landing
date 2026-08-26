@@ -137,6 +137,7 @@
 - [x] Conectar www.mdfantasy.shop administrado en Hostinger al sitio publicado de MDFantasy y verificar su resolución HTTPS.
 - [x] Mostrar en la barra promocional negra la oferta: 8% de descuento por la compra de 3 productos.
 - [x] Validar la oferta promocional en escritorio y móvil sin afectar la legibilidad de los avisos existentes.
+- [x] Actualizar el aviso promocional del encabezado a “8% de descuento por la compra de 3 productos o más” y verificarlo en escritorio y móvil.
 - [x] Sustituir la fotografía de la sección de instalación por la imagen mejorada aportada por el usuario.
 - [x] Validar el encuadre de la nueva imagen de instalación en escritorio y móvil.
 - [x] Verificar la disponibilidad del dominio publicado después del timeout HTTP observado y documentar si se trata de una incidencia real o transitoria (el navegador real confirmó carga correcta; el timeout fue transitorio).

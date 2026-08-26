@@ -140,7 +140,7 @@ export default function Home() {
       <div className="site-chrome">
       <div className="trust-strip">
         <span><Heart size={10} fill="currentColor" /> Hecho con amor</span>
-        <span className="trust-offer"><Sparkles size={11} /> 8% dcto. por 3 productos</span>
+        <span className="trust-offer"><Sparkles size={11} /> 8% de descuento por la compra de 3 productos o más</span>
         <span><Sparkles size={11} /> Envíos a todo el Perú</span>
       </div>
 
