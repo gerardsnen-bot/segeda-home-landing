@@ -26,3 +26,9 @@ La política `products_staff_manage` concede a perfiles administrativos autentic
 ## Programación visual
 
 La programación de reanudación visual se encontraba pausada y permanece desactivada. Por tanto, los 252 productos Mix no se reenviarán para clasificación automática.
+
+## Propagación de producción
+
+La vista de desarrollo ya muestra el filtro Mix con 142 productos en Nubes temáticas. La comprobación inicial de producción mostró un bundle anterior y, una vez propagado el nuevo bundle, la consulta pública quedó vacía por caché de esquema de PostgREST. Se recargó explícitamente el esquema de Supabase y la categoría volvió a presentar sus 213 diseños.
+
+La comprobación final de `https://mdfantasy.shop/catalogo/nubes?v=mix-schema-reload-3` confirmó el botón **Mix · 142**. Al activarlo, la categoría presentó exactamente **142 resultados** y los productos correspondientes, sin ocultarlos ni reclasificarlos como Niña o Niño.

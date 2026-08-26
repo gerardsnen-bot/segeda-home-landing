@@ -7,7 +7,7 @@ import { supabase } from "@/lib/supabase";
 import { getImageUploadError } from "@/lib/imageUploadValidation";
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
-import { BarChart3, Box, CheckCircle2, CircleAlert, FolderTree, LayoutPanelLeft, Loader2, LogIn, Plus, Save, Settings2, ShieldCheck, Tag, UploadCloud } from "lucide-react";
+import { BarChart3, Box, CheckCircle2, CircleAlert, FolderTree, LayoutPanelLeft, Loader2, LogIn, MailCheck, Plus, Save, Settings2, ShieldCheck, Tag, UploadCloud } from "lucide-react";
 import { toast } from "sonner";
 
 type Role = "user" | "editor" | "admin" | "super_admin";
@@ -33,21 +33,51 @@ function SupabaseAccess() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState("");
+
+  const confirmationRedirect = typeof window === "undefined" ? undefined : `${window.location.origin}/admin`;
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!supabase) return;
     setBusy(true);
+    setNotice("");
     const result = mode === "login"
       ? await supabase.auth.signInWithPassword({ email, password })
-      : await supabase.auth.signUp({ email, password, options: { data: { full_name: "Administración MDFantasy" } } });
+      : await supabase.auth.signUp({ email, password, options: { data: { full_name: "Administración MDFantasy" }, emailRedirectTo: confirmationRedirect } });
     setBusy(false);
-    if (result.error) return toast.error(result.error.message);
-    toast.success(mode === "login" ? "Sesión iniciada" : "Cuenta creada. Si tu cuenta exige confirmación, revisa tu correo.");
-    window.location.reload();
+    if (result.error) {
+      setNotice(result.error.message);
+      return toast.error(result.error.message);
+    }
+    if (mode === "signup" && !result.data.session) {
+      const message = "Cuenta creada. Revisa tu correo y confirma la cuenta antes de iniciar sesión. El enlace te devolverá a este panel.";
+      setNotice(message);
+      return toast.success(message);
+    }
+    setNotice("Sesión iniciada. Preparando el panel administrativo…");
+    toast.success("Sesión iniciada.");
+    window.location.assign("/admin/productos");
   };
 
-  return <div className="mx-auto flex min-h-[75vh] max-w-md items-center px-4"><section className="w-full rounded-[28px] border border-[#B99137]/30 bg-white p-8 shadow-[0_18px_50px_rgba(0,0,0,.08)]"><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#B99137] text-[#B99137]"><ShieldCheck size={20} /></span><p className="mt-4 text-xs font-bold uppercase tracking-[.18em] text-[#8B6A24]">MDFantasy Studio</p><h1 className="mt-2 font-serif text-4xl text-[#171717]">Acceso administrativo</h1><p className="mt-3 text-sm leading-6 text-[#6e665d]">Inicia sesión con la cuenta de Supabase que gestionará el catálogo y contenido de MDFantasy.</p><form onSubmit={submit} className="mt-7 space-y-4"><div className="space-y-2"><Label htmlFor="admin-email">Correo</Label><Input id="admin-email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></div><div className="space-y-2"><Label htmlFor="admin-password">Contraseña</Label><Input id="admin-password" type="password" minLength={8} value={password} onChange={(event) => setPassword(event.target.value)} required /></div><Button className="w-full bg-[#171717] hover:bg-[#2b2b2b]" disabled={busy}>{busy ? <Loader2 className="mr-2 animate-spin" size={16} /> : <LogIn className="mr-2" size={16} />}{mode === "login" ? "Entrar al panel" : "Crear cuenta"}</Button></form><button className="mt-5 w-full text-center text-xs font-semibold text-[#8B6A24] underline" onClick={() => setMode((current) => current === "login" ? "signup" : "login")}>{mode === "login" ? "Crear la primera cuenta administrativa" : "Ya tengo una cuenta"}</button></section></div>;
+  const resendConfirmation = async () => {
+    if (!supabase || !email) {
+      setNotice("Escribe el correo de la cuenta que deseas confirmar.");
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase.auth.resend({ type: "signup", email, options: { emailRedirectTo: confirmationRedirect } });
+    setBusy(false);
+    if (error) {
+      setNotice(error.message);
+      return toast.error(error.message);
+    }
+    const message = "Reenviamos el enlace de confirmación. Revisa también la carpeta de correo no deseado.";
+    setNotice(message);
+    toast.success(message);
+  };
+
+  return <div className="mx-auto flex min-h-[75vh] max-w-md items-center px-4"><section className="w-full rounded-[28px] border border-[#B99137]/30 bg-white p-8 shadow-[0_18px_50px_rgba(0,0,0,.08)]"><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#B99137] text-[#B99137]"><ShieldCheck size={20} /></span><p className="mt-4 text-xs font-bold uppercase tracking-[.18em] text-[#8B6A24]">MDFantasy Studio</p><h1 className="mt-2 font-serif text-4xl text-[#171717]">Acceso administrativo</h1><p className="mt-3 text-sm leading-6 text-[#6e665d]">{mode === "login" ? "Inicia sesión con la cuenta de Supabase que gestionará el catálogo y contenido de MDFantasy." : "Crea la cuenta de Supabase que administrará el catálogo. Tras crearla, confirma el correo para activar el acceso."}</p><form onSubmit={submit} className="mt-7 space-y-4"><div className="space-y-2"><Label htmlFor="admin-email">Correo</Label><Input id="admin-email" type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></div><div className="space-y-2"><Label htmlFor="admin-password">Contraseña</Label><Input id="admin-password" type="password" autoComplete={mode === "login" ? "current-password" : "new-password"} minLength={8} value={password} onChange={(event) => setPassword(event.target.value)} required /><p className="text-xs text-[#7f756b]">Mínimo 8 caracteres.</p></div><Button className="w-full bg-[#171717] hover:bg-[#2b2b2b]" disabled={busy}>{busy ? <Loader2 className="mr-2 animate-spin" size={16} /> : <LogIn className="mr-2" size={16} />}{mode === "login" ? "Entrar al panel" : "Crear cuenta administrativa"}</Button></form>{notice && <p role="status" className="mt-4 rounded-xl border border-[#B99137]/25 bg-[#F5EFE3] px-4 py-3 text-sm leading-5 text-[#5f5548]">{notice}</p>}<button type="button" className="mt-5 w-full text-center text-xs font-semibold text-[#8B6A24] underline" onClick={() => { setMode((current) => current === "login" ? "signup" : "login"); setNotice(""); }}>{mode === "login" ? "Crear una cuenta administrativa" : "Ya tengo una cuenta"}</button>{mode === "signup" && <button type="button" className="mt-3 inline-flex w-full items-center justify-center gap-2 text-xs font-semibold text-[#6e665d] underline" disabled={busy} onClick={resendConfirmation}><MailCheck size={14} />Reenviar enlace de confirmación</button>}</section></div>;
 }
 
 function AdminContent() {
