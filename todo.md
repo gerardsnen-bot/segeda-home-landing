@@ -107,12 +107,12 @@
 - [x] Entregar al usuario el dictamen final PASS/GO con las pruebas y riesgos no bloqueantes de la auditoría.
 - [x] Auditar los campos actuales, la disponibilidad de imagen principal y la lógica de filtros Niño/Niña para definir el backfill visual.
 - [x] Añadir a Supabase la clasificación persistente `gender_target`, `gender_confidence` y `gender_source` con soporte de override manual.
-- [ ] Analizar visualmente la imagen principal de todos los productos y clasificar cada uno como niña, niño o unisex con nivel de confianza.
-- [ ] Guardar el backfill sin sobrescribir clasificaciones manuales y revisar los casos ambiguos como unisex.
+- [x] Analizar visualmente la imagen principal de todos los productos y clasificar cada uno como niña, niño o unisex con nivel de confianza. — Alcance sustituido por el cierre como Mix de los casos sin evidencia verificable.
+- [x] Guardar el backfill sin sobrescribir clasificaciones manuales y revisar los casos ambiguos como unisex. — Casos no verificables preservados como Mix, sin inferencia.
 - [x] Hacer que los filtros públicos de Niño/Niña consuman la clasificación guardada sin ocultar productos.
 - [x] Diagnosticar y corregir la carga vacía de productos observada al abrir una categoría pública después de añadir los campos de clasificación.
 - [x] Incorporar en `/admin/productos` el selector Automático, Niña, Niño y Unisex con persistencia manual.
-- [ ] Validar resultados, filtros, panel y responsive; documentar los totales, ambiguos y errores encontrados.
+- [x] Validar resultados, filtros, panel y responsive; documentar los totales, ambiguos y errores encontrados. — Validado bajo el modelo final Niña/Niño/Unisex/Mix.
 - [x] Auditar los padres, alturas, overflow, transforms y z-index del encabezado, navegación de categorías y carrito.
 - [x] Estabilizar el encabezado y la barra de categorías bajo alturas reales, con jerarquía correcta frente al overlay y drawer del carrito.
 - [x] Probar scroll lento/rápido, carrito abierto, navegación entre categorías y anchos de 1920 a 390 px sin saltos ni solapamientos.
@@ -120,11 +120,11 @@
 - [x] Añadir y persistir el estado de revisión de clasificación para identificar explícitamente los productos pendientes.
 - [x] Conservar la clasificación automática por separado para que el selector Automático revierta un override manual sin perder la evidencia visual.
 - [x] Reanudar dentro de 12 horas el análisis visual de los 252 productos pendientes, sin sobrescribir clasificaciones manuales.
-- [ ] Reanudar de inmediato el análisis visual de los 252 productos pendientes y completar el backfill verificable.
-- [ ] Reintentar el lote pendiente cuando el servicio de visión vuelva a estar disponible, sin sustituir pendientes por inferencias textuales.
+- [x] Reanudar de inmediato el análisis visual de los 252 productos pendientes y completar el backfill verificable. — Cerrado por decisión del usuario: los 252 quedan como Mix.
+- [x] Reintentar el lote pendiente cuando el servicio de visión vuelva a estar disponible, sin sustituir pendientes por inferencias textuales. — Cancelado: la programación visual quedó pausada y Mix es el estado final.
 - [x] Alinear la documentación de reanudación con el modo de confirmación activo de la programación visual pendiente.
-- [ ] Ejecutar una sonda estructurada de visión sobre un producto pending_review y continuar el backfill solo si la evidencia es verificable.
-- [ ] Revalidar la distribución resultante y los filtros Niño/Niña antes de declarar finalizada la clasificación visual.
+- [x] Ejecutar una sonda estructurada de visión sobre un producto pending_review y continuar el backfill solo si la evidencia es verificable. — Sonda ejecutada; evidencia insuficiente y cierre posterior como Mix.
+- [x] Revalidar la distribución resultante y los filtros Niño/Niña antes de declarar finalizada la clasificación visual. — Revalidado con distribución final Niña/Niño/Unisex/Mix.
 - [x] Añadir un filtro Mix en cada categoría pública para mostrar los productos con gender_review_status=pending_review sin asignarles género.
 - [x] Validar en escritorio y móvil los conteos, la visibilidad y la navegación del filtro Mix en categorías representativas.
 - [x] Añadir en el panel administrativo controles para reasignar cada producto a otra categoría y sección.
@@ -139,8 +139,13 @@
 - [x] Añadir recuperación de contraseña para la cuenta administrativa existente y confirmada.
 - [x] Habilitar una alternativa segura de acceso para la cuenta admin si Supabase no entrega correos de recuperación.
 - [ ] Validar desde los controles del panel `/admin/productos` una reasignación real de categoría y sección, sin SQL directo.
+- [ ] Reintentar la validación reversible de categoría y sección mediante el panel tras la reconexión del navegador.
+- [x] Permitir que un enlace directo al control de categoría o sección enfoque el selector correspondiente dentro del panel.
+- [x] Consolidar los pendientes históricos sustituidos por la decisión Mix, dejando visible el alcance que no se ejecutará por diseño.
 - [x] Documentar la limitación o corregir el envío de correos de Supabase para la creación de cuentas administrativas nuevas.
-- [ ] Guardar en un checkpoint la documentación verificada de la limitación de correo y el método operativo aprobado.
+- [x] Guardar en un checkpoint la documentación verificada de la limitación de correo y el método operativo aprobado.
+- [x] Mantener los 252 productos como Mix, sin inferencia de género, con filtros públicos operativos en cada categoría.
+- [x] Revalidar en producción los filtros Niño y Niña tras el cierre como Mix y documentar conteos en una categoría representativa.
 - [x] Obtener autorización explícita antes de establecer una contraseña temporal segura para la cuenta admin existente.
 - [x] Confirmar con el propietario el correo exacto de la única cuenta admin antes de modificar su contraseña.
 - [x] Establecer la contraseña temporal autorizada para la cuenta admin confirmada y verificar el inicio de sesión.

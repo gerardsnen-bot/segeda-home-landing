@@ -36,3 +36,9 @@ La programación de reanudación visual se encontraba pausada y permanece desact
 La vista de desarrollo ya muestra el filtro Mix con 142 productos en Nubes temáticas. La comprobación inicial de producción mostró un bundle anterior y, una vez propagado el nuevo bundle, la consulta pública quedó vacía por caché de esquema de PostgREST. Se recargó explícitamente el esquema de Supabase y la categoría volvió a presentar sus 213 diseños.
 
 La comprobación final de `https://mdfantasy.shop/catalogo/nubes?v=mix-schema-reload-3` confirmó el botón **Mix · 142**. Al activarlo, la categoría presentó exactamente **142 resultados** y los productos correspondientes, sin ocultarlos ni reclasificarlos como Niña o Niño.
+
+## Reconciliación del alcance histórico
+
+Los ítems históricos que pedían reanudar o completar la clasificación automática de los 252 casos ambiguos quedan **sustituidos, no ejecutados**, por la decisión de producto de conservarlos como Mix. Esta distinción evita afirmar una clasificación visual inexistente: 431 productos conservan una clasificación basada en evidencia, mientras que 252 se mantienen visibles bajo Mix sin inferencia de género.
+
+La validación posterior en producción de Nubes temáticas confirma la separación pública: 213 resultados totales, 47 en Niña, 13 en Niño, 142 en Mix y 11 clasificados internamente como Unisex. La suma es consistente y los filtros Niña y Niño continúan operativos sin absorber productos Mix.

@@ -60,6 +60,19 @@ export default function AdminProductManager() {
 
   useEffect(() => { load().catch(() => setChecking(false)); }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || checking || !products.length) return;
+    const targetId = window.location.hash.slice(1);
+    if (!targetId.startsWith("placement-")) return;
+    const frame = window.requestAnimationFrame(() => {
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      target.scrollIntoView({ block: "center" });
+      if (target instanceof HTMLElement) target.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [checking, products]);
+
   const grouped = useMemo(() => categories.map((category) => ({ ...category, products: products.filter((product) => product.category_id === category.id) })), [categories, products]);
   const sectionOptions = useMemo(() => Array.from(new Set(products.map((product) => product.theme_group?.trim()).filter((section): section is string => Boolean(section)))).sort((a, b) => a.localeCompare(b, "es")), [products]);
 
