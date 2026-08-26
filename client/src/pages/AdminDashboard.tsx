@@ -29,7 +29,7 @@ const sectionFromPath = (path: string): PanelSection => {
 const sectionPath = (section: PanelSection) => section === "overview" ? "/admin" : `/admin/${({ products: "productos", categories: "categorias", content: "contenido", settings: "configuracion" } as const)[section]}`;
 
 function SupabaseAccess() {
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [mode, setMode] = useState<"login" | "signup" | "recovery">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -42,6 +42,17 @@ function SupabaseAccess() {
     if (!supabase) return;
     setBusy(true);
     setNotice("");
+    if (mode === "recovery") {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/admin?recovery=1` });
+      setBusy(false);
+      if (error) {
+        setNotice(error.message);
+        return toast.error(error.message);
+      }
+      const message = "Enviamos un enlace para restablecer tu contraseña. Revisa también la carpeta de correo no deseado.";
+      setNotice(message);
+      return toast.success(message);
+    }
     const result = mode === "login"
       ? await supabase.auth.signInWithPassword({ email, password })
       : await supabase.auth.signUp({ email, password, options: { data: { full_name: "Administración MDFantasy" }, emailRedirectTo: confirmationRedirect } });
@@ -77,7 +88,55 @@ function SupabaseAccess() {
     toast.success(message);
   };
 
-  return <div className="mx-auto flex min-h-[75vh] max-w-md items-center px-4"><section className="w-full rounded-[28px] border border-[#B99137]/30 bg-white p-8 shadow-[0_18px_50px_rgba(0,0,0,.08)]"><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#B99137] text-[#B99137]"><ShieldCheck size={20} /></span><p className="mt-4 text-xs font-bold uppercase tracking-[.18em] text-[#8B6A24]">MDFantasy Studio</p><h1 className="mt-2 font-serif text-4xl text-[#171717]">Acceso administrativo</h1><p className="mt-3 text-sm leading-6 text-[#6e665d]">{mode === "login" ? "Inicia sesión con la cuenta de Supabase que gestionará el catálogo y contenido de MDFantasy." : "Crea la cuenta de Supabase que administrará el catálogo. Tras crearla, confirma el correo para activar el acceso."}</p><form onSubmit={submit} className="mt-7 space-y-4"><div className="space-y-2"><Label htmlFor="admin-email">Correo</Label><Input id="admin-email" type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></div><div className="space-y-2"><Label htmlFor="admin-password">Contraseña</Label><Input id="admin-password" type="password" autoComplete={mode === "login" ? "current-password" : "new-password"} minLength={8} value={password} onChange={(event) => setPassword(event.target.value)} required /><p className="text-xs text-[#7f756b]">Mínimo 8 caracteres.</p></div><Button className="w-full bg-[#171717] hover:bg-[#2b2b2b]" disabled={busy}>{busy ? <Loader2 className="mr-2 animate-spin" size={16} /> : <LogIn className="mr-2" size={16} />}{mode === "login" ? "Entrar al panel" : "Crear cuenta administrativa"}</Button></form>{notice && <p role="status" className="mt-4 rounded-xl border border-[#B99137]/25 bg-[#F5EFE3] px-4 py-3 text-sm leading-5 text-[#5f5548]">{notice}</p>}<button type="button" className="mt-5 w-full text-center text-xs font-semibold text-[#8B6A24] underline" onClick={() => { setMode((current) => current === "login" ? "signup" : "login"); setNotice(""); }}>{mode === "login" ? "Crear una cuenta administrativa" : "Ya tengo una cuenta"}</button>{mode === "signup" && <button type="button" className="mt-3 inline-flex w-full items-center justify-center gap-2 text-xs font-semibold text-[#6e665d] underline" disabled={busy} onClick={resendConfirmation}><MailCheck size={14} />Reenviar enlace de confirmación</button>}</section></div>;
+  const isRecovery = mode === "recovery";
+  const intro = mode === "login"
+    ? "Inicia sesión con la cuenta de Supabase que gestionará el catálogo y contenido de MDFantasy."
+    : mode === "signup"
+      ? "Crea la cuenta de Supabase que administrará el catálogo. Tras crearla, confirma el correo para activar el acceso."
+      : "Recibirás un enlace seguro para crear una nueva contraseña de la cuenta administrativa existente.";
+  const submitLabel = mode === "login" ? "Entrar al panel" : mode === "signup" ? "Crear cuenta administrativa" : "Enviar enlace de recuperación";
+  return <div className="mx-auto flex min-h-[75vh] max-w-md items-center px-4"><section className="w-full rounded-[28px] border border-[#B99137]/30 bg-white p-8 shadow-[0_18px_50px_rgba(0,0,0,.08)]"><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#B99137] text-[#B99137]"><ShieldCheck size={20} /></span><p className="mt-4 text-xs font-bold uppercase tracking-[.18em] text-[#8B6A24]">MDFantasy Studio</p><h1 className="mt-2 font-serif text-4xl text-[#171717]">{isRecovery ? "Recupera tu acceso" : "Acceso administrativo"}</h1><p className="mt-3 text-sm leading-6 text-[#6e665d]">{intro}</p><form onSubmit={submit} className="mt-7 space-y-4"><div className="space-y-2"><Label htmlFor="admin-email">Correo</Label><Input id="admin-email" type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></div>{!isRecovery && <div className="space-y-2"><Label htmlFor="admin-password">Contraseña</Label><Input id="admin-password" type="password" autoComplete={mode === "login" ? "current-password" : "new-password"} minLength={8} value={password} onChange={(event) => setPassword(event.target.value)} required /><p className="text-xs text-[#7f756b]">Mínimo 8 caracteres.</p></div>}<Button className="w-full bg-[#171717] hover:bg-[#2b2b2b]" disabled={busy}>{busy ? <Loader2 className="mr-2 animate-spin" size={16} /> : <LogIn className="mr-2" size={16} />}{submitLabel}</Button></form>{notice && <p role="status" className="mt-4 rounded-xl border border-[#B99137]/25 bg-[#F5EFE3] px-4 py-3 text-sm leading-5 text-[#5f5548]">{notice}</p>}<button type="button" className="mt-5 w-full text-center text-xs font-semibold text-[#8B6A24] underline" onClick={() => { setMode((current) => current === "login" ? "signup" : "login"); setNotice(""); }}>{mode === "login" ? "Crear una cuenta administrativa" : "Ya tengo una cuenta"}</button>{mode === "login" && <button type="button" className="mt-3 w-full text-center text-xs font-semibold text-[#6e665d] underline" onClick={() => { setMode("recovery"); setNotice(""); }}>Olvidé mi contraseña</button>}{mode === "signup" && <button type="button" className="mt-3 inline-flex w-full items-center justify-center gap-2 text-xs font-semibold text-[#6e665d] underline" disabled={busy} onClick={resendConfirmation}><MailCheck size={14} />Reenviar enlace de confirmación</button>}</section></div>;
+}
+
+function ResetAdminPassword() {
+  const [password, setPassword] = useState("");
+  const [ready, setReady] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState("Verificando el enlace seguro…");
+
+  useEffect(() => {
+    const client = supabase;
+    if (!client) return;
+    const checkSession = async () => {
+      const { data } = await client.auth.getSession();
+      setReady(Boolean(data.session));
+      if (data.session) setNotice("El enlace está listo. Crea una nueva contraseña para continuar.");
+    };
+    checkSession();
+    const { data: listener } = client.auth.onAuthStateChange((event, session) => {
+      if ((event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") && session) {
+        setReady(true);
+        setNotice("El enlace está listo. Crea una nueva contraseña para continuar.");
+      }
+    });
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  const savePassword = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!supabase || !ready) return;
+    setBusy(true);
+    const { error } = await supabase.auth.updateUser({ password });
+    setBusy(false);
+    if (error) {
+      setNotice(error.message);
+      return toast.error(error.message);
+    }
+    toast.success("Contraseña actualizada. Abriendo el panel…");
+    window.location.assign("/admin/productos");
+  };
+
+  return <div className="mx-auto flex min-h-[75vh] max-w-md items-center px-4"><section className="w-full rounded-[28px] border border-[#B99137]/30 bg-white p-8 shadow-[0_18px_50px_rgba(0,0,0,.08)]"><span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#B99137] text-[#B99137]"><ShieldCheck size={20} /></span><p className="mt-4 text-xs font-bold uppercase tracking-[.18em] text-[#8B6A24]">MDFantasy Studio</p><h1 className="mt-2 font-serif text-4xl text-[#171717]">Nueva contraseña</h1><p role="status" className="mt-3 text-sm leading-6 text-[#6e665d]">{notice}</p><form onSubmit={savePassword} className="mt-7 space-y-4"><div className="space-y-2"><Label htmlFor="new-admin-password">Nueva contraseña</Label><Input id="new-admin-password" type="password" autoComplete="new-password" minLength={8} value={password} onChange={(event) => setPassword(event.target.value)} disabled={!ready || busy} required /><p className="text-xs text-[#7f756b]">Mínimo 8 caracteres.</p></div><Button className="w-full bg-[#171717] hover:bg-[#2b2b2b]" disabled={!ready || busy}>{busy ? <Loader2 className="mr-2 animate-spin" size={16} /> : <ShieldCheck className="mr-2" size={16} />}Guardar nueva contraseña</Button></form></section></div>;
 }
 
 function AdminContent() {
@@ -208,6 +267,8 @@ export default function AdminDashboard() {
     if (!supabase) return setSessionReady(false);
     supabase.auth.getSession().then(({ data }) => setSessionReady(Boolean(data.session)));
   }, []);
+  const isRecoveryRoute = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("recovery") === "1";
   if (sessionReady === null) return <div className="flex min-h-screen items-center justify-center bg-[#FAF8F3]"><Loader2 className="animate-spin text-[#B99137]" /></div>;
+  if (isRecoveryRoute) return <ResetAdminPassword />;
   return sessionReady ? <AdminContent /> : <SupabaseAccess />;
 }

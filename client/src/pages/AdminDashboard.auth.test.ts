@@ -9,5 +9,8 @@ describe("acceso administrativo de Supabase", () => {
     expect(source).toContain("supabase.auth.resend");
     expect(source).toContain("Reenviar enlace de confirmación");
     expect(source).toContain("Cuenta creada. Revisa tu correo y confirma la cuenta");
+    expect(source).toContain("resetPasswordForEmail");
+    expect(source).toContain("Olvidé mi contraseña");
+    expect(source).toContain("supabase.auth.updateUser");
   });
 });

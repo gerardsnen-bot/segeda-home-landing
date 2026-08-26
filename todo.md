@@ -134,6 +134,9 @@
 - [ ] Realizar una reasignación real desde el panel de un producto entre categoría y sección, confirmar su persistencia en Supabase y verificar el reflejo público.
 - [ ] Elevar la cuenta autenticada autorizada a rol admin y validar que accede al panel de Productos.
 - [ ] Reparar el formulario administrativo para permitir crear una cuenta Supabase e iniciar sesión desde el panel.
+- [ ] Confirmar que el dominio publicado sirve el formulario administrativo con confirmación y reenvío de activación.
+- [ ] Diagnosticar y corregir la entrega del correo de confirmación de Supabase para la cuenta administrativa.
+- [ ] Añadir recuperación de contraseña para la cuenta administrativa existente y confirmada.
 - [x] Confirmar que la documentación final de Mix contiene los totales globales y por categoría, la decisión de negocio y el estado de la programación visual.
 - [x] Confirmar que el bundle publicado incorpora Mix antes de validar el filtro en mdfantasy.shop.
 - [x] Desactivar la programación de reanudación visual para que los productos Mix no vuelvan a procesarse automáticamente.
