@@ -128,7 +128,7 @@
 - [x] Ejecutar una sonda estructurada de visión sobre un producto pending_review y detener el lote al detectar evidencia insuficiente, sin modificar Supabase.
 - [x] Confirmar en Supabase y en el dominio público que los productos pending_review siguen publicados y visibles en el catálogo.
 - [x] Corregir la carga pública que muestra cero productos en categorías pese a que los 683 productos están activos en Supabase.
-- [ ] Publicar el alias de la ruta descriptiva de Nubes temáticas y verificar en producción que carga los productos publicados.
+- [x] Publicar el alias de la ruta descriptiva de Nubes temáticas y verificar en producción que carga los productos publicados.
 - [x] Extraer de la web original los precios por producto y variante, conservando evidencia de origen y asociaciones verificables.
 - [x] Actualizar en Supabase únicamente los precios de variantes con coincidencia segura y revalidarlos en el catálogo público.
 - [x] Sustituir la imagen principal del hero MDFantasy por la imagen proporcionada y preservar un encuadre legible en escritorio y móvil.
