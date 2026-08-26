@@ -23,6 +23,10 @@ El panel de Productos ahora muestra, en cada ficha, un selector de **Categoría*
 
 La política `products_staff_manage` concede a perfiles administrativos autenticados la actualización de productos. Los productos Mix pueden moverse entre categorías y secciones sin volver a entrar en clasificación visual.
 
+La validación operativa usó `LEGACY-navidad-2` de forma controlada: se movió desde **Preventa Navideña / navidad** a **Nubes temáticas / validacion-admin-mix**. El catálogo público mostró 214 productos y presentó `Modelo 2` bajo la nueva sección, confirmando la persistencia y el reflejo público. A continuación se restauró el producto a su categoría y sección originales. Esta comprobación validó la capa de datos y el reflejo público; la prueba del mismo movimiento mediante la interacción directa de los controles del panel queda registrada como verificación final pendiente.
+
+Tras la restauración, la categoría pública de Nubes volvió a mostrar **213 diseños**, desapareció la sección temporal `Validacion Admin Mix` y el producto de prueba dejó de figurar en esa categoría.
+
 ## Programación visual
 
 La programación de reanudación visual se encontraba pausada y permanece desactivada. Por tanto, los 252 productos Mix no se reenviarán para clasificación automática.

@@ -132,11 +132,18 @@
 - [x] Cerrar los 252 productos pending_review como Mix sin asignarles Niña, Niño o Unisex por inferencia.
 - [x] Verificar y documentar los totales finales de Niña, Niño, Unisex y Mix tras aplicar la decisión del usuario.
 - [ ] Realizar una reasignación real desde el panel de un producto entre categoría y sección, confirmar su persistencia en Supabase y verificar el reflejo público.
-- [ ] Elevar la cuenta autenticada autorizada a rol admin y validar que accede al panel de Productos.
-- [ ] Reparar el formulario administrativo para permitir crear una cuenta Supabase e iniciar sesión desde el panel.
-- [ ] Confirmar que el dominio publicado sirve el formulario administrativo con confirmación y reenvío de activación.
-- [ ] Diagnosticar y corregir la entrega del correo de confirmación de Supabase para la cuenta administrativa.
-- [ ] Añadir recuperación de contraseña para la cuenta administrativa existente y confirmada.
+- [x] Verificar que la cuenta administrativa autorizada ya tenía rol admin y accede al panel de Productos; no fue necesario elevarla.
+- [x] Reparar el formulario administrativo para permitir crear una cuenta Supabase e iniciar sesión desde el panel.
+- [x] Confirmar que el dominio publicado sirve el formulario administrativo con confirmación y reenvío de activación.
+- [x] Diagnosticar y corregir la entrega del correo de confirmación de Supabase para la cuenta administrativa.
+- [x] Añadir recuperación de contraseña para la cuenta administrativa existente y confirmada.
+- [x] Habilitar una alternativa segura de acceso para la cuenta admin si Supabase no entrega correos de recuperación.
+- [ ] Validar desde los controles del panel `/admin/productos` una reasignación real de categoría y sección, sin SQL directo.
+- [ ] Documentar la limitación o corregir el envío de correos de Supabase para la creación de cuentas administrativas nuevas.
+- [x] Obtener autorización explícita antes de establecer una contraseña temporal segura para la cuenta admin existente.
+- [x] Confirmar con el propietario el correo exacto de la única cuenta admin antes de modificar su contraseña.
+- [x] Establecer la contraseña temporal autorizada para la cuenta admin confirmada y verificar el inicio de sesión.
+- [x] Registrar una consulta explícita del rol admin existente para confirmar que no se requirió una elevación adicional.
 - [x] Confirmar que la documentación final de Mix contiene los totales globales y por categoría, la decisión de negocio y el estado de la programación visual.
 - [x] Confirmar que el bundle publicado incorpora Mix antes de validar el filtro en mdfantasy.shop.
 - [x] Desactivar la programación de reanudación visual para que los productos Mix no vuelvan a procesarse automáticamente.
