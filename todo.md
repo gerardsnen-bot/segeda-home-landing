@@ -139,7 +139,8 @@
 - [x] Añadir recuperación de contraseña para la cuenta administrativa existente y confirmada.
 - [x] Habilitar una alternativa segura de acceso para la cuenta admin si Supabase no entrega correos de recuperación.
 - [ ] Validar desde los controles del panel `/admin/productos` una reasignación real de categoría y sección, sin SQL directo.
-- [ ] Documentar la limitación o corregir el envío de correos de Supabase para la creación de cuentas administrativas nuevas.
+- [x] Documentar la limitación o corregir el envío de correos de Supabase para la creación de cuentas administrativas nuevas.
+- [ ] Guardar en un checkpoint la documentación verificada de la limitación de correo y el método operativo aprobado.
 - [x] Obtener autorización explícita antes de establecer una contraseña temporal segura para la cuenta admin existente.
 - [x] Confirmar con el propietario el correo exacto de la única cuenta admin antes de modificar su contraseña.
 - [x] Establecer la contraseña temporal autorizada para la cuenta admin confirmada y verificar el inicio de sesión.

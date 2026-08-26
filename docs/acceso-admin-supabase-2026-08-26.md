@@ -15,3 +15,9 @@ La cuenta indicada para recuperación (`xavimark.1706@gmail.com`) no está vincu
 Tras la confirmación expresa del propietario, se estableció una contraseña temporal segura para la cuenta administrativa confirmada. El inicio de sesión de Supabase se completó y, una vez autenticada la sesión de Manus, `/admin/productos` presentó el gestor de Productos por categoría con los controles de **Categoría** y **Sección** en cada ficha.
 
 La consulta de perfil confirmó que la cuenta administrativa estaba activa y ya tenía rol `admin`; no fue necesario modificar privilegios. La prueba operativa de categoría y sección se completó y el producto usado para validación se restauró a su ubicación original.
+
+## Limitación de cuentas nuevas y método operativo
+
+La creación y recuperación de cuentas nuevas depende del proveedor de correo administrado por Supabase. Aunque Auth aceptó la solicitud, la entrega de correo no pudo verificarse y los registros de Auth devolvieron un error interno al consultar el estado del envío. Por tanto, la creación de administradores adicionales mediante enlace de correo se considera una **limitación externa pendiente**.
+
+El acceso de la cuenta administrativa existente quedó operativo mediante una contraseña temporal autorizada por el propietario. Debe cambiarse desde el panel después del próximo inicio de sesión. Si se requieren más administradores, la alternativa recomendada es crear el usuario desde la consola de Supabase o configurar un proveedor SMTP propio antes de invitarlo desde la interfaz.
