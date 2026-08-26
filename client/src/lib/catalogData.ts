@@ -11,7 +11,7 @@ export type CatalogProduct = {
   tags: string;
   audience: string;
   genderTarget: "girl" | "boy" | "unisex";
-  genderReviewStatus: "classified" | "pending_review";
+  genderReviewStatus: "classified" | "pending_review" | "mix";
   themeGroup: string;
   estimatedDays: string;
   featured: boolean;
@@ -50,7 +50,7 @@ type ProductRow = {
   short_description: string | null;
   audience: string | null;
   gender_target: "girl" | "boy" | "unisex" | null;
-  gender_review_status: "classified" | "pending_review" | null;
+  gender_review_status: "classified" | "pending_review" | "mix" | null;
   theme_group: string | null;
   estimated_days: string | null;
   featured: boolean;
@@ -74,6 +74,14 @@ export function genderTargetToAudience(target: "girl" | "boy" | "unisex" | null,
   if (target === "boy") return "niño";
   if (target === "unisex") return "unisex";
   return fallback ?? "unisex";
+}
+
+export type CatalogAudienceFilter = "todos" | "niña" | "niño" | "mix";
+
+export function matchesCatalogAudience(product: CatalogProduct, filter: CatalogAudienceFilter): boolean {
+  if (filter === "todos") return true;
+  if (filter === "mix") return product.genderReviewStatus === "mix" || product.genderReviewStatus === "pending_review";
+  return product.audience === filter;
 }
 
 function mapProduct(row: ProductRow): CatalogProduct {

@@ -1,0 +1,28 @@
+# Cierre de clasificación visual como Mix
+
+## Decisión aplicada
+
+Por instrucción del propietario, los productos que seguían sin evidencia visual suficiente dejaron de estar en espera de una nueva clasificación automática. Se mantienen publicados, pero ahora usan el estado persistente **`mix`**, que no los presenta como una clasificación visual verificada de Niña, Niño ni Unisex.
+
+| Estado público | Total activo | Tratamiento |
+| --- | ---: | --- |
+| Niña verificada | 170 | Filtro Niña |
+| Niño verificado | 67 | Filtro Niño |
+| Unisex verificado | 194 | Disponible en Todos y Unisex interno |
+| Mix | 252 | Filtro Mix, sin inferencia de género |
+
+La distribución de Mix se concentra en Nubes temáticas, con 142 productos; Cuadros infantiles tiene 98 y Combo completo 12. Las demás categorías activas no tienen productos Mix al cierre de esta actualización.
+
+## Catálogo público
+
+Cada categoría incorpora el botón **Mix** junto con Todos, Niña y Niño. El filtro identifica los productos mediante su estado de revisión persistente, por lo que los resultados no dependen de títulos, colores, texto de imagen ni heurísticas. En Nubes temáticas, la interfaz valida 142 productos Mix en escritorio y móvil.
+
+## Organización desde el panel
+
+El panel de Productos ahora muestra, en cada ficha, un selector de **Categoría** y un campo de **Sección**. La categoría se guarda inmediatamente al seleccionar un destino y la sección se guarda al finalizar la edición del campo. La sección reutiliza el campo `theme_group`, que alimenta las agrupaciones públicas cuando existe más de una sección en una categoría.
+
+La política `products_staff_manage` concede a perfiles administrativos autenticados la actualización de productos. Los productos Mix pueden moverse entre categorías y secciones sin volver a entrar en clasificación visual.
+
+## Programación visual
+
+La programación de reanudación visual se encontraba pausada y permanece desactivada. Por tanto, los 252 productos Mix no se reenviarán para clasificación automática.

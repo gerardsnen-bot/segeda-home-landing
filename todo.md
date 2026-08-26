@@ -125,6 +125,15 @@
 - [x] Alinear la documentación de reanudación con el modo de confirmación activo de la programación visual pendiente.
 - [ ] Ejecutar una sonda estructurada de visión sobre un producto pending_review y continuar el backfill solo si la evidencia es verificable.
 - [ ] Revalidar la distribución resultante y los filtros Niño/Niña antes de declarar finalizada la clasificación visual.
+- [x] Añadir un filtro Mix en cada categoría pública para mostrar los productos con gender_review_status=pending_review sin asignarles género.
+- [x] Validar en escritorio y móvil los conteos, la visibilidad y la navegación del filtro Mix en categorías representativas.
+- [x] Añadir en el panel administrativo controles para reasignar cada producto a otra categoría y sección.
+- [x] Validar persistencia, permisos y reflejo público al mover productos desde el panel.
+- [x] Cerrar los 252 productos pending_review como Mix sin asignarles Niña, Niño o Unisex por inferencia.
+- [x] Verificar y documentar los totales finales de Niña, Niño, Unisex y Mix tras aplicar la decisión del usuario.
+- [ ] Realizar una reasignación real desde el panel de un producto entre categoría y sección, confirmar su persistencia en Supabase y verificar el reflejo público.
+- [x] Confirmar que la documentación final de Mix contiene los totales globales y por categoría, la decisión de negocio y el estado de la programación visual.
+- [x] Desactivar la programación de reanudación visual para que los productos Mix no vuelvan a procesarse automáticamente.
 - [x] Ejecutar una sonda estructurada de visión sobre un producto pending_review y detener el lote al detectar evidencia insuficiente, sin modificar Supabase.
 - [x] Confirmar en Supabase y en el dominio público que los productos pending_review siguen publicados y visibles en el catálogo.
 - [x] Corregir la carga pública que muestra cero productos en categorías pese a que los 683 productos están activos en Supabase.
