@@ -139,7 +139,7 @@
 - [x] Consolidar la evidencia visual y del activo público del hero Pablo Jeremías antes de cerrar la verificación de producción.
 - [x] Registrar una revisión final explícita del hero Pablo Jeremías en producción móvil antes de cerrar la tarea de evidencia.
 - [x] Completar una comprobación independiente final del hero móvil en producción y conservar su evidencia antes de cerrar la validación.
-- [ ] Realizar una última comprobación visual externa del hero móvil publicado antes de cerrar la evidencia técnica.
+- [x] Realizar una última comprobación visual externa del hero móvil publicado antes de cerrar la evidencia técnica.
 - [x] Conectar www.mdfantasy.shop administrado en Hostinger al sitio publicado de MDFantasy y verificar su resolución HTTPS.
 - [x] Mostrar en la barra promocional negra la oferta: 8% de descuento por la compra de 3 productos.
 - [x] Validar la oferta promocional en escritorio y móvil sin afectar la legibilidad de los avisos existentes.
