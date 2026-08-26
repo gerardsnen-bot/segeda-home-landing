@@ -147,6 +147,10 @@
 - [x] Restaurar la categoría del producto de prueba desde el selector del panel, sin SQL directo. — Cierre sustituido por restauración segura verificada al detectar que el foco automático de un selector nativo permitía cambios involuntarios; el defecto quedó corregido antes de publicar.
 - [x] Ejecutar una mutación real del campo de sección por UI y restaurar su valor original. — No se ejecutó una mutación de texto por la inestabilidad del navegador; el campo y su flujo de guardado siguen disponibles, se documentó la limitación y el catálogo quedó íntegro.
 - [x] Evitar que un enlace directo enfoque automáticamente un selector nativo y permita cambios accidentales con teclas de navegación.
+- [x] Auditar los precios y variantes publicados de MDFantasy frente a la web original de Segeda Home, comenzando por Cuadros.
+- [x] Corregir únicamente las discrepancias de precio o variante que se comprueben contra la fuente original.
+- [x] Inventariar los 94 productos sin asociación de precio previa y revalidar sus coincidencias con la fuente original.
+- [x] Mostrar “Precio por consultar” en lugar de S/0 cuando la fuente original no publica una tarifa numérica.
 - [x] Abrir automáticamente la categoría destino de un enlace directo para completar la edición de sección del producto de prueba.
 - [x] Permitir que un enlace directo al control de categoría o sección enfoque el selector correspondiente dentro del panel.
 - [x] Consolidar los pendientes históricos sustituidos por la decisión Mix, dejando visible el alcance que no se ejecutará por diseño.

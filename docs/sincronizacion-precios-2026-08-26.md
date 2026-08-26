@@ -15,6 +15,8 @@ El catálogo de referencia se extrajo de la web original de Segeda Home, usando 
 
 Los productos con asociación no única o sin variantes verificables de la fuente permanecieron sin modificar. La sincronización no alteró campos de género, estados de revisión ni overrides manuales.
 
+> Actualización de cierre: una segunda auditoría resolvió los 94 productos inicialmente no asociados. Se actualizaron 85 mediante imagen, categoría y perfil de precio idéntico; nueve modelos de Preventa Navideña se verificaron públicamente a S/79; y nueve productos sin tarifa publicada se presentan como “Precio por consultar”, igual que la fuente. Véase `docs/auditoria-precios-final-2026-08-26.md`.
+
 La revisión pública confirmó la presentación de precios y variantes en Cuadros infantiles y Nubes temáticas. Como ejemplos, Cuadros muestra precios desde **S/ 50** con sus seis tamaños de set, mientras que Nubes muestra precios desde **S/ 80** con opciones de 40 a 80 cm.
 
 ## Referencias

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CatalogProduct, genderTargetToAudience, matchesCatalogAudience } from "./catalogData";
+import { CatalogProduct, genderTargetToAudience, hasCatalogPrice, matchesCatalogAudience } from "./catalogData";
 
 describe("genderTargetToAudience", () => {
   it("expone las clasificaciones persistentes con las etiquetas de filtros públicas", () => {
@@ -25,5 +25,13 @@ describe("genderTargetToAudience", () => {
     expect(matchesCatalogAudience(classified, "mix")).toBe(false);
     expect(matchesCatalogAudience(pending, "todos")).toBe(true);
     expect(matchesCatalogAudience(classified, "niña")).toBe(true);
+  });
+});
+
+describe("hasCatalogPrice", () => {
+  it("distingue precios publicables de productos cuyo importe se consulta", () => {
+    expect(hasCatalogPrice(79)).toBe(true);
+    expect(hasCatalogPrice(0)).toBe(false);
+    expect(hasCatalogPrice(-1)).toBe(false);
   });
 });

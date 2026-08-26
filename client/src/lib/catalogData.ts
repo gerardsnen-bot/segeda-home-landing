@@ -78,6 +78,10 @@ export function genderTargetToAudience(target: "girl" | "boy" | "unisex" | null,
 
 export type CatalogAudienceFilter = "todos" | "niña" | "niño" | "mix";
 
+export function hasCatalogPrice(price: number): boolean {
+  return Number.isFinite(price) && price > 0;
+}
+
 export function matchesCatalogAudience(product: CatalogProduct, filter: CatalogAudienceFilter): boolean {
   if (filter === "todos") return true;
   if (filter === "mix") return product.genderReviewStatus === "mix" || product.genderReviewStatus === "pending_review";
