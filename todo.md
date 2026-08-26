@@ -169,3 +169,4 @@
 - [x] Validar el nuevo bloque de logo y la distribución de categorías en escritorio y móvil.
 - [x] Eliminar el logo superior duplicado y conservar únicamente el logo cuadrado de la barra de categorías.
 - [x] Validar el encabezado con un único logo en escritorio y móvil antes de publicarlo.
+- [x] Confirmar en producción la propagación de la cabecera con un único logo antes de dar por cerrada la eliminación del logo superior.
