@@ -32,9 +32,11 @@ export default function Navidad() {
       if (!active) return;
       setModels(products.map((product, index) => ({ id: String(product.id), title: product.title || `Modelo ${index + 1}`, image: product.imageUrl, price: product.price })));
       const payload = sections.find((section) => section.key === "navidad-preventa")?.payload ?? {};
-      setPricing({
+      const nextPricing = {
         regularPrice: Number(payload.regular_price ?? 0), singlePrice: Number(payload.single_price ?? 0), multiPrice: Number(payload.multi_price ?? 0), multiMinimum: Number(payload.multi_minimum ?? 2), productionDays: String(payload.production_days ?? ""), reserveMessage: String(payload.reserve_message ?? ""), shippingMessage: String(payload.shipping_message ?? ""),
-      });
+      };
+      setPricing(nextPricing);
+      updateCart((current) => current.map((item) => item.category === "navidad" ? { ...item, unitPrice: item.quantity >= nextPricing.multiMinimum ? nextPricing.multiPrice / nextPricing.multiMinimum : nextPricing.singlePrice } : item));
     }).catch(() => undefined);
     return () => { active = false; };
   }, []);
@@ -43,6 +45,7 @@ export default function Navidad() {
   const navidadTotal = useMemo(() => items.filter((item) => item.category === "navidad").reduce((sum, item) => sum + item.quantity * item.unitPrice, 0), [items]);
   const selectedModels = models.filter((model) => amounts[model.id]);
   const selected = selectedModels.map((model) => `${model.title} × ${amounts[model.id]}`).join(", ");
+  const multiUnitPrice = pricing && pricing.multiMinimum > 0 ? pricing.multiPrice / pricing.multiMinimum : 0;
 
   const changeAmount = (id: string, delta: number) => updateCart((current) => {
     const model = models.find((item) => item.id === id);
@@ -53,7 +56,7 @@ export default function Navidad() {
     const withoutCurrent = current.filter((item) => item.id !== itemId);
     const next: SegedaCartItem[] = nextQuantity ? [...withoutCurrent, { id: itemId, category: "navidad", title: model.title, image: model.image, quantity: nextQuantity, unitPrice: pricing?.singlePrice ?? model.price }] : withoutCurrent;
     const navidadQuantity = next.filter((item) => item.category === "navidad").reduce((sum, item) => sum + item.quantity, 0);
-    return next.map((item) => item.category === "navidad" ? { ...item, unitPrice: navidadQuantity >= (pricing?.multiMinimum ?? 2) ? (pricing?.multiPrice ?? item.unitPrice) : (pricing?.singlePrice ?? item.unitPrice) } : item);
+    return next.map((item) => item.category === "navidad" ? { ...item, unitPrice: navidadQuantity >= (pricing?.multiMinimum ?? 2) ? (multiUnitPrice || item.unitPrice) : (pricing?.singlePrice ?? item.unitPrice) } : item);
   });
 
   const scrollToModels = () => document.getElementById("navidad-modelos")?.scrollIntoView({ behavior: "smooth" });
@@ -80,7 +83,7 @@ export default function Navidad() {
           <p className="navidad-kicker">✦ Colección especial ✦</p>
           <h1>Preventa Navideña</h1>
           <p className="navidad-intro">{pricing ? "Elige uno, combina varios o repite tu modelo favorito. Los detalles de cada diseño se coordinan cómodamente por WhatsApp." : "Cargando información de preventa…"}</p>
-          {pricing && <><div className="navidad-prices"><article><p>1 LETRERO</p><del>Regular S/{pricing.regularPrice}</del><strong>S/{pricing.singlePrice}</strong><small>Precio de preventa</small></article><article className="multi"><p>DESDE {pricing.multiMinimum} LETREROS</p><del>Regular S/{pricing.regularPrice} c/u</del><strong>S/{pricing.multiPrice} c/u</strong><small>{pricing.multiMinimum} por S/{pricing.multiPrice * pricing.multiMinimum}</small></article></div><div className="navidad-perks"><span>♡ Diseños en MDF premium</span><span>✦ {models.length} modelos disponibles</span><span>◷ Preparación de {pricing.productionDays}</span><span>✓ {pricing.reserveMessage}</span><span>🚚 {pricing.shippingMessage}</span></div></>}
+          {pricing && <><div className="navidad-prices"><article><p>1 LETRERO</p><del>Regular S/{pricing.regularPrice}</del><strong>S/{pricing.singlePrice}</strong><small>Precio de preventa</small></article><article className="multi"><p>{pricing.multiMinimum} LETREROS</p><del>Regular S/{pricing.regularPrice} c/u</del><strong>S/{pricing.multiPrice}</strong><small>{pricing.multiMinimum} por S/{pricing.multiPrice}</small></article></div><div className="navidad-perks"><span>♡ Diseños en MDF premium</span><span>✦ {models.length} modelos disponibles</span><span>◷ Preparación de {pricing.productionDays}</span><span>✓ {pricing.reserveMessage}</span><span>🚚 {pricing.shippingMessage}</span></div></>}
         </section>
 
           <section id="navidad-modelos" className="navidad-models"><p className="navidad-kicker">Compra fácil y rápida</p><h2>Elige tus modelos favoritos</h2><p>Usa + para seleccionar. Puedes escoger modelos diferentes o pedir dos iguales.</p><div className="navidad-multi-guide"><span><b>1</b> Elige los modelos</span><span><b>2</b> Ajusta las cantidades</span><span><b>3</b> Coordina detalles por WhatsApp</span></div>{models.length ? <div className="navidad-grid">{models.map((model, index) => { const selectedAmount = amounts[model.id] ?? 0; return <article className="navidad-model" key={model.id}>{index === 1 && <span className="model-highlight">Diseño destacado</span>}<button className="model-photo-zoom" onClick={() => setZoomedModel(model)} aria-label={`Ampliar foto de ${model.title}`}><img src={model.image} alt={`Letrero navideño ${model.title}`} /><span><Maximize2 size={15} /> Ver detalle</span></button><div className="navidad-model-copy"><p>PREVENTA NAVIDEÑA</p><h3>{model.title}</h3><span>Diseño navideño en MDF · S/{pricing?.singlePrice ?? model.price} · detalles por coordinar</span><div className="quantity-control"><button onClick={() => changeAmount(model.id, -1)} disabled={!selectedAmount} aria-label={`Quitar ${model.title}`}><Minus size={15} /></button><div><b>{selectedAmount}</b><small>{selectedAmount === 1 ? "ELEGIDO" : "ELEGIDOS"}</small></div><button onClick={() => changeAmount(model.id, 1)} aria-label={`Seleccionar ${model.title}`}><Plus size={16} /></button></div><button className="select-model" onClick={() => changeAmount(model.id, 1)}>{selectedAmount ? "Agregar otro" : "Seleccionar modelo"}</button></div></article>; })}</div> : <div className="navidad-empty">Cargando modelos disponibles…</div>}
