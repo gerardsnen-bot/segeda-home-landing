@@ -19,7 +19,7 @@ import { useSegedaCart } from "@/lib/segedaCart";
 import { getCatalogOverview, getPublicSeo, getPublicSections, ManagedCategory, ManagedSection } from "@/lib/catalogData";
 
 const WHATSAPP = "https://wa.me/51938634695?text=Hola%20MDFantasy%2C%20quiero%20crear%20un%20producto%20personalizado";
-const HERO_IMAGE = "/manus-storage/mdfantasy-hero-pablo-jeremias_f72bc070.png";
+const HERO_IMAGE = "/assets/legacy/mdfantasy-hero-pablo-jeremias_f72bc070.webp";
 
 const serviceLines = [
   { icon: "⌂", title: "Decoración para el hogar", note: "Próximamente", slug: "nubes" },
@@ -30,21 +30,21 @@ const serviceLines = [
 ];
 
 const allCategories = [
-  { title: "Preventa Navideña", note: "9 diseños disponibles", image: "/manus-storage/navidad_c98eafac.jpg", slug: "navidad", badge: "PREVENTA · DESDE S/79", featured: true },
-  { title: "Nubes temáticas", note: "213 diseños disponibles", image: "/manus-storage/nubes-portada-premium_f843e2ec.jpeg", slug: "nubes" },
-  { title: "Placas circulares", note: "32 diseños disponibles", image: "/manus-storage/placas_f2df896b.jpg", slug: "placas" },
-  { title: "Cuadros infantiles", note: "170 diseños disponibles", image: "/manus-storage/cuadros_0fdc2e1c.jpg", slug: "cuadros" },
-  { title: "Combo completo", note: "82 diseños disponibles", image: "/manus-storage/combo_d729a5a2.jpg", slug: "combo" },
-  { title: "Nube + cuadros", note: "24 diseños disponibles", image: "/manus-storage/nube-cuadros_4f013700.jpg", slug: "nube-cuadros" },
-  { title: "Nube + cuadros + lámpara", note: "26 diseños disponibles", image: "/manus-storage/combo_d729a5a2.jpg", slug: "nube-cuadros-lampara" },
-  { title: "Nombre + cuadros", note: "10 diseños disponibles", image: "/manus-storage/nube-cuadros_4f013700.jpg", slug: "nombre-cuadros" },
-  { title: "Packs lamparitas", note: "29 diseños disponibles", image: "/manus-storage/instalacion-real-nubes_eee88aa5.jpg", slug: "packs" },
-  { title: "Lámparas decorativas", note: "65 diseños disponibles", image: "/manus-storage/instalacion-real-nubes_eee88aa5.jpg", slug: "lamparas" },
-  { title: "Liquidación", note: "14 diseños disponibles", image: "/manus-storage/cuadros_0fdc2e1c.jpg", slug: "liquidacion" },
-  { title: "Decoración para el hogar", note: "Próximamente", image: "/manus-storage/soft-paper-texture_0c3e5549.jpg", slug: "nubes", upcoming: true },
-  { title: "Fe y espiritualidad", note: "5 diseños disponibles", image: "/manus-storage/fe-espiritualidad_546155f2.png", slug: "fe-espiritualidad" },
-  { title: "Alcancías y regalos", note: "1 diseño disponible", image: "/manus-storage/placas_f2df896b.jpg", slug: "alcancias" },
-  { title: "Didácticos", note: "3 diseños disponibles", image: "/manus-storage/cuadros_0fdc2e1c.jpg", slug: "didacticos" },
+  { title: "Preventa Navideña", note: "9 diseños disponibles", image: "/assets/legacy/navidad_c98eafac.jpg", slug: "navidad", badge: "PREVENTA · DESDE S/79", featured: true },
+  { title: "Nubes temáticas", note: "213 diseños disponibles", image: "/assets/legacy/nubes-portada-premium_f843e2ec.jpeg", slug: "nubes" },
+  { title: "Placas circulares", note: "32 diseños disponibles", image: "/assets/legacy/placas_f2df896b.jpg", slug: "placas" },
+  { title: "Cuadros infantiles", note: "170 diseños disponibles", image: "/assets/legacy/cuadros_0fdc2e1c.jpg", slug: "cuadros" },
+  { title: "Combo completo", note: "82 diseños disponibles", image: "/assets/legacy/combo_d729a5a2.jpg", slug: "combo" },
+  { title: "Nube + cuadros", note: "24 diseños disponibles", image: "/assets/legacy/nube-cuadros_4f013700.jpg", slug: "nube-cuadros" },
+  { title: "Nube + cuadros + lámpara", note: "26 diseños disponibles", image: "/assets/legacy/combo_d729a5a2.jpg", slug: "nube-cuadros-lampara" },
+  { title: "Nombre + cuadros", note: "10 diseños disponibles", image: "/assets/legacy/nube-cuadros_4f013700.jpg", slug: "nombre-cuadros" },
+  { title: "Packs lamparitas", note: "29 diseños disponibles", image: "/assets/legacy/instalacion-real-nubes_eee88aa5.jpg", slug: "packs" },
+  { title: "Lámparas decorativas", note: "65 diseños disponibles", image: "/assets/legacy/instalacion-real-nubes_eee88aa5.jpg", slug: "lamparas" },
+  { title: "Liquidación", note: "14 diseños disponibles", image: "/assets/legacy/cuadros_0fdc2e1c.jpg", slug: "liquidacion" },
+  { title: "Decoración para el hogar", note: "Próximamente", image: "/assets/legacy/soft-paper-texture_0c3e5549.jpg", slug: "nubes", upcoming: true },
+  { title: "Fe y espiritualidad", note: "5 diseños disponibles", image: "/assets/legacy/fe-espiritualidad_546155f2.png", slug: "fe-espiritualidad" },
+  { title: "Alcancías y regalos", note: "1 diseño disponible", image: "/assets/legacy/placas_f2df896b.jpg", slug: "alcancias" },
+  { title: "Didácticos", note: "3 diseños disponibles", image: "/assets/legacy/cuadros_0fdc2e1c.jpg", slug: "didacticos" },
 ];
 
 const materialDetails = [
@@ -54,9 +54,9 @@ const materialDetails = [
 ];
 
 const inspirationCollections = [
-  { eyebrow: "Para soñar", title: "Habitaciones con magia", note: "Nubes, luz cálida y detalles que acompañan cada etapa.", image: "/manus-storage/nubes-portada-premium_f843e2ec.jpeg", slug: "nubes" },
-  { eyebrow: "Para regalar", title: "Un nombre que se recuerda", note: "Piezas personalizadas para convertir un momento en un detalle especial.", image: "/manus-storage/placas_f2df896b.jpg", slug: "placas" },
-  { eyebrow: "Para celebrar", title: "Momentos hechos a medida", note: "Composiciones en MDF para dar vida a su tema favorito.", image: "/manus-storage/cuadros_0fdc2e1c.jpg", slug: "cuadros" },
+  { eyebrow: "Para soñar", title: "Habitaciones con magia", note: "Nubes, luz cálida y detalles que acompañan cada etapa.", image: "/assets/legacy/nubes-portada-premium_f843e2ec.jpeg", slug: "nubes" },
+  { eyebrow: "Para regalar", title: "Un nombre que se recuerda", note: "Piezas personalizadas para convertir un momento en un detalle especial.", image: "/assets/legacy/placas_f2df896b.jpg", slug: "placas" },
+  { eyebrow: "Para celebrar", title: "Momentos hechos a medida", note: "Composiciones en MDF para dar vida a su tema favorito.", image: "/assets/legacy/cuadros_0fdc2e1c.jpg", slug: "cuadros" },
 ];
 
 const occasionDetails = [
@@ -175,7 +175,7 @@ export default function Home() {
       `}</style>
 
       <section className="category-rail" aria-label="Categorías del catálogo">
-        <div className="rail-logo"><img src="/manus-storage/mdfantasy-logo-oficial-agosto-2026_3627de6b.png" alt="MDFantasy" /></div>
+        <div className="rail-logo"><img src="/assets/legacy/mdfantasy-logo-oficial-agosto-2026_3627de6b.png" alt="MDFantasy" /></div>
         <div className="category-scroll">
           {managedCategoryLinks.map(([icon, label, slug]) => <button key={label} onClick={() => slug === "todas" ? setCategoriesOpen(true) : setLocation(`/catalogo/${slug}`)} className="category-pill"><i>{icon}</i>{label}</button>)}
         </div>
@@ -195,7 +195,7 @@ export default function Home() {
 
       <section className="payment-strip"><div className="shell payment-inner">
         <div><p className="eyebrow">✦ Paga fácil y seguro</p></div><h2 className="serif">Medios de pago</h2>
-        <div className="payment-list"><div className="payment-card"><img src="/manus-storage/visa_1e1d1310.png" alt="Visa" /></div><div className="payment-card"><img src="/manus-storage/mastercard_fe030528.png" alt="Mastercard" /></div><div className="payment-card"><img src="/manus-storage/yape_c149812e.png" alt="Yape" /></div><div className="payment-card"><img src="/manus-storage/plin_eba30021.png" alt="Plin" /></div></div>
+        <div className="payment-list"><div className="payment-card"><img src="/assets/legacy/visa_1e1d1310.png" alt="Visa" /></div><div className="payment-card"><img src="/assets/legacy/mastercard_fe030528.png" alt="Mastercard" /></div><div className="payment-card"><img src="/assets/legacy/yape_c149812e.png" alt="Yape" /></div><div className="payment-card"><img src="/assets/legacy/plin_eba30021.png" alt="Plin" /></div></div>
       </div></section>
 
       <main>
@@ -226,7 +226,7 @@ export default function Home() {
         </section>
 
         <section className="faith-banner shell">
-          <div className="faith-picture"><img src={faithSection?.imageUrl || "/manus-storage/fe-espiritualidad_546155f2.png"} alt="Decoración espiritual en MDF" /></div>
+          <div className="faith-picture"><img src={faithSection?.imageUrl || "/assets/legacy/fe-espiritualidad_546155f2.png"} alt="Decoración espiritual en MDF" /></div>
           <div className="faith-copy"><p className="eyebrow">{faithSection?.subtitle || "Nueva línea para el hogar"}</p><h2 className="section-title">{faithSection?.title || "Fe y espiritualidad"}</h2><p>{faithSection?.description || "Piezas que inspiran y dan significado a cada espacio."}</p><button className="round-button round-button--outline" onClick={() => setLocation(faithSection?.ctaUrl || "/catalogo/fe-espiritualidad")}>{faithSection?.ctaLabel || "Ver colección"} <ArrowRight size={15} /></button></div>
         </section>
 
@@ -268,7 +268,7 @@ export default function Home() {
         </section>
 
         <section className="installation-section shell">
-          <div className="installation-image"><img src="/manus-storage/mdfantasy-instalacion-mejorada_ad830076.png" alt="Decoración infantil de luna, estrellas y nubes iluminadas instalada en una habitación" /><span>Foto real de instalación</span></div>
+          <div className="installation-image"><img src="/assets/legacy/mdfantasy-instalacion-mejorada_ad830076.webp" alt="Decoración infantil de luna, estrellas y nubes iluminadas instalada en una habitación" /><span>Foto real de instalación</span></div>
           <div className="installation-copy"><p className="eyebrow">Luz que transforma el espacio</p><h2 className="section-title">Así se siente una habitación con un detalle hecho especialmente para ella.</h2><p>La iluminación cálida y suave acompaña la decoración sin perder la ternura del ambiente. Cada composición puede adaptarse a los colores, formas y temática de su habitación.</p><div className="feature-tags"><span>✦ Luz cálida</span><span>♡ Diseño personalizado</span><span>⌂ Listo para instalar</span></div><button className="round-button round-button--coral" onClick={() => setCartOpen(true)}>Ver diseños personalizados <ArrowRight size={15} /></button></div>
         </section>
 
@@ -300,7 +300,7 @@ export default function Home() {
         .site-header{background:rgba(255,253,249,.96);position:relative;z-index:10;border-bottom:1px solid #f2e7dc}.header-inner{height:88px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;min-width:max-content}.brand-logo{width:78px;height:58px;object-fit:contain}.brand-copy{display:flex;flex-direction:column;gap:3px}.brand-copy b{font-size:24px;font-weight:600;line-height:1}.brand-copy small{font-size:7px;letter-spacing:.17em;font-weight:600;color:#786357}.main-nav{display:flex;gap:33px;margin-left:auto;margin-right:42px;font-family:'Playfair Display',serif;font-size:13px}.main-nav a{position:relative;padding:6px 0}.main-nav a.active::after{content:'';position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);height:2px;width:18px;border-radius:2px;background:#f1afa2}.header-actions{display:flex;gap:9px}.header-actions button{border:0;background:transparent;padding:8px;color:#664d40;position:relative}.cart-trigger i{position:absolute;right:0;top:1px;width:13px;height:13px;display:grid;place-items:center;border-radius:99px;background:#e98f84;color:white;font-style:normal;font-size:8px}.menu-trigger{display:none}.search-bar{display:flex;align-items:center;gap:10px;padding:10px 20px 14px;color:#8a7568}.search-bar input{width:100%;border:1px solid #ebded3;border-radius:999px;padding:10px 15px;background:white;outline:none}.search-bar button{border:0;background:transparent}.mobile-menu{display:none}
         .category-rail{height:64px;display:flex;align-items:stretch;background:#fffdfa;border-bottom:1px solid #efe4d9}.rail-label{flex:0 0 105px;display:grid;grid-template-columns:13px 1fr;grid-template-rows:20px 1fr;align-content:center;gap:0 3px;padding-left:35px;color:#6a5141}.rail-label span{grid-row:span 2;font-size:12px;color:#b18861}.rail-label strong{font-family:'Playfair Display',serif;font-size:13px;line-height:1}.rail-label small{font-size:5px;font-weight:700;letter-spacing:.12em;line-height:1.3}.category-scroll{display:flex;align-items:center;gap:8px;overflow:hidden;padding:0 12px;white-space:nowrap}.category-pill{display:inline-flex;align-items:center;gap:6px;padding:10px 12px;border:1px solid #f0e7de;border-radius:6px;background:#fff;box-shadow:0 2px 5px rgba(99,72,49,.035);font-size:10px;transition:transform .16s ease}.category-pill:hover{transform:translateY(-2px);border-color:#e5b5ab}.category-pill i{font-style:normal;font-size:12px;color:#c59283}
         .payment-strip{background:rgba(244,235,225,.7);padding:13px 0}.payment-inner{display:flex;align-items:center;gap:24px}.payment-inner .eyebrow{white-space:nowrap}.payment-inner h2{font-size:18px;font-weight:500;white-space:nowrap}.payment-list{display:flex;align-items:center;gap:9px;margin-left:auto}.payment-card{height:55px;width:151px;overflow:hidden;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 12px rgba(91,64,52,.06)}.payment-card img{display:block;width:100%;height:100%;object-fit:cover}
-        .hero{min-height:495px;margin-top:25px;padding:66px 52px 44px;display:grid;grid-template-columns:minmax(300px,.84fr) 1.25fr;align-items:center;gap:55px;border-radius:30px;background:#fff8f1 url('/manus-storage/cream-luminous-orb_7f1b4b3d.jpg') center / cover;box-shadow:0 18px 35px rgba(91,64,52,.06);position:relative;overflow:hidden}.hero-stars{position:absolute;width:180px;right:43%;top:22px;opacity:.58;pointer-events:none}.hero-copy{position:relative;z-index:1}.hero h1{font-size:clamp(48px,5vw,69px);line-height:.98;letter-spacing:-.05em;margin:13px 0 22px;font-weight:500}.hero h1 em,.steps-section h2 em,.coordination-section h2 em{display:block;color:#c77f72;font-weight:500}.hero-description{max-width:360px;font-size:13px;line-height:1.65;color:#725c51;margin-bottom:21px}.hero-actions{display:flex;gap:10px;align-items:center}.hero-stats{display:flex;gap:21px;margin-top:35px}.hero-stats span{display:flex;flex-direction:column;gap:3px;width:84px;color:#8d786b;font-size:8px;line-height:1.35}.hero-stats span+span{border-left:1px solid #e7d9ce;padding-left:17px}.hero-stats b{font-size:10px;color:#5f4639}.hero-image{height:306px;padding:0;border:0;border-radius:42px;position:relative;overflow:hidden;box-shadow:0 15px 25px rgba(91,64,52,.11);text-align:left;background:#eae0d7;cursor:pointer}.hero-image>img{height:100%;width:100%;object-fit:cover;display:block}.hero-image::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,22,17,0) 50%,rgba(38,22,17,.21) 100%);pointer-events:none}.craft-tag{position:absolute;right:14px;top:14px;border-radius:99px;background:rgba(70,48,37,.85);color:#fff6ee;padding:7px 10px;font-size:7px;font-weight:700;z-index:1}.hero-image-caption{position:absolute;z-index:2;left:16px;bottom:15px;width:160px;border-radius:13px;background:#fff9f1;padding:13px 15px;display:flex;flex-direction:column;gap:3px;color:#695043}.hero-image-caption small{font-size:7px;letter-spacing:.12em;color:#a08268}.hero-image-caption b{font-size:19px;font-weight:600}.hero-image-caption em{font-size:9px;color:#8f7466;font-style:italic}
+        .hero{min-height:495px;margin-top:25px;padding:66px 52px 44px;display:grid;grid-template-columns:minmax(300px,.84fr) 1.25fr;align-items:center;gap:55px;border-radius:30px;background:#fff8f1 url('/assets/legacy/cream-luminous-orb_7f1b4b3d.jpg') center / cover;box-shadow:0 18px 35px rgba(91,64,52,.06);position:relative;overflow:hidden}.hero-stars{position:absolute;width:180px;right:43%;top:22px;opacity:.58;pointer-events:none}.hero-copy{position:relative;z-index:1}.hero h1{font-size:clamp(48px,5vw,69px);line-height:.98;letter-spacing:-.05em;margin:13px 0 22px;font-weight:500}.hero h1 em,.steps-section h2 em,.coordination-section h2 em{display:block;color:#c77f72;font-weight:500}.hero-description{max-width:360px;font-size:13px;line-height:1.65;color:#725c51;margin-bottom:21px}.hero-actions{display:flex;gap:10px;align-items:center}.hero-stats{display:flex;gap:21px;margin-top:35px}.hero-stats span{display:flex;flex-direction:column;gap:3px;width:84px;color:#8d786b;font-size:8px;line-height:1.35}.hero-stats span+span{border-left:1px solid #e7d9ce;padding-left:17px}.hero-stats b{font-size:10px;color:#5f4639}.hero-image{height:306px;padding:0;border:0;border-radius:42px;position:relative;overflow:hidden;box-shadow:0 15px 25px rgba(91,64,52,.11);text-align:left;background:#eae0d7;cursor:pointer}.hero-image>img{height:100%;width:100%;object-fit:cover;display:block}.hero-image::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,22,17,0) 50%,rgba(38,22,17,.21) 100%);pointer-events:none}.craft-tag{position:absolute;right:14px;top:14px;border-radius:99px;background:rgba(70,48,37,.85);color:#fff6ee;padding:7px 10px;font-size:7px;font-weight:700;z-index:1}.hero-image-caption{position:absolute;z-index:2;left:16px;bottom:15px;width:160px;border-radius:13px;background:#fff9f1;padding:13px 15px;display:flex;flex-direction:column;gap:3px;color:#695043}.hero-image-caption small{font-size:7px;letter-spacing:.12em;color:#a08268}.hero-image-caption b{font-size:19px;font-weight:600}.hero-image-caption em{font-size:9px;color:#8f7466;font-style:italic}
         .catalogue-section{margin-top:25px;border-radius:28px;padding:29px 27px 26px;background:rgba(255,250,244,.87);box-shadow:0 10px 23px rgba(91,64,52,.035)}.section-heading{text-align:center;max-width:700px;margin:0 auto 25px}.section-heading>span{vertical-align:middle;margin:0 7px}.section-heading h2{display:inline}.section-heading>p:not(.eyebrow){font-size:13px;line-height:1.6;color:#776255;margin:15px auto 0;max-width:590px}.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.product-card{border:1px solid #eee5dc;border-radius:21px;background:#fffdfa;overflow:hidden;padding:0;transition:transform .18s cubic-bezier(.23,1,.32,1),box-shadow .18s ease;text-align:left}.product-card:hover{transform:translateY(-4px);box-shadow:0 13px 24px rgba(91,64,52,.09)}.product-card.is-featured{border:2px solid #e69a8e}.product-image{aspect-ratio:1.43;position:relative;overflow:hidden;background:#eaddd2;margin:8px;border-radius:14px}.product-image img{height:100%;width:100%;object-fit:cover}.product-image span{position:absolute;top:9px;left:8px;border-radius:99px;color:#fff;padding:5px 8px;background:#8c473d;font-size:7px;font-weight:700;letter-spacing:.06em}.product-info{padding:5px 13px 16px;text-align:center}.product-info h3{font-size:17px;font-weight:600;margin:0 0 5px}.product-info p{font-size:9px;color:#8b776b;margin:0}.product-info i{font-style:normal;display:inline-grid;place-items:center;background:#efa496;color:#fff;border-radius:50%;font-size:9px;height:14px;width:14px}.all-categories{display:flex;margin:22px auto 0;min-height:36px;font-size:11px;padding:0 18px}
         .faith-banner{display:grid;grid-template-columns:1.06fr .94fr;margin-top:47px;overflow:hidden;border-radius:26px;background:#f6e4de;min-height:305px}.faith-picture{min-height:290px}.faith-picture img{width:100%;height:100%;object-fit:cover}.faith-copy{padding:55px 45px;align-self:center}.faith-copy h2{font-size:42px;margin:10px 0}.faith-copy>p:not(.eyebrow){font-size:13px;color:#795f53;line-height:1.55;margin-bottom:20px}.faith-copy .round-button{min-height:38px;font-size:11px}
         .lines-section{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;padding:88px 42px}.lines-intro h2{margin:11px 0 16px}.lines-intro>p:not(.eyebrow){font-size:13px;color:#776255;line-height:1.65}.lines-list{border-top:1px solid #eadfd5}.line-item{width:100%;border:0;border-bottom:1px solid #eadfd5;background:transparent;display:flex;align-items:center;gap:16px;padding:17px 5px;text-align:left;transition:padding .17s ease, color .17s ease}.line-item:hover{padding-left:10px;color:#d77c72}.line-item>i{font-style:normal;width:34px;text-align:center;color:#c28e68;font-size:16px}.line-item span{display:flex;flex:1;flex-direction:column;gap:3px}.line-item b{font-family:'Playfair Display',serif;font-size:18px;font-weight:600}.line-item small{font-size:10px;color:#91796b}

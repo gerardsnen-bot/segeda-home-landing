@@ -19,13 +19,11 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { startLogin } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
 import { Box, FolderTree, History, LayoutDashboard, LayoutPanelLeft, LayoutTemplate, LogOut, PanelLeft, SearchCheck } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
-import { Button } from "./ui/button";
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Resumen", path: "/admin" },
@@ -71,16 +69,12 @@ export default function DashboardLayout({
               Inicia sesión para continuar
             </h1>
             <p className="text-sm text-muted-foreground text-center max-w-sm">
-              El panel de administración requiere autenticación de Manus antes de continuar.
+              El panel de administración requiere una sesión activa de Supabase.
             </p>
           </div>
-          <Button
-            onClick={() => startLogin()}
-            size="lg"
-            className="w-full shadow-lg hover:shadow-xl transition-all"
-          >
-            Iniciar sesión
-          </Button>
+          <a href="/admin" className="w-full rounded-md bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground shadow-lg transition hover:shadow-xl">
+            Ir al acceso administrativo
+          </a>
         </div>
       </div>
     );

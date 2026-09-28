@@ -67,7 +67,6 @@ type CategoryRow = {
   sort_order: number;
 };
 
-const LEGACY_CATALOG_URL = "/manus-storage/segeda-real-products_742b0de3.json";
 
 export function genderTargetToAudience(target: "girl" | "boy" | "unisex" | null, fallback: string | null): string {
   if (target === "girl") return "niña";
@@ -111,15 +110,8 @@ function mapProduct(row: ProductRow): CatalogProduct {
   };
 }
 
-async function readLegacyCategory(slug: string): Promise<CatalogProduct[]> {
-  const response = await fetch(LEGACY_CATALOG_URL);
-  if (!response.ok) return [];
-  const data = await response.json() as { collection?: Record<string, CatalogProduct[]> };
-  return data.collection?.[slug] ?? [];
-}
-
 export async function getCatalogCategory(slug: string): Promise<CatalogProduct[]> {
-  if (!supabase) return readLegacyCategory(slug);
+  if (!supabase) return [];
 
   const { data: category, error: categoryError } = await supabase
     .from("categories")
